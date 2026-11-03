@@ -1,0 +1,331 @@
+{
+  "regions": [
+    {
+      "id": "r-lagos",
+      "name": "Lagos"
+    },
+    {
+      "id": "r-sw",
+      "name": "South West"
+    },
+    {
+      "id": "r-nc",
+      "name": "North Central"
+    },
+    {
+      "id": "r-ss",
+      "name": "South South"
+    },
+    {
+      "id": "r-nw",
+      "name": "North West"
+    },
+    {
+      "id": "r-se",
+      "name": "South East"
+    }
+  ],
+  "branches": [
+    {
+      "id": "b-lis",
+      "code": "LIS",
+      "name": "Lagos Island",
+      "regionId": "r-lagos",
+      "state": "Lagos"
+    },
+    {
+      "id": "b-ikj",
+      "code": "IKJ",
+      "name": "Ikeja",
+      "regionId": "r-lagos",
+      "state": "Lagos"
+    },
+    {
+      "id": "b-lek",
+      "code": "LEK",
+      "name": "Lekki",
+      "regionId": "r-lagos",
+      "state": "Lagos"
+    },
+    {
+      "id": "b-yab",
+      "code": "YAB",
+      "name": "Yaba",
+      "regionId": "r-lagos",
+      "state": "Lagos"
+    },
+    {
+      "id": "b-ibd",
+      "code": "IBD",
+      "name": "Ibadan Ring Road",
+      "regionId": "r-sw",
+      "state": "Oyo"
+    },
+    {
+      "id": "b-abk",
+      "code": "ABK",
+      "name": "Abeokuta",
+      "regionId": "r-sw",
+      "state": "Ogun"
+    },
+    {
+      "id": "b-wse",
+      "code": "WSE",
+      "name": "Abuja Wuse",
+      "regionId": "r-nc",
+      "state": "FCT"
+    },
+    {
+      "id": "b-grk",
+      "code": "GRK",
+      "name": "Abuja Garki",
+      "regionId": "r-nc",
+      "state": "FCT"
+    },
+    {
+      "id": "b-phc",
+      "code": "PHC",
+      "name": "Port Harcourt GRA",
+      "regionId": "r-ss",
+      "state": "Rivers"
+    },
+    {
+      "id": "b-bnc",
+      "code": "BNC",
+      "name": "Benin City",
+      "regionId": "r-ss",
+      "state": "Edo"
+    },
+    {
+      "id": "b-kan",
+      "code": "KAN",
+      "name": "Kano",
+      "regionId": "r-nw",
+      "state": "Kano"
+    },
+    {
+      "id": "b-enu",
+      "code": "ENU",
+      "name": "Enugu",
+      "regionId": "r-se",
+      "state": "Enugu"
+    }
+  ],
+  "agents": [
+    {
+      "id": "a-01",
+      "code": "AG-0114",
+      "name": "Iya Basira Agency, Mushin",
+      "branchId": "b-ikj"
+    },
+    {
+      "id": "a-02",
+      "code": "AG-0127",
+      "name": "Ojota Cash Point",
+      "branchId": "b-ikj"
+    },
+    {
+      "id": "a-03",
+      "code": "AG-0203",
+      "name": "Ajah Mobile Money Hub",
+      "branchId": "b-lek"
+    },
+    {
+      "id": "a-04",
+      "code": "AG-0310",
+      "name": "Alhaji Sani POS Hub, Sabon Gari",
+      "branchId": "b-kan"
+    },
+    {
+      "id": "a-05",
+      "code": "AG-0412",
+      "name": "Mile 3 Market Agency",
+      "branchId": "b-phc"
+    },
+    {
+      "id": "a-06",
+      "code": "AG-0508",
+      "name": "Nyanya Express Agency",
+      "branchId": "b-grk"
+    },
+    {
+      "id": "a-07",
+      "code": "AG-0611",
+      "name": "Bodija Market Desk",
+      "branchId": "b-ibd"
+    },
+    {
+      "id": "a-08",
+      "code": "AG-0702",
+      "name": "Ogbete Market Agency",
+      "branchId": "b-enu"
+    }
+  ],
+  "products": [
+    {
+      "id": "p-salary",
+      "code": "RTL-SAL",
+      "name": "Salary Advance",
+      "segment": "retail",
+      "monthlyRateBps": 350,
+      "fees": [
+        {
+          "code": "management",
+          "label": "Management fee",
+          "rateBps": 100
+        },
+        {
+          "code": "insurance",
+          "label": "Credit life insurance",
+          "rateBps": 50
+        }
+      ],
+      "minAmount": 5000000,
+      "maxAmount": 200000000,
+      "minTenorMonths": 1,
+      "maxTenorMonths": 6,
+      "active": true
+    },
+    {
+      "id": "p-payroll",
+      "code": "RTL-PAY",
+      "name": "Payroll Personal Loan",
+      "segment": "retail",
+      "monthlyRateBps": 300,
+      "fees": [
+        {
+          "code": "management",
+          "label": "Management fee",
+          "rateBps": 100
+        },
+        {
+          "code": "insurance",
+          "label": "Credit life insurance",
+          "rateBps": 50
+        }
+      ],
+      "minAmount": 20000000,
+      "maxAmount": 1500000000,
+      "minTenorMonths": 6,
+      "maxTenorMonths": 24,
+      "active": true
+    },
+    {
+      "id": "p-asset-rtl",
+      "code": "RTL-AST",
+      "name": "Consumer Asset Finance",
+      "segment": "retail",
+      "monthlyRateBps": 325,
+      "fees": [
+        {
+          "code": "management",
+          "label": "Management fee",
+          "rateBps": 150
+        },
+        {
+          "code": "insurance",
+          "label": "Credit life insurance",
+          "rateBps": 75
+        }
+      ],
+      "minAmount": 15000000,
+      "maxAmount": 500000000,
+      "minTenorMonths": 6,
+      "maxTenorMonths": 18,
+      "active": true
+    },
+    {
+      "id": "p-wc",
+      "code": "SME-WCF",
+      "name": "SME Working Capital",
+      "segment": "sme",
+      "monthlyRateBps": 400,
+      "fees": [
+        {
+          "code": "management",
+          "label": "Management fee",
+          "rateBps": 150
+        },
+        {
+          "code": "insurance",
+          "label": "Credit life insurance",
+          "rateBps": 50
+        }
+      ],
+      "minAmount": 100000000,
+      "maxAmount": 5000000000,
+      "minTenorMonths": 3,
+      "maxTenorMonths": 12,
+      "active": true
+    },
+    {
+      "id": "p-asset-sme",
+      "code": "SME-AST",
+      "name": "SME Asset Finance",
+      "segment": "sme",
+      "monthlyRateBps": 350,
+      "fees": [
+        {
+          "code": "management",
+          "label": "Management fee",
+          "rateBps": 200
+        },
+        {
+          "code": "insurance",
+          "label": "Credit life insurance",
+          "rateBps": 75
+        }
+      ],
+      "minAmount": 200000000,
+      "maxAmount": 10000000000,
+      "minTenorMonths": 12,
+      "maxTenorMonths": 36,
+      "active": true
+    },
+    {
+      "id": "p-lpo",
+      "code": "SME-LPO",
+      "name": "LPO Financing",
+      "segment": "sme",
+      "monthlyRateBps": 450,
+      "fees": [
+        {
+          "code": "management",
+          "label": "Management fee",
+          "rateBps": 200
+        },
+        {
+          "code": "insurance",
+          "label": "Credit life insurance",
+          "rateBps": 50
+        }
+      ],
+      "minAmount": 100000000,
+      "maxAmount": 3000000000,
+      "minTenorMonths": 1,
+      "maxTenorMonths": 6,
+      "active": true
+    }
+  ],
+  "banks": [
+    "Access Bank",
+    "Ecobank",
+    "FCMB",
+    "Fidelity Bank",
+    "First Bank",
+    "GTBank",
+    "Keystone Bank",
+    "Kuda MFB",
+    "Mainstreet MFB",
+    "Moniepoint MFB",
+    "Opay",
+    "PalmPay",
+    "Polaris Bank",
+    "Stanbic IBTC",
+    "Sterling Bank",
+    "UBA",
+    "Union Bank",
+    "Wema Bank",
+    "Zenith Bank"
+  ]
+}

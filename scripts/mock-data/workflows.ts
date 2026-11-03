@@ -1,0 +1,141 @@
+import type { WorkflowDefinition, WorkflowStage } from "@/features/workflow/types"
+
+const N = 100
+
+/** Three named members; any two votes decide. Shared by Retail and SME. */
+const FINAL_COMMITTEE: WorkflowStage["committee"] = { memberIds: ["u-fa-1", "u-fa-2", "u-fa-3"], votesRequired: 2 }
+
+export const RETAIL_WORKFLOW: WorkflowDefinition = {
+  id: "wf-retail",
+  name: "Retail lending",
+  segment: "retail",
+  version: 4,
+  stages: [
+    {
+      key: "ro_review",
+      name: "Relationship Officer",
+      approverRoles: ["relationship_officer"],
+      quorum: "any",
+      slaHours: 8,
+      reminderAtPercent: 75,
+      autoEscalateAfterHours: null,
+      committee: null,
+    },
+    {
+      key: "credit_manager",
+      name: "Credit Manager",
+      approverRoles: ["credit_manager"],
+      quorum: "any",
+      slaHours: 24,
+      reminderAtPercent: 75,
+      autoEscalateAfterHours: 8,
+      committee: null,
+    },
+    {
+      key: "analyst",
+      name: "Credit Analyst",
+      approverRoles: ["credit_analyst"],
+      quorum: "any",
+      slaHours: 24,
+      reminderAtPercent: 75,
+      autoEscalateAfterHours: null,
+      committee: null,
+    },
+    {
+      key: "head_of_credit",
+      name: "Head of Credit",
+      approverRoles: ["head_of_credit"],
+      quorum: "any",
+      slaHours: 24,
+      reminderAtPercent: 70,
+      autoEscalateAfterHours: 12,
+      committee: null,
+    },
+    {
+      key: "final",
+      name: "Final Approval Committee",
+      approverRoles: ["final_approver"],
+      quorum: "any",
+      slaHours: 72,
+      reminderAtPercent: 60,
+      autoEscalateAfterHours: null,
+      committee: FINAL_COMMITTEE,
+    },
+  ],
+  bands: [
+    { id: "rb-1", minAmount: 0, maxAmount: 500_000 * N, finalStageKey: "credit_manager" },
+    { id: "rb-2", minAmount: 500_000 * N + 1, maxAmount: 3_000_000 * N, finalStageKey: "analyst" },
+    { id: "rb-3", minAmount: 3_000_000 * N + 1, maxAmount: 10_000_000 * N, finalStageKey: "head_of_credit" },
+    { id: "rb-4", minAmount: 10_000_000 * N + 1, maxAmount: null, finalStageKey: "final" },
+  ],
+  updatedAt: "2026-08-14T09:30:00.000Z",
+  updatedById: "u-adm-1",
+}
+
+/** SME follows the same chain; the largest loans close at the committee vote. */
+export const SME_WORKFLOW: WorkflowDefinition = {
+  id: "wf-sme",
+  name: "SME lending",
+  segment: "sme",
+  version: 3,
+  stages: [
+    {
+      key: "ro_review",
+      name: "Relationship Officer",
+      approverRoles: ["relationship_officer"],
+      quorum: "any",
+      slaHours: 12,
+      reminderAtPercent: 75,
+      autoEscalateAfterHours: null,
+      committee: null,
+    },
+    {
+      key: "credit_manager",
+      name: "Credit Manager",
+      approverRoles: ["credit_manager"],
+      quorum: "any",
+      slaHours: 24,
+      reminderAtPercent: 75,
+      autoEscalateAfterHours: 12,
+      committee: null,
+    },
+    {
+      key: "analyst",
+      name: "Credit Analyst",
+      approverRoles: ["credit_analyst"],
+      quorum: "any",
+      slaHours: 48,
+      reminderAtPercent: 75,
+      autoEscalateAfterHours: null,
+      committee: null,
+    },
+    {
+      key: "head_of_credit",
+      name: "Head of Credit",
+      approverRoles: ["head_of_credit"],
+      quorum: "any",
+      slaHours: 24,
+      reminderAtPercent: 70,
+      autoEscalateAfterHours: 12,
+      committee: null,
+    },
+    {
+      key: "committee",
+      name: "Final Approval Committee",
+      approverRoles: ["final_approver"],
+      quorum: "any",
+      slaHours: 72,
+      reminderAtPercent: 60,
+      autoEscalateAfterHours: null,
+      committee: FINAL_COMMITTEE,
+    },
+  ],
+  bands: [
+    { id: "sb-1", minAmount: 0, maxAmount: 5_000_000 * N, finalStageKey: "credit_manager" },
+    { id: "sb-2", minAmount: 5_000_000 * N + 1, maxAmount: 20_000_000 * N, finalStageKey: "analyst" },
+    { id: "sb-3", minAmount: 20_000_000 * N + 1, maxAmount: 50_000_000 * N, finalStageKey: "head_of_credit" },
+    { id: "sb-4", minAmount: 50_000_000 * N + 1, maxAmount: null, finalStageKey: "committee" },
+  ],
+  updatedAt: "2026-07-02T14:05:00.000Z",
+  updatedById: "u-adm-1",
+}

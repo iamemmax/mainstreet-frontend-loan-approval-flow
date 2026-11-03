@@ -20,7 +20,7 @@ pnpm dev            # http://localhost:3000
 | `pnpm lint`                    | ESLint                                                        |
 | `pnpm mock:generate`           | Regenerates `src/mocks/data/*.json` from `scripts/mock-data/` |
 
-Environment variables (all optional):
+Environment variables (all optional). Copy `.env.example` to `.env.local` to set them:
 
 | Variable                      | Default | Purpose                                                |
 | ----------------------------- | ------- | ------------------------------------------------------ |

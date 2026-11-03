@@ -1,0 +1,10 @@
+[
+  {
+    "id": "dlg-1",
+    "fromUserId": "u-hoc-1",
+    "toUserId": "u-cm-1",
+    "startsAt": "2026-10-24T09:00:00.000Z",
+    "endsAt": "2026-10-31T09:00:00.000Z",
+    "reason": "Annual leave — Olumide is away until next week."
+  }
+]

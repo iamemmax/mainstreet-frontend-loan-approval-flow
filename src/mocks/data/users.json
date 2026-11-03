@@ -1,0 +1,182 @@
+[
+  {
+    "id": "u-ro-1",
+    "staffId": "ML-0412",
+    "name": "Adaeze Nwosu",
+    "email": "adaeze.nwosu@mainstreetmfb.com",
+    "role": "relationship_officer",
+    "branchId": "b-lis",
+    "status": "active"
+  },
+  {
+    "id": "u-ro-2",
+    "staffId": "ML-0418",
+    "name": "Tunde Bakare",
+    "email": "tunde.bakare@mainstreetmfb.com",
+    "role": "relationship_officer",
+    "branchId": "b-ikj",
+    "status": "active"
+  },
+  {
+    "id": "u-ro-3",
+    "staffId": "ML-0433",
+    "name": "Chinedu Eze",
+    "email": "chinedu.eze@mainstreetmfb.com",
+    "role": "relationship_officer",
+    "branchId": "b-wse",
+    "status": "active"
+  },
+  {
+    "id": "u-ro-4",
+    "staffId": "ML-0447",
+    "name": "Fatima Abubakar",
+    "email": "fatima.abubakar@mainstreetmfb.com",
+    "role": "relationship_officer",
+    "branchId": "b-kan",
+    "status": "active"
+  },
+  {
+    "id": "u-ro-5",
+    "staffId": "ML-0451",
+    "name": "Efe Omoregie",
+    "email": "efe.omoregie@mainstreetmfb.com",
+    "role": "relationship_officer",
+    "branchId": "b-bnc",
+    "status": "active"
+  },
+  {
+    "id": "u-ro-6",
+    "staffId": "ML-0460",
+    "name": "Kelechi Amadi",
+    "email": "kelechi.amadi@mainstreetmfb.com",
+    "role": "relationship_officer",
+    "branchId": "b-phc",
+    "status": "active"
+  },
+  {
+    "id": "u-ro-7",
+    "staffId": "ML-0466",
+    "name": "Temitope Ajayi",
+    "email": "temitope.ajayi@mainstreetmfb.com",
+    "role": "relationship_officer",
+    "branchId": "b-ibd",
+    "status": "active"
+  },
+  {
+    "id": "u-vo-1",
+    "staffId": "ML-0302",
+    "name": "Bisola Adeyemi",
+    "email": "bisola.adeyemi@mainstreetmfb.com",
+    "role": "verification_officer",
+    "branchId": "b-lis",
+    "status": "active"
+  },
+  {
+    "id": "u-vo-2",
+    "staffId": "ML-0309",
+    "name": "Usman Garba",
+    "email": "usman.garba@mainstreetmfb.com",
+    "role": "verification_officer",
+    "branchId": "b-wse",
+    "status": "active"
+  },
+  {
+    "id": "u-cm-1",
+    "staffId": "ML-0215",
+    "name": "Ngozi Okafor",
+    "email": "ngozi.okafor@mainstreetmfb.com",
+    "role": "credit_manager",
+    "branchId": "b-lis",
+    "status": "active"
+  },
+  {
+    "id": "u-cm-2",
+    "staffId": "ML-0221",
+    "name": "Ibrahim Bello",
+    "email": "ibrahim.bello@mainstreetmfb.com",
+    "role": "credit_manager",
+    "branchId": "b-wse",
+    "status": "active"
+  },
+  {
+    "id": "u-an-1",
+    "staffId": "ML-0240",
+    "name": "Yetunde Ogunleye",
+    "email": "yetunde.ogunleye@mainstreetmfb.com",
+    "role": "credit_analyst",
+    "branchId": "b-lis",
+    "status": "active"
+  },
+  {
+    "id": "u-an-2",
+    "staffId": "ML-0244",
+    "name": "Musa Danjuma",
+    "email": "musa.danjuma@mainstreetmfb.com",
+    "role": "credit_analyst",
+    "branchId": "b-wse",
+    "status": "active"
+  },
+  {
+    "id": "u-hoc-1",
+    "staffId": "ML-0108",
+    "name": "Olumide Adebayo",
+    "email": "olumide.adebayo@mainstreetmfb.com",
+    "role": "head_of_credit",
+    "branchId": "b-lis",
+    "status": "away"
+  },
+  {
+    "id": "u-fa-1",
+    "staffId": "ML-0101",
+    "name": "Aisha Mohammed",
+    "email": "aisha.mohammed@mainstreetmfb.com",
+    "role": "final_approver",
+    "branchId": "b-lis",
+    "status": "active"
+  },
+  {
+    "id": "u-fa-2",
+    "staffId": "ML-0102",
+    "name": "Chiamaka Okeke",
+    "email": "chiamaka.okeke@mainstreetmfb.com",
+    "role": "final_approver",
+    "branchId": "b-lis",
+    "status": "active"
+  },
+  {
+    "id": "u-fa-3",
+    "staffId": "ML-0100",
+    "name": "Babatunde Fashola",
+    "email": "babatunde.fashola@mainstreetmfb.com",
+    "role": "final_approver",
+    "branchId": "b-ikj",
+    "status": "active"
+  },
+  {
+    "id": "u-fin-1",
+    "staffId": "ML-0520",
+    "name": "Emeka Obi",
+    "email": "emeka.obi@mainstreetmfb.com",
+    "role": "finance_officer",
+    "branchId": "b-lis",
+    "status": "active"
+  },
+  {
+    "id": "u-aud-1",
+    "staffId": "ML-0601",
+    "name": "Halima Yusuf",
+    "email": "halima.yusuf@mainstreetmfb.com",
+    "role": "auditor",
+    "branchId": "b-lis",
+    "status": "active"
+  },
+  {
+    "id": "u-adm-1",
+    "staffId": "ML-0001",
+    "name": "Segun Afolabi",
+    "email": "segun.afolabi@mainstreetmfb.com",
+    "role": "admin",
+    "branchId": "b-lis",
+    "status": "active"
+  }
+]

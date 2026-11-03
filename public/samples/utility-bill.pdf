@@ -1,0 +1,48 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+2 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+3 0 obj
+<< /Length 752 >>
+stream
+0.486 0.122 0.455 rg 0 782 595 60 re f
+BT 1 1 1 rg /F2 18 Tf 40 812 Td (Electricity bill) Tj ET
+BT 0.95 0.9 0.95 rg /F1 9 Tf 40 794 Td (Prepaid meter · October 2026) Tj ET
+BT 0.486 0.122 0.455 rg /F2 11 Tf 40 740 Td (Customer) Tj ET
+BT 0.43 0.41 0.46 rg /F1 10 Tf 40 718 Td (Service address) Tj ET
+BT 0.11 0.1 0.12 rg /F1 10 Tf 230 718 Td (As on the application) Tj ET
+0.86 0.85 0.88 RG 0.6 w 40 710 m 555 710 l S
+BT 0.43 0.41 0.46 rg /F1 10 Tf 40 694 Td (Meter number) Tj ET
+BT 0.11 0.1 0.12 rg /F1 10 Tf 230 694 Td (4500 1123 987) Tj ET
+0.86 0.85 0.88 RG 0.6 w 40 686 m 555 686 l S
+BT 0.43 0.41 0.46 rg /F1 10 Tf 40 670 Td (Amount paid) Tj ET
+BT 0.11 0.1 0.12 rg /F1 10 Tf 230 670 Td (NGN 15,000.00) Tj ET
+0.86 0.85 0.88 RG 0.6 w 40 662 m 555 662 l S
+endstream
+endobj
+4 0 obj
+<< /Type /Page /Parent 5 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 3 0 R >>
+endobj
+5 0 obj
+<< /Type /Pages /Kids [4 0 R] /Count 1 >>
+endobj
+6 0 obj
+<< /Type /Catalog /Pages 5 0 R >>
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000009 00000 n 
+0000000079 00000 n 
+0000000154 00000 n 
+0000000957 00000 n 
+0000001093 00000 n 
+0000001150 00000 n 
+trailer
+<< /Size 7 /Root 6 0 R >>
+startxref
+1199
+%%EOF

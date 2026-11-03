@@ -1,0 +1,3692 @@
+[
+  {
+    "kind": "info_requested",
+    "title": "ML-RTL-2610-01331 needs more information",
+    "body": "Please obtain six months of bank statements from the salary account.",
+    "href": "/applications/app-1331",
+    "createdAt": "2026-10-27T08:58:14.243Z",
+    "userId": "u-ro-6",
+    "readAt": "2026-10-27T08:58:14.243Z",
+    "id": "ntf-1"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01377 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1377",
+    "createdAt": "2026-10-27T08:42:50.189Z",
+    "userId": "u-ro-6",
+    "readAt": null,
+    "id": "ntf-2"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01324",
+    "body": "Relationship Officer SLA of 12h has passed.",
+    "href": "/applications/app-1324",
+    "createdAt": "2026-10-27T08:28:44.976Z",
+    "userId": "u-ro-6",
+    "readAt": null,
+    "id": "ntf-3"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01274",
+    "body": "Relationship Officer SLA of 8h has passed.",
+    "href": "/applications/app-1274",
+    "createdAt": "2026-10-27T08:08:19.384Z",
+    "userId": "u-ro-6",
+    "readAt": "2026-10-27T08:08:19.384Z",
+    "id": "ntf-4"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01341 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1341",
+    "createdAt": "2026-10-27T07:41:02.522Z",
+    "userId": "u-ro-6",
+    "readAt": null,
+    "id": "ntf-5"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01343 awaits your decision",
+    "body": "Relationship Officer stage · SLA 12h",
+    "href": "/applications/app-1343",
+    "createdAt": "2026-10-27T07:26:24.196Z",
+    "userId": "u-ro-6",
+    "readAt": null,
+    "id": "ntf-6"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01296 awaits your decision",
+    "body": "Relationship Officer stage · SLA 12h",
+    "href": "/applications/app-1296",
+    "createdAt": "2026-10-27T06:40:00.749Z",
+    "userId": "u-ro-6",
+    "readAt": null,
+    "id": "ntf-7"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01327 awaits your decision",
+    "body": "Relationship Officer stage · SLA 12h",
+    "href": "/applications/app-1327",
+    "createdAt": "2026-10-27T06:31:18.000Z",
+    "userId": "u-ro-6",
+    "readAt": null,
+    "id": "ntf-8"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01312",
+    "body": "Relationship Officer SLA of 12h has passed.",
+    "href": "/applications/app-1312",
+    "createdAt": "2026-10-27T06:05:37.151Z",
+    "userId": "u-ro-6",
+    "readAt": null,
+    "id": "ntf-9"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01285",
+    "body": "Relationship Officer SLA of 8h has passed.",
+    "href": "/applications/app-1285",
+    "createdAt": "2026-10-27T05:44:30.816Z",
+    "userId": "u-ro-6",
+    "readAt": "2026-10-27T05:44:30.816Z",
+    "id": "ntf-10"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01380 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1380",
+    "createdAt": "2026-10-27T05:39:23.364Z",
+    "userId": "u-ro-6",
+    "readAt": "2026-10-27T05:39:23.364Z",
+    "id": "ntf-11"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01303 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1303",
+    "createdAt": "2026-10-27T05:22:22.362Z",
+    "userId": "u-ro-6",
+    "readAt": "2026-10-27T05:22:22.362Z",
+    "id": "ntf-12"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01354",
+    "body": "Relationship Officer SLA of 12h has passed.",
+    "href": "/applications/app-1354",
+    "createdAt": "2026-10-27T05:05:58.133Z",
+    "userId": "u-ro-6",
+    "readAt": "2026-10-27T05:05:58.133Z",
+    "id": "ntf-13"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01300",
+    "body": "Relationship Officer SLA of 8h has passed.",
+    "href": "/applications/app-1300",
+    "createdAt": "2026-10-27T04:51:34.508Z",
+    "userId": "u-ro-6",
+    "readAt": null,
+    "id": "ntf-14"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01348 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1348",
+    "createdAt": "2026-10-27T04:39:15.998Z",
+    "userId": "u-ro-6",
+    "readAt": null,
+    "id": "ntf-15"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01373 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1373",
+    "createdAt": "2026-10-27T04:24:11.936Z",
+    "userId": "u-ro-6",
+    "readAt": "2026-10-27T04:24:11.936Z",
+    "id": "ntf-16"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01360",
+    "body": "Relationship Officer SLA of 12h has passed.",
+    "href": "/applications/app-1360",
+    "createdAt": "2026-10-27T04:08:50.669Z",
+    "userId": "u-ro-6",
+    "readAt": null,
+    "id": "ntf-17"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01358 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1358",
+    "createdAt": "2026-10-27T03:14:45.696Z",
+    "userId": "u-ro-6",
+    "readAt": null,
+    "id": "ntf-18"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01278",
+    "body": "Relationship Officer SLA of 12h has passed.",
+    "href": "/applications/app-1278",
+    "createdAt": "2026-10-27T03:12:23.366Z",
+    "userId": "u-ro-6",
+    "readAt": "2026-10-27T03:12:23.366Z",
+    "id": "ntf-19"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01359 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1359",
+    "createdAt": "2026-10-27T02:34:49.595Z",
+    "userId": "u-ro-6",
+    "readAt": null,
+    "id": "ntf-20"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01332 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1332",
+    "createdAt": "2026-10-27T02:33:25.989Z",
+    "userId": "u-ro-6",
+    "readAt": null,
+    "id": "ntf-21"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01294 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1294",
+    "createdAt": "2026-10-27T02:23:38.908Z",
+    "userId": "u-ro-6",
+    "readAt": "2026-10-27T02:23:38.908Z",
+    "id": "ntf-22"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01349 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1349",
+    "createdAt": "2026-10-27T02:12:00.230Z",
+    "userId": "u-ro-6",
+    "readAt": "2026-10-27T02:12:00.230Z",
+    "id": "ntf-23"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01308 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1308",
+    "createdAt": "2026-10-27T01:45:16.929Z",
+    "userId": "u-ro-6",
+    "readAt": null,
+    "id": "ntf-24"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01290",
+    "body": "Relationship Officer SLA of 12h has passed.",
+    "href": "/applications/app-1290",
+    "createdAt": "2026-10-27T01:37:02.178Z",
+    "userId": "u-ro-6",
+    "readAt": "2026-10-27T01:37:02.178Z",
+    "id": "ntf-25"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01374 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1374",
+    "createdAt": "2026-10-27T01:24:49.510Z",
+    "userId": "u-ro-6",
+    "readAt": "2026-10-27T01:24:49.510Z",
+    "id": "ntf-26"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01274 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1274",
+    "createdAt": "2026-10-27T00:08:19.384Z",
+    "userId": "u-ro-6",
+    "readAt": "2026-10-27T00:08:19.384Z",
+    "id": "ntf-27"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01263",
+    "body": "Relationship Officer SLA of 8h has passed.",
+    "href": "/applications/app-1263",
+    "createdAt": "2026-10-26T22:00:00.000Z",
+    "userId": "u-ro-6",
+    "readAt": null,
+    "id": "ntf-28"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01285 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1285",
+    "createdAt": "2026-10-26T21:44:30.816Z",
+    "userId": "u-ro-6",
+    "readAt": null,
+    "id": "ntf-29"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01319 awaits your decision",
+    "body": "Relationship Officer stage · SLA 12h",
+    "href": "/applications/app-1319",
+    "createdAt": "2026-10-26T21:10:38.473Z",
+    "userId": "u-ro-6",
+    "readAt": null,
+    "id": "ntf-30"
+  },
+  {
+    "kind": "application_returned",
+    "title": "ML-RTL-2610-01375 returned for correction",
+    "body": "Guarantor form is not signed. Return for completion.",
+    "href": "/applications/app-1375",
+    "createdAt": "2026-10-27T08:46:39.145Z",
+    "userId": "u-ro-4",
+    "readAt": "2026-10-27T08:46:39.145Z",
+    "id": "ntf-31"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01377 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1377",
+    "createdAt": "2026-10-27T08:42:50.189Z",
+    "userId": "u-ro-4",
+    "readAt": null,
+    "id": "ntf-32"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01324",
+    "body": "Relationship Officer SLA of 12h has passed.",
+    "href": "/applications/app-1324",
+    "createdAt": "2026-10-27T08:28:44.976Z",
+    "userId": "u-ro-4",
+    "readAt": "2026-10-27T08:28:44.976Z",
+    "id": "ntf-33"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01341 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1341",
+    "createdAt": "2026-10-27T07:41:02.522Z",
+    "userId": "u-ro-4",
+    "readAt": null,
+    "id": "ntf-34"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01376",
+    "body": "Relationship Officer SLA of 8h has passed.",
+    "href": "/applications/app-1376",
+    "createdAt": "2026-10-27T06:52:13.099Z",
+    "userId": "u-ro-4",
+    "readAt": "2026-10-27T06:52:13.099Z",
+    "id": "ntf-35"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01296 awaits your decision",
+    "body": "Relationship Officer stage · SLA 12h",
+    "href": "/applications/app-1296",
+    "createdAt": "2026-10-27T06:40:00.749Z",
+    "userId": "u-ro-4",
+    "readAt": null,
+    "id": "ntf-36"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01370",
+    "body": "Relationship Officer SLA of 8h has passed.",
+    "href": "/applications/app-1370",
+    "createdAt": "2026-10-27T06:38:52.621Z",
+    "userId": "u-ro-4",
+    "readAt": "2026-10-27T06:38:52.621Z",
+    "id": "ntf-37"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01327 awaits your decision",
+    "body": "Relationship Officer stage · SLA 12h",
+    "href": "/applications/app-1327",
+    "createdAt": "2026-10-27T06:31:18.000Z",
+    "userId": "u-ro-4",
+    "readAt": null,
+    "id": "ntf-38"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01285",
+    "body": "Relationship Officer SLA of 8h has passed.",
+    "href": "/applications/app-1285",
+    "createdAt": "2026-10-27T05:44:30.816Z",
+    "userId": "u-ro-4",
+    "readAt": null,
+    "id": "ntf-39"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01380 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1380",
+    "createdAt": "2026-10-27T05:39:23.364Z",
+    "userId": "u-ro-4",
+    "readAt": null,
+    "id": "ntf-40"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01303 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1303",
+    "createdAt": "2026-10-27T05:22:22.362Z",
+    "userId": "u-ro-4",
+    "readAt": "2026-10-27T05:22:22.362Z",
+    "id": "ntf-41"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01354",
+    "body": "Relationship Officer SLA of 12h has passed.",
+    "href": "/applications/app-1354",
+    "createdAt": "2026-10-27T05:05:58.133Z",
+    "userId": "u-ro-4",
+    "readAt": "2026-10-27T05:05:58.133Z",
+    "id": "ntf-42"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01300",
+    "body": "Relationship Officer SLA of 8h has passed.",
+    "href": "/applications/app-1300",
+    "createdAt": "2026-10-27T04:51:34.508Z",
+    "userId": "u-ro-4",
+    "readAt": null,
+    "id": "ntf-43"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01348 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1348",
+    "createdAt": "2026-10-27T04:39:15.998Z",
+    "userId": "u-ro-4",
+    "readAt": null,
+    "id": "ntf-44"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01373 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1373",
+    "createdAt": "2026-10-27T04:24:11.936Z",
+    "userId": "u-ro-4",
+    "readAt": "2026-10-27T04:24:11.936Z",
+    "id": "ntf-45"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01360",
+    "body": "Relationship Officer SLA of 12h has passed.",
+    "href": "/applications/app-1360",
+    "createdAt": "2026-10-27T04:08:50.669Z",
+    "userId": "u-ro-4",
+    "readAt": null,
+    "id": "ntf-46"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01318",
+    "body": "Relationship Officer SLA of 8h has passed.",
+    "href": "/applications/app-1318",
+    "createdAt": "2026-10-27T04:06:05.393Z",
+    "userId": "u-ro-4",
+    "readAt": null,
+    "id": "ntf-47"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01299",
+    "body": "Relationship Officer SLA of 12h has passed.",
+    "href": "/applications/app-1299",
+    "createdAt": "2026-10-27T03:37:42.411Z",
+    "userId": "u-ro-4",
+    "readAt": "2026-10-27T03:37:42.411Z",
+    "id": "ntf-48"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01358 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1358",
+    "createdAt": "2026-10-27T03:14:45.696Z",
+    "userId": "u-ro-4",
+    "readAt": "2026-10-27T03:14:45.696Z",
+    "id": "ntf-49"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01278",
+    "body": "Relationship Officer SLA of 12h has passed.",
+    "href": "/applications/app-1278",
+    "createdAt": "2026-10-27T03:12:23.366Z",
+    "userId": "u-ro-4",
+    "readAt": null,
+    "id": "ntf-50"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01359 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1359",
+    "createdAt": "2026-10-27T02:34:49.595Z",
+    "userId": "u-ro-4",
+    "readAt": null,
+    "id": "ntf-51"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01332 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1332",
+    "createdAt": "2026-10-27T02:33:25.989Z",
+    "userId": "u-ro-4",
+    "readAt": null,
+    "id": "ntf-52"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01294 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1294",
+    "createdAt": "2026-10-27T02:23:38.908Z",
+    "userId": "u-ro-4",
+    "readAt": "2026-10-27T02:23:38.908Z",
+    "id": "ntf-53"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01349 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1349",
+    "createdAt": "2026-10-27T02:12:00.230Z",
+    "userId": "u-ro-4",
+    "readAt": null,
+    "id": "ntf-54"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01308 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1308",
+    "createdAt": "2026-10-27T01:45:16.929Z",
+    "userId": "u-ro-4",
+    "readAt": null,
+    "id": "ntf-55"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01290",
+    "body": "Relationship Officer SLA of 12h has passed.",
+    "href": "/applications/app-1290",
+    "createdAt": "2026-10-27T01:37:02.178Z",
+    "userId": "u-ro-4",
+    "readAt": null,
+    "id": "ntf-56"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01374 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1374",
+    "createdAt": "2026-10-27T01:24:49.510Z",
+    "userId": "u-ro-4",
+    "readAt": null,
+    "id": "ntf-57"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01286 awaits your decision",
+    "body": "Relationship Officer stage · SLA 12h",
+    "href": "/applications/app-1286",
+    "createdAt": "2026-10-27T00:00:45.170Z",
+    "userId": "u-ro-4",
+    "readAt": "2026-10-27T00:00:45.170Z",
+    "id": "ntf-58"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01305 awaits your decision",
+    "body": "Relationship Officer stage · SLA 12h",
+    "href": "/applications/app-1305",
+    "createdAt": "2026-10-26T22:55:19.629Z",
+    "userId": "u-ro-4",
+    "readAt": null,
+    "id": "ntf-59"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01376 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1376",
+    "createdAt": "2026-10-26T22:52:13.099Z",
+    "userId": "u-ro-4",
+    "readAt": "2026-10-26T22:52:13.099Z",
+    "id": "ntf-60"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01304 awaits your decision",
+    "body": "Credit Manager stage · SLA 24h",
+    "href": "/applications/app-1304",
+    "createdAt": "2026-10-27T08:45:26.301Z",
+    "userId": "u-cm-1",
+    "readAt": null,
+    "id": "ntf-61"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01293 awaits your decision",
+    "body": "Credit Manager stage · SLA 24h",
+    "href": "/applications/app-1293",
+    "createdAt": "2026-10-27T08:40:03.422Z",
+    "userId": "u-cm-1",
+    "readAt": null,
+    "id": "ntf-62"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01362 awaits your decision",
+    "body": "Credit Manager stage · SLA 24h",
+    "href": "/applications/app-1362",
+    "createdAt": "2026-10-27T07:56:56.480Z",
+    "userId": "u-cm-1",
+    "readAt": null,
+    "id": "ntf-63"
+  },
+  {
+    "kind": "delegation",
+    "title": "ML-SME-2610-01325 delegated to you",
+    "body": "Acting for Olumide Adebayo (Head of Credit).",
+    "href": "/applications/app-1325",
+    "createdAt": "2026-10-27T07:25:23.407Z",
+    "userId": "u-cm-1",
+    "readAt": null,
+    "id": "ntf-64"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01339 awaits your decision",
+    "body": "Credit Manager stage · SLA 24h",
+    "href": "/applications/app-1339",
+    "createdAt": "2026-10-27T05:52:43.848Z",
+    "userId": "u-cm-1",
+    "readAt": "2026-10-27T05:52:43.848Z",
+    "id": "ntf-65"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01317",
+    "body": "Credit Manager SLA of 24h has passed.",
+    "href": "/applications/app-1317",
+    "createdAt": "2026-10-27T05:21:21.689Z",
+    "userId": "u-cm-1",
+    "readAt": null,
+    "id": "ntf-66"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01260",
+    "body": "Credit Manager SLA of 24h has passed.",
+    "href": "/applications/app-1260",
+    "createdAt": "2026-10-27T04:19:07.937Z",
+    "userId": "u-cm-1",
+    "readAt": "2026-10-27T04:19:07.937Z",
+    "id": "ntf-67"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01378 awaits your decision",
+    "body": "Credit Manager stage · SLA 24h",
+    "href": "/applications/app-1378",
+    "createdAt": "2026-10-27T04:01:18.541Z",
+    "userId": "u-cm-1",
+    "readAt": "2026-10-27T04:01:18.541Z",
+    "id": "ntf-68"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01313 awaits your decision",
+    "body": "Credit Manager stage · SLA 24h",
+    "href": "/applications/app-1313",
+    "createdAt": "2026-10-27T02:45:02.018Z",
+    "userId": "u-cm-1",
+    "readAt": "2026-10-27T02:45:02.018Z",
+    "id": "ntf-69"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01337 awaits your decision",
+    "body": "Credit Manager stage · SLA 24h",
+    "href": "/applications/app-1337",
+    "createdAt": "2026-10-27T01:52:48.602Z",
+    "userId": "u-cm-1",
+    "readAt": null,
+    "id": "ntf-70"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01275",
+    "body": "Credit Manager SLA of 24h has passed.",
+    "href": "/applications/app-1275",
+    "createdAt": "2026-10-27T00:56:39.978Z",
+    "userId": "u-cm-1",
+    "readAt": "2026-10-27T00:56:39.978Z",
+    "id": "ntf-71"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01301 awaits your decision",
+    "body": "Credit Manager stage · SLA 24h",
+    "href": "/applications/app-1301",
+    "createdAt": "2026-10-27T00:29:51.136Z",
+    "userId": "u-cm-1",
+    "readAt": null,
+    "id": "ntf-72"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01298 awaits your decision",
+    "body": "Credit Manager stage · SLA 24h",
+    "href": "/applications/app-1298",
+    "createdAt": "2026-10-27T00:25:29.422Z",
+    "userId": "u-cm-1",
+    "readAt": null,
+    "id": "ntf-73"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01315 awaits your decision",
+    "body": "Credit Manager stage · SLA 24h",
+    "href": "/applications/app-1315",
+    "createdAt": "2026-10-26T23:54:50.769Z",
+    "userId": "u-cm-1",
+    "readAt": null,
+    "id": "ntf-74"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01321 awaits your decision",
+    "body": "Credit Manager stage · SLA 24h",
+    "href": "/applications/app-1321",
+    "createdAt": "2026-10-26T23:28:22.978Z",
+    "userId": "u-cm-1",
+    "readAt": null,
+    "id": "ntf-75"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01307 awaits your decision",
+    "body": "Credit Manager stage · SLA 24h",
+    "href": "/applications/app-1307",
+    "createdAt": "2026-10-26T23:00:00.000Z",
+    "userId": "u-cm-1",
+    "readAt": null,
+    "id": "ntf-76"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01238",
+    "body": "Credit Manager SLA of 24h has passed.",
+    "href": "/applications/app-1238",
+    "createdAt": "2026-10-26T21:06:39.524Z",
+    "userId": "u-cm-1",
+    "readAt": null,
+    "id": "ntf-77"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01280 awaits your decision",
+    "body": "Credit Manager stage · SLA 24h",
+    "href": "/applications/app-1280",
+    "createdAt": "2026-10-26T20:46:17.385Z",
+    "userId": "u-cm-1",
+    "readAt": "2026-10-26T20:46:17.385Z",
+    "id": "ntf-78"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01322",
+    "body": "Credit Manager SLA of 24h has passed.",
+    "href": "/applications/app-1322",
+    "createdAt": "2026-10-26T20:37:14.457Z",
+    "userId": "u-cm-1",
+    "readAt": null,
+    "id": "ntf-79"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01282 awaits your decision",
+    "body": "Credit Manager stage · SLA 24h",
+    "href": "/applications/app-1282",
+    "createdAt": "2026-10-26T20:15:30.158Z",
+    "userId": "u-cm-1",
+    "readAt": "2026-10-26T20:15:30.158Z",
+    "id": "ntf-80"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01262",
+    "body": "Credit Manager SLA of 24h has passed.",
+    "href": "/applications/app-1262",
+    "createdAt": "2026-10-26T20:12:56.247Z",
+    "userId": "u-cm-1",
+    "readAt": null,
+    "id": "ntf-81"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01259",
+    "body": "Credit Manager SLA of 24h has passed.",
+    "href": "/applications/app-1259",
+    "createdAt": "2026-10-26T19:44:12.615Z",
+    "userId": "u-cm-1",
+    "readAt": null,
+    "id": "ntf-82"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01228",
+    "body": "Credit Manager SLA of 24h has passed.",
+    "href": "/applications/app-1228",
+    "createdAt": "2026-10-26T19:43:29.445Z",
+    "userId": "u-cm-1",
+    "readAt": null,
+    "id": "ntf-83"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01323 awaits your decision",
+    "body": "Credit Manager stage · SLA 24h",
+    "href": "/applications/app-1323",
+    "createdAt": "2026-10-26T19:39:30.130Z",
+    "userId": "u-cm-1",
+    "readAt": null,
+    "id": "ntf-84"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01309 awaits your decision",
+    "body": "Credit Manager stage · SLA 24h",
+    "href": "/applications/app-1309",
+    "createdAt": "2026-10-26T19:07:56.616Z",
+    "userId": "u-cm-1",
+    "readAt": null,
+    "id": "ntf-85"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01273 awaits your decision",
+    "body": "Credit Manager stage · SLA 24h",
+    "href": "/applications/app-1273",
+    "createdAt": "2026-10-26T18:38:23.579Z",
+    "userId": "u-cm-1",
+    "readAt": null,
+    "id": "ntf-86"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01284 awaits your decision",
+    "body": "Credit Manager stage · SLA 24h",
+    "href": "/applications/app-1284",
+    "createdAt": "2026-10-26T18:21:01.096Z",
+    "userId": "u-cm-1",
+    "readAt": "2026-10-26T18:21:01.096Z",
+    "id": "ntf-87"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01302",
+    "body": "Credit Manager SLA of 24h has passed.",
+    "href": "/applications/app-1302",
+    "createdAt": "2026-10-26T17:54:04.674Z",
+    "userId": "u-cm-1",
+    "readAt": null,
+    "id": "ntf-88"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01329 awaits your decision",
+    "body": "Credit Manager stage · SLA 24h",
+    "href": "/applications/app-1329",
+    "createdAt": "2026-10-26T17:43:34.090Z",
+    "userId": "u-cm-1",
+    "readAt": null,
+    "id": "ntf-89"
+  },
+  {
+    "kind": "delegation",
+    "title": "ML-RTL-2610-01271 delegated to you",
+    "body": "Acting for Olumide Adebayo (Head of Credit).",
+    "href": "/applications/app-1271",
+    "createdAt": "2026-10-26T17:31:07.026Z",
+    "userId": "u-cm-1",
+    "readAt": "2026-10-26T17:31:07.026Z",
+    "id": "ntf-90"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01304 awaits your decision",
+    "body": "Credit Manager stage · SLA 24h",
+    "href": "/applications/app-1304",
+    "createdAt": "2026-10-27T08:45:26.301Z",
+    "userId": "u-cm-2",
+    "readAt": null,
+    "id": "ntf-91"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01293 awaits your decision",
+    "body": "Credit Manager stage · SLA 24h",
+    "href": "/applications/app-1293",
+    "createdAt": "2026-10-27T08:40:03.422Z",
+    "userId": "u-cm-2",
+    "readAt": null,
+    "id": "ntf-92"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01362 awaits your decision",
+    "body": "Credit Manager stage · SLA 24h",
+    "href": "/applications/app-1362",
+    "createdAt": "2026-10-27T07:56:56.480Z",
+    "userId": "u-cm-2",
+    "readAt": null,
+    "id": "ntf-93"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01339 awaits your decision",
+    "body": "Credit Manager stage · SLA 24h",
+    "href": "/applications/app-1339",
+    "createdAt": "2026-10-27T05:52:43.848Z",
+    "userId": "u-cm-2",
+    "readAt": null,
+    "id": "ntf-94"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01317",
+    "body": "Credit Manager SLA of 24h has passed.",
+    "href": "/applications/app-1317",
+    "createdAt": "2026-10-27T05:21:21.689Z",
+    "userId": "u-cm-2",
+    "readAt": null,
+    "id": "ntf-95"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01260",
+    "body": "Credit Manager SLA of 24h has passed.",
+    "href": "/applications/app-1260",
+    "createdAt": "2026-10-27T04:19:07.937Z",
+    "userId": "u-cm-2",
+    "readAt": null,
+    "id": "ntf-96"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01378 awaits your decision",
+    "body": "Credit Manager stage · SLA 24h",
+    "href": "/applications/app-1378",
+    "createdAt": "2026-10-27T04:01:18.541Z",
+    "userId": "u-cm-2",
+    "readAt": null,
+    "id": "ntf-97"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01371 awaits your decision",
+    "body": "Credit Manager stage · SLA 24h",
+    "href": "/applications/app-1371",
+    "createdAt": "2026-10-27T04:00:00.000Z",
+    "userId": "u-cm-2",
+    "readAt": null,
+    "id": "ntf-98"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01313 awaits your decision",
+    "body": "Credit Manager stage · SLA 24h",
+    "href": "/applications/app-1313",
+    "createdAt": "2026-10-27T02:45:02.018Z",
+    "userId": "u-cm-2",
+    "readAt": null,
+    "id": "ntf-99"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01337 awaits your decision",
+    "body": "Credit Manager stage · SLA 24h",
+    "href": "/applications/app-1337",
+    "createdAt": "2026-10-27T01:52:48.602Z",
+    "userId": "u-cm-2",
+    "readAt": null,
+    "id": "ntf-100"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01275",
+    "body": "Credit Manager SLA of 24h has passed.",
+    "href": "/applications/app-1275",
+    "createdAt": "2026-10-27T00:56:39.978Z",
+    "userId": "u-cm-2",
+    "readAt": null,
+    "id": "ntf-101"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01301 awaits your decision",
+    "body": "Credit Manager stage · SLA 24h",
+    "href": "/applications/app-1301",
+    "createdAt": "2026-10-27T00:29:51.136Z",
+    "userId": "u-cm-2",
+    "readAt": null,
+    "id": "ntf-102"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01298 awaits your decision",
+    "body": "Credit Manager stage · SLA 24h",
+    "href": "/applications/app-1298",
+    "createdAt": "2026-10-27T00:25:29.422Z",
+    "userId": "u-cm-2",
+    "readAt": "2026-10-27T00:25:29.422Z",
+    "id": "ntf-103"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01315 awaits your decision",
+    "body": "Credit Manager stage · SLA 24h",
+    "href": "/applications/app-1315",
+    "createdAt": "2026-10-26T23:54:50.769Z",
+    "userId": "u-cm-2",
+    "readAt": null,
+    "id": "ntf-104"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01321 awaits your decision",
+    "body": "Credit Manager stage · SLA 24h",
+    "href": "/applications/app-1321",
+    "createdAt": "2026-10-26T23:28:22.978Z",
+    "userId": "u-cm-2",
+    "readAt": null,
+    "id": "ntf-105"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01307 awaits your decision",
+    "body": "Credit Manager stage · SLA 24h",
+    "href": "/applications/app-1307",
+    "createdAt": "2026-10-26T23:00:00.000Z",
+    "userId": "u-cm-2",
+    "readAt": null,
+    "id": "ntf-106"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01238",
+    "body": "Credit Manager SLA of 24h has passed.",
+    "href": "/applications/app-1238",
+    "createdAt": "2026-10-26T21:06:39.524Z",
+    "userId": "u-cm-2",
+    "readAt": null,
+    "id": "ntf-107"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01280 awaits your decision",
+    "body": "Credit Manager stage · SLA 24h",
+    "href": "/applications/app-1280",
+    "createdAt": "2026-10-26T20:46:17.385Z",
+    "userId": "u-cm-2",
+    "readAt": null,
+    "id": "ntf-108"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01322",
+    "body": "Credit Manager SLA of 24h has passed.",
+    "href": "/applications/app-1322",
+    "createdAt": "2026-10-26T20:37:14.457Z",
+    "userId": "u-cm-2",
+    "readAt": null,
+    "id": "ntf-109"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01282 awaits your decision",
+    "body": "Credit Manager stage · SLA 24h",
+    "href": "/applications/app-1282",
+    "createdAt": "2026-10-26T20:15:30.158Z",
+    "userId": "u-cm-2",
+    "readAt": "2026-10-26T20:15:30.158Z",
+    "id": "ntf-110"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01262",
+    "body": "Credit Manager SLA of 24h has passed.",
+    "href": "/applications/app-1262",
+    "createdAt": "2026-10-26T20:12:56.247Z",
+    "userId": "u-cm-2",
+    "readAt": null,
+    "id": "ntf-111"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01259",
+    "body": "Credit Manager SLA of 24h has passed.",
+    "href": "/applications/app-1259",
+    "createdAt": "2026-10-26T19:44:12.615Z",
+    "userId": "u-cm-2",
+    "readAt": null,
+    "id": "ntf-112"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01228",
+    "body": "Credit Manager SLA of 24h has passed.",
+    "href": "/applications/app-1228",
+    "createdAt": "2026-10-26T19:43:29.445Z",
+    "userId": "u-cm-2",
+    "readAt": null,
+    "id": "ntf-113"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01323 awaits your decision",
+    "body": "Credit Manager stage · SLA 24h",
+    "href": "/applications/app-1323",
+    "createdAt": "2026-10-26T19:39:30.130Z",
+    "userId": "u-cm-2",
+    "readAt": null,
+    "id": "ntf-114"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01309 awaits your decision",
+    "body": "Credit Manager stage · SLA 24h",
+    "href": "/applications/app-1309",
+    "createdAt": "2026-10-26T19:07:56.616Z",
+    "userId": "u-cm-2",
+    "readAt": null,
+    "id": "ntf-115"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01273 awaits your decision",
+    "body": "Credit Manager stage · SLA 24h",
+    "href": "/applications/app-1273",
+    "createdAt": "2026-10-26T18:38:23.579Z",
+    "userId": "u-cm-2",
+    "readAt": "2026-10-26T18:38:23.579Z",
+    "id": "ntf-116"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01284 awaits your decision",
+    "body": "Credit Manager stage · SLA 24h",
+    "href": "/applications/app-1284",
+    "createdAt": "2026-10-26T18:21:01.096Z",
+    "userId": "u-cm-2",
+    "readAt": null,
+    "id": "ntf-117"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01302",
+    "body": "Credit Manager SLA of 24h has passed.",
+    "href": "/applications/app-1302",
+    "createdAt": "2026-10-26T17:54:04.674Z",
+    "userId": "u-cm-2",
+    "readAt": null,
+    "id": "ntf-118"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01329 awaits your decision",
+    "body": "Credit Manager stage · SLA 24h",
+    "href": "/applications/app-1329",
+    "createdAt": "2026-10-26T17:43:34.090Z",
+    "userId": "u-cm-2",
+    "readAt": null,
+    "id": "ntf-119"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01254",
+    "body": "Credit Manager SLA of 24h has passed.",
+    "href": "/applications/app-1254",
+    "createdAt": "2026-10-26T16:57:21.634Z",
+    "userId": "u-cm-2",
+    "readAt": null,
+    "id": "ntf-120"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01377 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1377",
+    "createdAt": "2026-10-27T08:42:50.189Z",
+    "userId": "u-ro-1",
+    "readAt": null,
+    "id": "ntf-121"
+  },
+  {
+    "kind": "application_returned",
+    "title": "ML-SME-2610-01240 returned for correction",
+    "body": "Guarantor form is not signed. Return for completion.",
+    "href": "/applications/app-1240",
+    "createdAt": "2026-10-27T08:42:27.324Z",
+    "userId": "u-ro-1",
+    "readAt": null,
+    "id": "ntf-122"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01324",
+    "body": "Relationship Officer SLA of 12h has passed.",
+    "href": "/applications/app-1324",
+    "createdAt": "2026-10-27T08:28:44.976Z",
+    "userId": "u-ro-1",
+    "readAt": "2026-10-27T08:28:44.976Z",
+    "id": "ntf-123"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01274",
+    "body": "Relationship Officer SLA of 8h has passed.",
+    "href": "/applications/app-1274",
+    "createdAt": "2026-10-27T08:08:19.384Z",
+    "userId": "u-ro-1",
+    "readAt": "2026-10-27T08:08:19.384Z",
+    "id": "ntf-124"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01341 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1341",
+    "createdAt": "2026-10-27T07:41:02.522Z",
+    "userId": "u-ro-1",
+    "readAt": null,
+    "id": "ntf-125"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01343 awaits your decision",
+    "body": "Relationship Officer stage · SLA 12h",
+    "href": "/applications/app-1343",
+    "createdAt": "2026-10-27T07:26:24.196Z",
+    "userId": "u-ro-1",
+    "readAt": null,
+    "id": "ntf-126"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01376",
+    "body": "Relationship Officer SLA of 8h has passed.",
+    "href": "/applications/app-1376",
+    "createdAt": "2026-10-27T06:52:13.099Z",
+    "userId": "u-ro-1",
+    "readAt": null,
+    "id": "ntf-127"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01296 awaits your decision",
+    "body": "Relationship Officer stage · SLA 12h",
+    "href": "/applications/app-1296",
+    "createdAt": "2026-10-27T06:40:00.749Z",
+    "userId": "u-ro-1",
+    "readAt": null,
+    "id": "ntf-128"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01370",
+    "body": "Relationship Officer SLA of 8h has passed.",
+    "href": "/applications/app-1370",
+    "createdAt": "2026-10-27T06:38:52.621Z",
+    "userId": "u-ro-1",
+    "readAt": null,
+    "id": "ntf-129"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01327 awaits your decision",
+    "body": "Relationship Officer stage · SLA 12h",
+    "href": "/applications/app-1327",
+    "createdAt": "2026-10-27T06:31:18.000Z",
+    "userId": "u-ro-1",
+    "readAt": null,
+    "id": "ntf-130"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01312",
+    "body": "Relationship Officer SLA of 12h has passed.",
+    "href": "/applications/app-1312",
+    "createdAt": "2026-10-27T06:05:37.151Z",
+    "userId": "u-ro-1",
+    "readAt": "2026-10-27T06:05:37.151Z",
+    "id": "ntf-131"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01285",
+    "body": "Relationship Officer SLA of 8h has passed.",
+    "href": "/applications/app-1285",
+    "createdAt": "2026-10-27T05:44:30.816Z",
+    "userId": "u-ro-1",
+    "readAt": null,
+    "id": "ntf-132"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01380 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1380",
+    "createdAt": "2026-10-27T05:39:23.364Z",
+    "userId": "u-ro-1",
+    "readAt": "2026-10-27T05:39:23.364Z",
+    "id": "ntf-133"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01303 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1303",
+    "createdAt": "2026-10-27T05:22:22.362Z",
+    "userId": "u-ro-1",
+    "readAt": null,
+    "id": "ntf-134"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01354",
+    "body": "Relationship Officer SLA of 12h has passed.",
+    "href": "/applications/app-1354",
+    "createdAt": "2026-10-27T05:05:58.133Z",
+    "userId": "u-ro-1",
+    "readAt": null,
+    "id": "ntf-135"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01300",
+    "body": "Relationship Officer SLA of 8h has passed.",
+    "href": "/applications/app-1300",
+    "createdAt": "2026-10-27T04:51:34.508Z",
+    "userId": "u-ro-1",
+    "readAt": "2026-10-27T04:51:34.508Z",
+    "id": "ntf-136"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01373 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1373",
+    "createdAt": "2026-10-27T04:24:11.936Z",
+    "userId": "u-ro-1",
+    "readAt": null,
+    "id": "ntf-137"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01360",
+    "body": "Relationship Officer SLA of 12h has passed.",
+    "href": "/applications/app-1360",
+    "createdAt": "2026-10-27T04:08:50.669Z",
+    "userId": "u-ro-1",
+    "readAt": null,
+    "id": "ntf-138"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01318",
+    "body": "Relationship Officer SLA of 8h has passed.",
+    "href": "/applications/app-1318",
+    "createdAt": "2026-10-27T04:06:05.393Z",
+    "userId": "u-ro-1",
+    "readAt": null,
+    "id": "ntf-139"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01299",
+    "body": "Relationship Officer SLA of 12h has passed.",
+    "href": "/applications/app-1299",
+    "createdAt": "2026-10-27T03:37:42.411Z",
+    "userId": "u-ro-1",
+    "readAt": null,
+    "id": "ntf-140"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01358 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1358",
+    "createdAt": "2026-10-27T03:14:45.696Z",
+    "userId": "u-ro-1",
+    "readAt": null,
+    "id": "ntf-141"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01278",
+    "body": "Relationship Officer SLA of 12h has passed.",
+    "href": "/applications/app-1278",
+    "createdAt": "2026-10-27T03:12:23.366Z",
+    "userId": "u-ro-1",
+    "readAt": null,
+    "id": "ntf-142"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01359 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1359",
+    "createdAt": "2026-10-27T02:34:49.595Z",
+    "userId": "u-ro-1",
+    "readAt": "2026-10-27T02:34:49.595Z",
+    "id": "ntf-143"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01332 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1332",
+    "createdAt": "2026-10-27T02:33:25.989Z",
+    "userId": "u-ro-1",
+    "readAt": "2026-10-27T02:33:25.989Z",
+    "id": "ntf-144"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01294 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1294",
+    "createdAt": "2026-10-27T02:23:38.908Z",
+    "userId": "u-ro-1",
+    "readAt": "2026-10-27T02:23:38.908Z",
+    "id": "ntf-145"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01349 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1349",
+    "createdAt": "2026-10-27T02:12:00.230Z",
+    "userId": "u-ro-1",
+    "readAt": "2026-10-27T02:12:00.230Z",
+    "id": "ntf-146"
+  },
+  {
+    "kind": "info_requested",
+    "title": "ML-RTL-2610-01270 needs more information",
+    "body": "Need confirmation of the LPO from the issuing company before we proceed.",
+    "href": "/applications/app-1270",
+    "createdAt": "2026-10-27T02:02:28.336Z",
+    "userId": "u-ro-1",
+    "readAt": null,
+    "id": "ntf-147"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01308 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1308",
+    "createdAt": "2026-10-27T01:45:16.929Z",
+    "userId": "u-ro-1",
+    "readAt": "2026-10-27T01:45:16.929Z",
+    "id": "ntf-148"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01290",
+    "body": "Relationship Officer SLA of 12h has passed.",
+    "href": "/applications/app-1290",
+    "createdAt": "2026-10-27T01:37:02.178Z",
+    "userId": "u-ro-1",
+    "readAt": null,
+    "id": "ntf-149"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01274 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1274",
+    "createdAt": "2026-10-27T00:08:19.384Z",
+    "userId": "u-ro-1",
+    "readAt": null,
+    "id": "ntf-150"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01377 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1377",
+    "createdAt": "2026-10-27T08:42:50.189Z",
+    "userId": "u-ro-2",
+    "readAt": null,
+    "id": "ntf-151"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01324",
+    "body": "Relationship Officer SLA of 12h has passed.",
+    "href": "/applications/app-1324",
+    "createdAt": "2026-10-27T08:28:44.976Z",
+    "userId": "u-ro-2",
+    "readAt": null,
+    "id": "ntf-152"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01274",
+    "body": "Relationship Officer SLA of 8h has passed.",
+    "href": "/applications/app-1274",
+    "createdAt": "2026-10-27T08:08:19.384Z",
+    "userId": "u-ro-2",
+    "readAt": null,
+    "id": "ntf-153"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01343 awaits your decision",
+    "body": "Relationship Officer stage · SLA 12h",
+    "href": "/applications/app-1343",
+    "createdAt": "2026-10-27T07:26:24.196Z",
+    "userId": "u-ro-2",
+    "readAt": null,
+    "id": "ntf-154"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01376",
+    "body": "Relationship Officer SLA of 8h has passed.",
+    "href": "/applications/app-1376",
+    "createdAt": "2026-10-27T06:52:13.099Z",
+    "userId": "u-ro-2",
+    "readAt": null,
+    "id": "ntf-155"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01296 awaits your decision",
+    "body": "Relationship Officer stage · SLA 12h",
+    "href": "/applications/app-1296",
+    "createdAt": "2026-10-27T06:40:00.749Z",
+    "userId": "u-ro-2",
+    "readAt": "2026-10-27T06:40:00.749Z",
+    "id": "ntf-156"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01370",
+    "body": "Relationship Officer SLA of 8h has passed.",
+    "href": "/applications/app-1370",
+    "createdAt": "2026-10-27T06:38:52.621Z",
+    "userId": "u-ro-2",
+    "readAt": null,
+    "id": "ntf-157"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01312",
+    "body": "Relationship Officer SLA of 12h has passed.",
+    "href": "/applications/app-1312",
+    "createdAt": "2026-10-27T06:05:37.151Z",
+    "userId": "u-ro-2",
+    "readAt": null,
+    "id": "ntf-158"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01285",
+    "body": "Relationship Officer SLA of 8h has passed.",
+    "href": "/applications/app-1285",
+    "createdAt": "2026-10-27T05:44:30.816Z",
+    "userId": "u-ro-2",
+    "readAt": "2026-10-27T05:44:30.816Z",
+    "id": "ntf-159"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01380 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1380",
+    "createdAt": "2026-10-27T05:39:23.364Z",
+    "userId": "u-ro-2",
+    "readAt": null,
+    "id": "ntf-160"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01303 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1303",
+    "createdAt": "2026-10-27T05:22:22.362Z",
+    "userId": "u-ro-2",
+    "readAt": null,
+    "id": "ntf-161"
+  },
+  {
+    "kind": "info_requested",
+    "title": "ML-RTL-2610-01357 needs more information",
+    "body": "Need confirmation of the LPO from the issuing company before we proceed.",
+    "href": "/applications/app-1357",
+    "createdAt": "2026-10-27T05:12:17.661Z",
+    "userId": "u-ro-2",
+    "readAt": null,
+    "id": "ntf-162"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01348 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1348",
+    "createdAt": "2026-10-27T04:39:15.998Z",
+    "userId": "u-ro-2",
+    "readAt": null,
+    "id": "ntf-163"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01360",
+    "body": "Relationship Officer SLA of 12h has passed.",
+    "href": "/applications/app-1360",
+    "createdAt": "2026-10-27T04:08:50.669Z",
+    "userId": "u-ro-2",
+    "readAt": "2026-10-27T04:08:50.669Z",
+    "id": "ntf-164"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01318",
+    "body": "Relationship Officer SLA of 8h has passed.",
+    "href": "/applications/app-1318",
+    "createdAt": "2026-10-27T04:06:05.393Z",
+    "userId": "u-ro-2",
+    "readAt": null,
+    "id": "ntf-165"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01299",
+    "body": "Relationship Officer SLA of 12h has passed.",
+    "href": "/applications/app-1299",
+    "createdAt": "2026-10-27T03:37:42.411Z",
+    "userId": "u-ro-2",
+    "readAt": null,
+    "id": "ntf-166"
+  },
+  {
+    "kind": "info_requested",
+    "title": "ML-SME-2610-01310 needs more information",
+    "body": "Please obtain six months of bank statements from the salary account.",
+    "href": "/applications/app-1310",
+    "createdAt": "2026-10-27T03:18:58.425Z",
+    "userId": "u-ro-2",
+    "readAt": null,
+    "id": "ntf-167"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01358 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1358",
+    "createdAt": "2026-10-27T03:14:45.696Z",
+    "userId": "u-ro-2",
+    "readAt": null,
+    "id": "ntf-168"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01359 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1359",
+    "createdAt": "2026-10-27T02:34:49.595Z",
+    "userId": "u-ro-2",
+    "readAt": null,
+    "id": "ntf-169"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01332 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1332",
+    "createdAt": "2026-10-27T02:33:25.989Z",
+    "userId": "u-ro-2",
+    "readAt": null,
+    "id": "ntf-170"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01294 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1294",
+    "createdAt": "2026-10-27T02:23:38.908Z",
+    "userId": "u-ro-2",
+    "readAt": "2026-10-27T02:23:38.908Z",
+    "id": "ntf-171"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01349 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1349",
+    "createdAt": "2026-10-27T02:12:00.230Z",
+    "userId": "u-ro-2",
+    "readAt": null,
+    "id": "ntf-172"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01308 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1308",
+    "createdAt": "2026-10-27T01:45:16.929Z",
+    "userId": "u-ro-2",
+    "readAt": null,
+    "id": "ntf-173"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01290",
+    "body": "Relationship Officer SLA of 12h has passed.",
+    "href": "/applications/app-1290",
+    "createdAt": "2026-10-27T01:37:02.178Z",
+    "userId": "u-ro-2",
+    "readAt": "2026-10-27T01:37:02.178Z",
+    "id": "ntf-174"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01374 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1374",
+    "createdAt": "2026-10-27T01:24:49.510Z",
+    "userId": "u-ro-2",
+    "readAt": null,
+    "id": "ntf-175"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01274 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1274",
+    "createdAt": "2026-10-27T00:08:19.384Z",
+    "userId": "u-ro-2",
+    "readAt": null,
+    "id": "ntf-176"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01286 awaits your decision",
+    "body": "Relationship Officer stage · SLA 12h",
+    "href": "/applications/app-1286",
+    "createdAt": "2026-10-27T00:00:45.170Z",
+    "userId": "u-ro-2",
+    "readAt": "2026-10-27T00:00:45.170Z",
+    "id": "ntf-177"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01305 awaits your decision",
+    "body": "Relationship Officer stage · SLA 12h",
+    "href": "/applications/app-1305",
+    "createdAt": "2026-10-26T22:55:19.629Z",
+    "userId": "u-ro-2",
+    "readAt": null,
+    "id": "ntf-178"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01376 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1376",
+    "createdAt": "2026-10-26T22:52:13.099Z",
+    "userId": "u-ro-2",
+    "readAt": null,
+    "id": "ntf-179"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01370 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1370",
+    "createdAt": "2026-10-26T22:38:52.621Z",
+    "userId": "u-ro-2",
+    "readAt": null,
+    "id": "ntf-180"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01377 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1377",
+    "createdAt": "2026-10-27T08:42:50.189Z",
+    "userId": "u-ro-5",
+    "readAt": null,
+    "id": "ntf-181"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01324",
+    "body": "Relationship Officer SLA of 12h has passed.",
+    "href": "/applications/app-1324",
+    "createdAt": "2026-10-27T08:28:44.976Z",
+    "userId": "u-ro-5",
+    "readAt": null,
+    "id": "ntf-182"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01274",
+    "body": "Relationship Officer SLA of 8h has passed.",
+    "href": "/applications/app-1274",
+    "createdAt": "2026-10-27T08:08:19.384Z",
+    "userId": "u-ro-5",
+    "readAt": "2026-10-27T08:08:19.384Z",
+    "id": "ntf-183"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01341 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1341",
+    "createdAt": "2026-10-27T07:41:02.522Z",
+    "userId": "u-ro-5",
+    "readAt": null,
+    "id": "ntf-184"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01343 awaits your decision",
+    "body": "Relationship Officer stage · SLA 12h",
+    "href": "/applications/app-1343",
+    "createdAt": "2026-10-27T07:26:24.196Z",
+    "userId": "u-ro-5",
+    "readAt": null,
+    "id": "ntf-185"
+  },
+  {
+    "kind": "application_returned",
+    "title": "ML-RTL-2610-01352 returned for correction",
+    "body": "Payslip for the most recent month is missing. Please upload and resubmit.",
+    "href": "/applications/app-1352",
+    "createdAt": "2026-10-27T07:00:56.095Z",
+    "userId": "u-ro-5",
+    "readAt": null,
+    "id": "ntf-186"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01376",
+    "body": "Relationship Officer SLA of 8h has passed.",
+    "href": "/applications/app-1376",
+    "createdAt": "2026-10-27T06:52:13.099Z",
+    "userId": "u-ro-5",
+    "readAt": "2026-10-27T06:52:13.099Z",
+    "id": "ntf-187"
+  },
+  {
+    "kind": "info_requested",
+    "title": "ML-RTL-2610-01368 needs more information",
+    "body": "Need confirmation of the LPO from the issuing company before we proceed.",
+    "href": "/applications/app-1368",
+    "createdAt": "2026-10-27T06:41:12.773Z",
+    "userId": "u-ro-5",
+    "readAt": "2026-10-27T06:41:12.773Z",
+    "id": "ntf-188"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01296 awaits your decision",
+    "body": "Relationship Officer stage · SLA 12h",
+    "href": "/applications/app-1296",
+    "createdAt": "2026-10-27T06:40:00.749Z",
+    "userId": "u-ro-5",
+    "readAt": null,
+    "id": "ntf-189"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01370",
+    "body": "Relationship Officer SLA of 8h has passed.",
+    "href": "/applications/app-1370",
+    "createdAt": "2026-10-27T06:38:52.621Z",
+    "userId": "u-ro-5",
+    "readAt": null,
+    "id": "ntf-190"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01327 awaits your decision",
+    "body": "Relationship Officer stage · SLA 12h",
+    "href": "/applications/app-1327",
+    "createdAt": "2026-10-27T06:31:18.000Z",
+    "userId": "u-ro-5",
+    "readAt": null,
+    "id": "ntf-191"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01312",
+    "body": "Relationship Officer SLA of 12h has passed.",
+    "href": "/applications/app-1312",
+    "createdAt": "2026-10-27T06:05:37.151Z",
+    "userId": "u-ro-5",
+    "readAt": null,
+    "id": "ntf-192"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01380 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1380",
+    "createdAt": "2026-10-27T05:39:23.364Z",
+    "userId": "u-ro-5",
+    "readAt": null,
+    "id": "ntf-193"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01303 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1303",
+    "createdAt": "2026-10-27T05:22:22.362Z",
+    "userId": "u-ro-5",
+    "readAt": null,
+    "id": "ntf-194"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01354",
+    "body": "Relationship Officer SLA of 12h has passed.",
+    "href": "/applications/app-1354",
+    "createdAt": "2026-10-27T05:05:58.133Z",
+    "userId": "u-ro-5",
+    "readAt": null,
+    "id": "ntf-195"
+  },
+  {
+    "kind": "info_requested",
+    "title": "ML-RTL-2610-01306 needs more information",
+    "body": "Kindly get an explanation for the large cash withdrawals in June.",
+    "href": "/applications/app-1306",
+    "createdAt": "2026-10-27T04:55:08.251Z",
+    "userId": "u-ro-5",
+    "readAt": "2026-10-27T04:55:08.251Z",
+    "id": "ntf-196"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01300",
+    "body": "Relationship Officer SLA of 8h has passed.",
+    "href": "/applications/app-1300",
+    "createdAt": "2026-10-27T04:51:34.508Z",
+    "userId": "u-ro-5",
+    "readAt": null,
+    "id": "ntf-197"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01348 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1348",
+    "createdAt": "2026-10-27T04:39:15.998Z",
+    "userId": "u-ro-5",
+    "readAt": null,
+    "id": "ntf-198"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01373 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1373",
+    "createdAt": "2026-10-27T04:24:11.936Z",
+    "userId": "u-ro-5",
+    "readAt": "2026-10-27T04:24:11.936Z",
+    "id": "ntf-199"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01360",
+    "body": "Relationship Officer SLA of 12h has passed.",
+    "href": "/applications/app-1360",
+    "createdAt": "2026-10-27T04:08:50.669Z",
+    "userId": "u-ro-5",
+    "readAt": "2026-10-27T04:08:50.669Z",
+    "id": "ntf-200"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01318",
+    "body": "Relationship Officer SLA of 8h has passed.",
+    "href": "/applications/app-1318",
+    "createdAt": "2026-10-27T04:06:05.393Z",
+    "userId": "u-ro-5",
+    "readAt": null,
+    "id": "ntf-201"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01299",
+    "body": "Relationship Officer SLA of 12h has passed.",
+    "href": "/applications/app-1299",
+    "createdAt": "2026-10-27T03:37:42.411Z",
+    "userId": "u-ro-5",
+    "readAt": null,
+    "id": "ntf-202"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01358 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1358",
+    "createdAt": "2026-10-27T03:14:45.696Z",
+    "userId": "u-ro-5",
+    "readAt": "2026-10-27T03:14:45.696Z",
+    "id": "ntf-203"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01278",
+    "body": "Relationship Officer SLA of 12h has passed.",
+    "href": "/applications/app-1278",
+    "createdAt": "2026-10-27T03:12:23.366Z",
+    "userId": "u-ro-5",
+    "readAt": null,
+    "id": "ntf-204"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01359 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1359",
+    "createdAt": "2026-10-27T02:34:49.595Z",
+    "userId": "u-ro-5",
+    "readAt": null,
+    "id": "ntf-205"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01294 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1294",
+    "createdAt": "2026-10-27T02:23:38.908Z",
+    "userId": "u-ro-5",
+    "readAt": null,
+    "id": "ntf-206"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01308 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1308",
+    "createdAt": "2026-10-27T01:45:16.929Z",
+    "userId": "u-ro-5",
+    "readAt": "2026-10-27T01:45:16.929Z",
+    "id": "ntf-207"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01374 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1374",
+    "createdAt": "2026-10-27T01:24:49.510Z",
+    "userId": "u-ro-5",
+    "readAt": null,
+    "id": "ntf-208"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01274 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1274",
+    "createdAt": "2026-10-27T00:08:19.384Z",
+    "userId": "u-ro-5",
+    "readAt": "2026-10-27T00:08:19.384Z",
+    "id": "ntf-209"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01286 awaits your decision",
+    "body": "Relationship Officer stage · SLA 12h",
+    "href": "/applications/app-1286",
+    "createdAt": "2026-10-27T00:00:45.170Z",
+    "userId": "u-ro-5",
+    "readAt": null,
+    "id": "ntf-210"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01377 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1377",
+    "createdAt": "2026-10-27T08:42:50.189Z",
+    "userId": "u-ro-7",
+    "readAt": null,
+    "id": "ntf-211"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01324",
+    "body": "Relationship Officer SLA of 12h has passed.",
+    "href": "/applications/app-1324",
+    "createdAt": "2026-10-27T08:28:44.976Z",
+    "userId": "u-ro-7",
+    "readAt": null,
+    "id": "ntf-212"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01274",
+    "body": "Relationship Officer SLA of 8h has passed.",
+    "href": "/applications/app-1274",
+    "createdAt": "2026-10-27T08:08:19.384Z",
+    "userId": "u-ro-7",
+    "readAt": null,
+    "id": "ntf-213"
+  },
+  {
+    "kind": "info_requested",
+    "title": "ML-RTL-2610-01320 needs more information",
+    "body": "Kindly get an explanation for the large cash withdrawals in June.",
+    "href": "/applications/app-1320",
+    "createdAt": "2026-10-27T07:59:29.629Z",
+    "userId": "u-ro-7",
+    "readAt": null,
+    "id": "ntf-214"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01341 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1341",
+    "createdAt": "2026-10-27T07:41:02.522Z",
+    "userId": "u-ro-7",
+    "readAt": "2026-10-27T07:41:02.522Z",
+    "id": "ntf-215"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01343 awaits your decision",
+    "body": "Relationship Officer stage · SLA 12h",
+    "href": "/applications/app-1343",
+    "createdAt": "2026-10-27T07:26:24.196Z",
+    "userId": "u-ro-7",
+    "readAt": null,
+    "id": "ntf-216"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01376",
+    "body": "Relationship Officer SLA of 8h has passed.",
+    "href": "/applications/app-1376",
+    "createdAt": "2026-10-27T06:52:13.099Z",
+    "userId": "u-ro-7",
+    "readAt": null,
+    "id": "ntf-217"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01296 awaits your decision",
+    "body": "Relationship Officer stage · SLA 12h",
+    "href": "/applications/app-1296",
+    "createdAt": "2026-10-27T06:40:00.749Z",
+    "userId": "u-ro-7",
+    "readAt": null,
+    "id": "ntf-218"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01370",
+    "body": "Relationship Officer SLA of 8h has passed.",
+    "href": "/applications/app-1370",
+    "createdAt": "2026-10-27T06:38:52.621Z",
+    "userId": "u-ro-7",
+    "readAt": null,
+    "id": "ntf-219"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01327 awaits your decision",
+    "body": "Relationship Officer stage · SLA 12h",
+    "href": "/applications/app-1327",
+    "createdAt": "2026-10-27T06:31:18.000Z",
+    "userId": "u-ro-7",
+    "readAt": null,
+    "id": "ntf-220"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01312",
+    "body": "Relationship Officer SLA of 12h has passed.",
+    "href": "/applications/app-1312",
+    "createdAt": "2026-10-27T06:05:37.151Z",
+    "userId": "u-ro-7",
+    "readAt": "2026-10-27T06:05:37.151Z",
+    "id": "ntf-221"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01285",
+    "body": "Relationship Officer SLA of 8h has passed.",
+    "href": "/applications/app-1285",
+    "createdAt": "2026-10-27T05:44:30.816Z",
+    "userId": "u-ro-7",
+    "readAt": null,
+    "id": "ntf-222"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01380 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1380",
+    "createdAt": "2026-10-27T05:39:23.364Z",
+    "userId": "u-ro-7",
+    "readAt": null,
+    "id": "ntf-223"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01354",
+    "body": "Relationship Officer SLA of 12h has passed.",
+    "href": "/applications/app-1354",
+    "createdAt": "2026-10-27T05:05:58.133Z",
+    "userId": "u-ro-7",
+    "readAt": null,
+    "id": "ntf-224"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01300",
+    "body": "Relationship Officer SLA of 8h has passed.",
+    "href": "/applications/app-1300",
+    "createdAt": "2026-10-27T04:51:34.508Z",
+    "userId": "u-ro-7",
+    "readAt": null,
+    "id": "ntf-225"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01348 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1348",
+    "createdAt": "2026-10-27T04:39:15.998Z",
+    "userId": "u-ro-7",
+    "readAt": null,
+    "id": "ntf-226"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01373 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1373",
+    "createdAt": "2026-10-27T04:24:11.936Z",
+    "userId": "u-ro-7",
+    "readAt": "2026-10-27T04:24:11.936Z",
+    "id": "ntf-227"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01360",
+    "body": "Relationship Officer SLA of 12h has passed.",
+    "href": "/applications/app-1360",
+    "createdAt": "2026-10-27T04:08:50.669Z",
+    "userId": "u-ro-7",
+    "readAt": null,
+    "id": "ntf-228"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01318",
+    "body": "Relationship Officer SLA of 8h has passed.",
+    "href": "/applications/app-1318",
+    "createdAt": "2026-10-27T04:06:05.393Z",
+    "userId": "u-ro-7",
+    "readAt": "2026-10-27T04:06:05.393Z",
+    "id": "ntf-229"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01299",
+    "body": "Relationship Officer SLA of 12h has passed.",
+    "href": "/applications/app-1299",
+    "createdAt": "2026-10-27T03:37:42.411Z",
+    "userId": "u-ro-7",
+    "readAt": "2026-10-27T03:37:42.411Z",
+    "id": "ntf-230"
+  },
+  {
+    "kind": "application_returned",
+    "title": "ML-RTL-2610-01344 returned for correction",
+    "body": "Payslip for the most recent month is missing. Please upload and resubmit.",
+    "href": "/applications/app-1344",
+    "createdAt": "2026-10-27T03:25:47.121Z",
+    "userId": "u-ro-7",
+    "readAt": null,
+    "id": "ntf-231"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01278",
+    "body": "Relationship Officer SLA of 12h has passed.",
+    "href": "/applications/app-1278",
+    "createdAt": "2026-10-27T03:12:23.366Z",
+    "userId": "u-ro-7",
+    "readAt": null,
+    "id": "ntf-232"
+  },
+  {
+    "kind": "application_returned",
+    "title": "ML-RTL-2610-01369 returned for correction",
+    "body": "Employer name on the application differs from the payslip. Please correct.",
+    "href": "/applications/app-1369",
+    "createdAt": "2026-10-27T03:11:10.359Z",
+    "userId": "u-ro-7",
+    "readAt": "2026-10-27T03:11:10.359Z",
+    "id": "ntf-233"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01332 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1332",
+    "createdAt": "2026-10-27T02:33:25.989Z",
+    "userId": "u-ro-7",
+    "readAt": "2026-10-27T02:33:25.989Z",
+    "id": "ntf-234"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01294 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1294",
+    "createdAt": "2026-10-27T02:23:38.908Z",
+    "userId": "u-ro-7",
+    "readAt": "2026-10-27T02:23:38.908Z",
+    "id": "ntf-235"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01349 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1349",
+    "createdAt": "2026-10-27T02:12:00.230Z",
+    "userId": "u-ro-7",
+    "readAt": null,
+    "id": "ntf-236"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01308 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1308",
+    "createdAt": "2026-10-27T01:45:16.929Z",
+    "userId": "u-ro-7",
+    "readAt": "2026-10-27T01:45:16.929Z",
+    "id": "ntf-237"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01290",
+    "body": "Relationship Officer SLA of 12h has passed.",
+    "href": "/applications/app-1290",
+    "createdAt": "2026-10-27T01:37:02.178Z",
+    "userId": "u-ro-7",
+    "readAt": null,
+    "id": "ntf-238"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01374 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1374",
+    "createdAt": "2026-10-27T01:24:49.510Z",
+    "userId": "u-ro-7",
+    "readAt": null,
+    "id": "ntf-239"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01274 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1274",
+    "createdAt": "2026-10-27T00:08:19.384Z",
+    "userId": "u-ro-7",
+    "readAt": "2026-10-27T00:08:19.384Z",
+    "id": "ntf-240"
+  },
+  {
+    "kind": "application_returned",
+    "title": "ML-RTL-2610-01353 returned for correction",
+    "body": "Employer name on the application differs from the payslip. Please correct.",
+    "href": "/applications/app-1353",
+    "createdAt": "2026-10-27T08:34:54.234Z",
+    "userId": "u-ro-3",
+    "readAt": null,
+    "id": "ntf-241"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01274",
+    "body": "Relationship Officer SLA of 8h has passed.",
+    "href": "/applications/app-1274",
+    "createdAt": "2026-10-27T08:08:19.384Z",
+    "userId": "u-ro-3",
+    "readAt": null,
+    "id": "ntf-242"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01341 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1341",
+    "createdAt": "2026-10-27T07:41:02.522Z",
+    "userId": "u-ro-3",
+    "readAt": "2026-10-27T07:41:02.522Z",
+    "id": "ntf-243"
+  },
+  {
+    "kind": "info_requested",
+    "title": "ML-RTL-2610-01314 needs more information",
+    "body": "Please obtain six months of bank statements from the salary account.",
+    "href": "/applications/app-1314",
+    "createdAt": "2026-10-27T07:38:34.005Z",
+    "userId": "u-ro-3",
+    "readAt": null,
+    "id": "ntf-244"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01343 awaits your decision",
+    "body": "Relationship Officer stage · SLA 12h",
+    "href": "/applications/app-1343",
+    "createdAt": "2026-10-27T07:26:24.196Z",
+    "userId": "u-ro-3",
+    "readAt": "2026-10-27T07:26:24.196Z",
+    "id": "ntf-245"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01376",
+    "body": "Relationship Officer SLA of 8h has passed.",
+    "href": "/applications/app-1376",
+    "createdAt": "2026-10-27T06:52:13.099Z",
+    "userId": "u-ro-3",
+    "readAt": null,
+    "id": "ntf-246"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01370",
+    "body": "Relationship Officer SLA of 8h has passed.",
+    "href": "/applications/app-1370",
+    "createdAt": "2026-10-27T06:38:52.621Z",
+    "userId": "u-ro-3",
+    "readAt": "2026-10-27T06:38:52.621Z",
+    "id": "ntf-247"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01327 awaits your decision",
+    "body": "Relationship Officer stage · SLA 12h",
+    "href": "/applications/app-1327",
+    "createdAt": "2026-10-27T06:31:18.000Z",
+    "userId": "u-ro-3",
+    "readAt": null,
+    "id": "ntf-248"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01312",
+    "body": "Relationship Officer SLA of 12h has passed.",
+    "href": "/applications/app-1312",
+    "createdAt": "2026-10-27T06:05:37.151Z",
+    "userId": "u-ro-3",
+    "readAt": null,
+    "id": "ntf-249"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01285",
+    "body": "Relationship Officer SLA of 8h has passed.",
+    "href": "/applications/app-1285",
+    "createdAt": "2026-10-27T05:44:30.816Z",
+    "userId": "u-ro-3",
+    "readAt": null,
+    "id": "ntf-250"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01303 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1303",
+    "createdAt": "2026-10-27T05:22:22.362Z",
+    "userId": "u-ro-3",
+    "readAt": null,
+    "id": "ntf-251"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01354",
+    "body": "Relationship Officer SLA of 12h has passed.",
+    "href": "/applications/app-1354",
+    "createdAt": "2026-10-27T05:05:58.133Z",
+    "userId": "u-ro-3",
+    "readAt": "2026-10-27T05:05:58.133Z",
+    "id": "ntf-252"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01300",
+    "body": "Relationship Officer SLA of 8h has passed.",
+    "href": "/applications/app-1300",
+    "createdAt": "2026-10-27T04:51:34.508Z",
+    "userId": "u-ro-3",
+    "readAt": "2026-10-27T04:51:34.508Z",
+    "id": "ntf-253"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01348 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1348",
+    "createdAt": "2026-10-27T04:39:15.998Z",
+    "userId": "u-ro-3",
+    "readAt": "2026-10-27T04:39:15.998Z",
+    "id": "ntf-254"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01373 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1373",
+    "createdAt": "2026-10-27T04:24:11.936Z",
+    "userId": "u-ro-3",
+    "readAt": null,
+    "id": "ntf-255"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01318",
+    "body": "Relationship Officer SLA of 8h has passed.",
+    "href": "/applications/app-1318",
+    "createdAt": "2026-10-27T04:06:05.393Z",
+    "userId": "u-ro-3",
+    "readAt": "2026-10-27T04:06:05.393Z",
+    "id": "ntf-256"
+  },
+  {
+    "kind": "info_requested",
+    "title": "ML-SME-2610-01257 needs more information",
+    "body": "Need confirmation of the LPO from the issuing company before we proceed.",
+    "href": "/applications/app-1257",
+    "createdAt": "2026-10-27T04:00:47.486Z",
+    "userId": "u-ro-3",
+    "readAt": null,
+    "id": "ntf-257"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01299",
+    "body": "Relationship Officer SLA of 12h has passed.",
+    "href": "/applications/app-1299",
+    "createdAt": "2026-10-27T03:37:42.411Z",
+    "userId": "u-ro-3",
+    "readAt": null,
+    "id": "ntf-258"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01358 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1358",
+    "createdAt": "2026-10-27T03:14:45.696Z",
+    "userId": "u-ro-3",
+    "readAt": null,
+    "id": "ntf-259"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01278",
+    "body": "Relationship Officer SLA of 12h has passed.",
+    "href": "/applications/app-1278",
+    "createdAt": "2026-10-27T03:12:23.366Z",
+    "userId": "u-ro-3",
+    "readAt": null,
+    "id": "ntf-260"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01359 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1359",
+    "createdAt": "2026-10-27T02:34:49.595Z",
+    "userId": "u-ro-3",
+    "readAt": "2026-10-27T02:34:49.595Z",
+    "id": "ntf-261"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01332 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1332",
+    "createdAt": "2026-10-27T02:33:25.989Z",
+    "userId": "u-ro-3",
+    "readAt": null,
+    "id": "ntf-262"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01349 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1349",
+    "createdAt": "2026-10-27T02:12:00.230Z",
+    "userId": "u-ro-3",
+    "readAt": null,
+    "id": "ntf-263"
+  },
+  {
+    "kind": "info_requested",
+    "title": "ML-RTL-2610-01365 needs more information",
+    "body": "Need confirmation of the LPO from the issuing company before we proceed.",
+    "href": "/applications/app-1365",
+    "createdAt": "2026-10-27T01:48:44.587Z",
+    "userId": "u-ro-3",
+    "readAt": "2026-10-27T01:48:44.587Z",
+    "id": "ntf-264"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01290",
+    "body": "Relationship Officer SLA of 12h has passed.",
+    "href": "/applications/app-1290",
+    "createdAt": "2026-10-27T01:37:02.178Z",
+    "userId": "u-ro-3",
+    "readAt": null,
+    "id": "ntf-265"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01374 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1374",
+    "createdAt": "2026-10-27T01:24:49.510Z",
+    "userId": "u-ro-3",
+    "readAt": null,
+    "id": "ntf-266"
+  },
+  {
+    "kind": "application_returned",
+    "title": "ML-SME-2610-01269 returned for correction",
+    "body": "Employer name on the application differs from the payslip. Please correct.",
+    "href": "/applications/app-1269",
+    "createdAt": "2026-10-27T00:09:10.160Z",
+    "userId": "u-ro-3",
+    "readAt": null,
+    "id": "ntf-267"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01274 awaits your decision",
+    "body": "Relationship Officer stage · SLA 8h",
+    "href": "/applications/app-1274",
+    "createdAt": "2026-10-27T00:08:19.384Z",
+    "userId": "u-ro-3",
+    "readAt": null,
+    "id": "ntf-268"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01286 awaits your decision",
+    "body": "Relationship Officer stage · SLA 12h",
+    "href": "/applications/app-1286",
+    "createdAt": "2026-10-27T00:00:45.170Z",
+    "userId": "u-ro-3",
+    "readAt": null,
+    "id": "ntf-269"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01305 awaits your decision",
+    "body": "Relationship Officer stage · SLA 12h",
+    "href": "/applications/app-1305",
+    "createdAt": "2026-10-26T22:55:19.629Z",
+    "userId": "u-ro-3",
+    "readAt": "2026-10-26T22:55:19.629Z",
+    "id": "ntf-270"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01249",
+    "body": "Credit Analyst SLA of 24h has passed.",
+    "href": "/applications/app-1249",
+    "createdAt": "2026-10-27T07:58:03.939Z",
+    "userId": "u-an-1",
+    "readAt": null,
+    "id": "ntf-271"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01253 awaits your decision",
+    "body": "Credit Analyst stage · SLA 24h",
+    "href": "/applications/app-1253",
+    "createdAt": "2026-10-27T06:00:00.000Z",
+    "userId": "u-an-1",
+    "readAt": null,
+    "id": "ntf-272"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01256 awaits your decision",
+    "body": "Credit Analyst stage · SLA 24h",
+    "href": "/applications/app-1256",
+    "createdAt": "2026-10-27T06:00:00.000Z",
+    "userId": "u-an-1",
+    "readAt": null,
+    "id": "ntf-273"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01279 awaits your decision",
+    "body": "Credit Analyst stage · SLA 24h",
+    "href": "/applications/app-1279",
+    "createdAt": "2026-10-27T06:00:00.000Z",
+    "userId": "u-an-1",
+    "readAt": null,
+    "id": "ntf-274"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01281 awaits your decision",
+    "body": "Credit Analyst stage · SLA 24h",
+    "href": "/applications/app-1281",
+    "createdAt": "2026-10-27T04:56:11.681Z",
+    "userId": "u-an-1",
+    "readAt": null,
+    "id": "ntf-275"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01220",
+    "body": "Credit Analyst SLA of 48h has passed.",
+    "href": "/applications/app-1220",
+    "createdAt": "2026-10-27T04:24:02.440Z",
+    "userId": "u-an-1",
+    "readAt": "2026-10-27T04:24:02.440Z",
+    "id": "ntf-276"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01351 awaits your decision",
+    "body": "Credit Analyst stage · SLA 24h",
+    "href": "/applications/app-1351",
+    "createdAt": "2026-10-27T03:26:15.590Z",
+    "userId": "u-an-1",
+    "readAt": null,
+    "id": "ntf-277"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01239",
+    "body": "Credit Analyst SLA of 48h has passed.",
+    "href": "/applications/app-1239",
+    "createdAt": "2026-10-26T22:21:58.844Z",
+    "userId": "u-an-1",
+    "readAt": null,
+    "id": "ntf-278"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01295 awaits your decision",
+    "body": "Credit Analyst stage · SLA 24h",
+    "href": "/applications/app-1295",
+    "createdAt": "2026-10-26T19:55:24.665Z",
+    "userId": "u-an-1",
+    "readAt": "2026-10-26T19:55:24.665Z",
+    "id": "ntf-279"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01345 awaits your decision",
+    "body": "Credit Analyst stage · SLA 24h",
+    "href": "/applications/app-1345",
+    "createdAt": "2026-10-26T17:52:22.886Z",
+    "userId": "u-an-1",
+    "readAt": null,
+    "id": "ntf-280"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01265 awaits your decision",
+    "body": "Credit Analyst stage · SLA 24h",
+    "href": "/applications/app-1265",
+    "createdAt": "2026-10-26T17:28:46.255Z",
+    "userId": "u-an-1",
+    "readAt": "2026-10-26T17:28:46.255Z",
+    "id": "ntf-281"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01218",
+    "body": "Credit Analyst SLA of 24h has passed.",
+    "href": "/applications/app-1218",
+    "createdAt": "2026-10-26T17:00:45.908Z",
+    "userId": "u-an-1",
+    "readAt": null,
+    "id": "ntf-282"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01213",
+    "body": "Credit Analyst SLA of 48h has passed.",
+    "href": "/applications/app-1213",
+    "createdAt": "2026-10-26T12:59:26.747Z",
+    "userId": "u-an-1",
+    "readAt": null,
+    "id": "ntf-283"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01231 awaits your decision",
+    "body": "Credit Analyst stage · SLA 24h",
+    "href": "/applications/app-1231",
+    "createdAt": "2026-10-26T10:42:20.789Z",
+    "userId": "u-an-1",
+    "readAt": null,
+    "id": "ntf-284"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01266 awaits your decision",
+    "body": "Credit Analyst stage · SLA 48h",
+    "href": "/applications/app-1266",
+    "createdAt": "2026-10-26T10:04:46.051Z",
+    "userId": "u-an-1",
+    "readAt": null,
+    "id": "ntf-285"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01241 awaits your decision",
+    "body": "Credit Analyst stage · SLA 48h",
+    "href": "/applications/app-1241",
+    "createdAt": "2026-10-26T09:33:45.013Z",
+    "userId": "u-an-1",
+    "readAt": null,
+    "id": "ntf-286"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01249 awaits your decision",
+    "body": "Credit Analyst stage · SLA 24h",
+    "href": "/applications/app-1249",
+    "createdAt": "2026-10-26T07:58:03.939Z",
+    "userId": "u-an-1",
+    "readAt": "2026-10-26T07:58:03.939Z",
+    "id": "ntf-287"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01268 awaits your decision",
+    "body": "Credit Analyst stage · SLA 48h",
+    "href": "/applications/app-1268",
+    "createdAt": "2026-10-26T05:16:40.188Z",
+    "userId": "u-an-1",
+    "readAt": null,
+    "id": "ntf-288"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01245 awaits your decision",
+    "body": "Credit Analyst stage · SLA 48h",
+    "href": "/applications/app-1245",
+    "createdAt": "2026-10-25T23:39:49.464Z",
+    "userId": "u-an-1",
+    "readAt": null,
+    "id": "ntf-289"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01218 awaits your decision",
+    "body": "Credit Analyst stage · SLA 24h",
+    "href": "/applications/app-1218",
+    "createdAt": "2026-10-25T17:00:45.908Z",
+    "userId": "u-an-1",
+    "readAt": null,
+    "id": "ntf-290"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01220 awaits your decision",
+    "body": "Credit Analyst stage · SLA 48h",
+    "href": "/applications/app-1220",
+    "createdAt": "2026-10-25T04:24:02.440Z",
+    "userId": "u-an-1",
+    "readAt": "2026-10-25T04:24:02.440Z",
+    "id": "ntf-291"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01239 awaits your decision",
+    "body": "Credit Analyst stage · SLA 48h",
+    "href": "/applications/app-1239",
+    "createdAt": "2026-10-24T22:21:58.844Z",
+    "userId": "u-an-1",
+    "readAt": "2026-10-24T22:21:58.844Z",
+    "id": "ntf-292"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01213 awaits your decision",
+    "body": "Credit Analyst stage · SLA 48h",
+    "href": "/applications/app-1213",
+    "createdAt": "2026-10-24T12:59:26.747Z",
+    "userId": "u-an-1",
+    "readAt": "2026-10-24T12:59:26.747Z",
+    "id": "ntf-293"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01249",
+    "body": "Credit Analyst SLA of 24h has passed.",
+    "href": "/applications/app-1249",
+    "createdAt": "2026-10-27T07:58:03.939Z",
+    "userId": "u-an-2",
+    "readAt": null,
+    "id": "ntf-294"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01253 awaits your decision",
+    "body": "Credit Analyst stage · SLA 24h",
+    "href": "/applications/app-1253",
+    "createdAt": "2026-10-27T06:00:00.000Z",
+    "userId": "u-an-2",
+    "readAt": null,
+    "id": "ntf-295"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01256 awaits your decision",
+    "body": "Credit Analyst stage · SLA 24h",
+    "href": "/applications/app-1256",
+    "createdAt": "2026-10-27T06:00:00.000Z",
+    "userId": "u-an-2",
+    "readAt": null,
+    "id": "ntf-296"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01279 awaits your decision",
+    "body": "Credit Analyst stage · SLA 24h",
+    "href": "/applications/app-1279",
+    "createdAt": "2026-10-27T06:00:00.000Z",
+    "userId": "u-an-2",
+    "readAt": null,
+    "id": "ntf-297"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01281 awaits your decision",
+    "body": "Credit Analyst stage · SLA 24h",
+    "href": "/applications/app-1281",
+    "createdAt": "2026-10-27T04:56:11.681Z",
+    "userId": "u-an-2",
+    "readAt": null,
+    "id": "ntf-298"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01220",
+    "body": "Credit Analyst SLA of 48h has passed.",
+    "href": "/applications/app-1220",
+    "createdAt": "2026-10-27T04:24:02.440Z",
+    "userId": "u-an-2",
+    "readAt": null,
+    "id": "ntf-299"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01351 awaits your decision",
+    "body": "Credit Analyst stage · SLA 24h",
+    "href": "/applications/app-1351",
+    "createdAt": "2026-10-27T03:26:15.590Z",
+    "userId": "u-an-2",
+    "readAt": "2026-10-27T03:26:15.590Z",
+    "id": "ntf-300"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01239",
+    "body": "Credit Analyst SLA of 48h has passed.",
+    "href": "/applications/app-1239",
+    "createdAt": "2026-10-26T22:21:58.844Z",
+    "userId": "u-an-2",
+    "readAt": null,
+    "id": "ntf-301"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01295 awaits your decision",
+    "body": "Credit Analyst stage · SLA 24h",
+    "href": "/applications/app-1295",
+    "createdAt": "2026-10-26T19:55:24.665Z",
+    "userId": "u-an-2",
+    "readAt": null,
+    "id": "ntf-302"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01345 awaits your decision",
+    "body": "Credit Analyst stage · SLA 24h",
+    "href": "/applications/app-1345",
+    "createdAt": "2026-10-26T17:52:22.886Z",
+    "userId": "u-an-2",
+    "readAt": null,
+    "id": "ntf-303"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01265 awaits your decision",
+    "body": "Credit Analyst stage · SLA 24h",
+    "href": "/applications/app-1265",
+    "createdAt": "2026-10-26T17:28:46.255Z",
+    "userId": "u-an-2",
+    "readAt": "2026-10-26T17:28:46.255Z",
+    "id": "ntf-304"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01218",
+    "body": "Credit Analyst SLA of 24h has passed.",
+    "href": "/applications/app-1218",
+    "createdAt": "2026-10-26T17:00:45.908Z",
+    "userId": "u-an-2",
+    "readAt": null,
+    "id": "ntf-305"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01213",
+    "body": "Credit Analyst SLA of 48h has passed.",
+    "href": "/applications/app-1213",
+    "createdAt": "2026-10-26T12:59:26.747Z",
+    "userId": "u-an-2",
+    "readAt": null,
+    "id": "ntf-306"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01231 awaits your decision",
+    "body": "Credit Analyst stage · SLA 24h",
+    "href": "/applications/app-1231",
+    "createdAt": "2026-10-26T10:42:20.789Z",
+    "userId": "u-an-2",
+    "readAt": null,
+    "id": "ntf-307"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01266 awaits your decision",
+    "body": "Credit Analyst stage · SLA 48h",
+    "href": "/applications/app-1266",
+    "createdAt": "2026-10-26T10:04:46.051Z",
+    "userId": "u-an-2",
+    "readAt": "2026-10-26T10:04:46.051Z",
+    "id": "ntf-308"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01241 awaits your decision",
+    "body": "Credit Analyst stage · SLA 48h",
+    "href": "/applications/app-1241",
+    "createdAt": "2026-10-26T09:33:45.013Z",
+    "userId": "u-an-2",
+    "readAt": "2026-10-26T09:33:45.013Z",
+    "id": "ntf-309"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01249 awaits your decision",
+    "body": "Credit Analyst stage · SLA 24h",
+    "href": "/applications/app-1249",
+    "createdAt": "2026-10-26T07:58:03.939Z",
+    "userId": "u-an-2",
+    "readAt": null,
+    "id": "ntf-310"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01268 awaits your decision",
+    "body": "Credit Analyst stage · SLA 48h",
+    "href": "/applications/app-1268",
+    "createdAt": "2026-10-26T05:16:40.188Z",
+    "userId": "u-an-2",
+    "readAt": "2026-10-26T05:16:40.188Z",
+    "id": "ntf-311"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01245 awaits your decision",
+    "body": "Credit Analyst stage · SLA 48h",
+    "href": "/applications/app-1245",
+    "createdAt": "2026-10-25T23:39:49.464Z",
+    "userId": "u-an-2",
+    "readAt": null,
+    "id": "ntf-312"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01218 awaits your decision",
+    "body": "Credit Analyst stage · SLA 24h",
+    "href": "/applications/app-1218",
+    "createdAt": "2026-10-25T17:00:45.908Z",
+    "userId": "u-an-2",
+    "readAt": null,
+    "id": "ntf-313"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01220 awaits your decision",
+    "body": "Credit Analyst stage · SLA 48h",
+    "href": "/applications/app-1220",
+    "createdAt": "2026-10-25T04:24:02.440Z",
+    "userId": "u-an-2",
+    "readAt": "2026-10-25T04:24:02.440Z",
+    "id": "ntf-314"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01239 awaits your decision",
+    "body": "Credit Analyst stage · SLA 48h",
+    "href": "/applications/app-1239",
+    "createdAt": "2026-10-24T22:21:58.844Z",
+    "userId": "u-an-2",
+    "readAt": "2026-10-24T22:21:58.844Z",
+    "id": "ntf-315"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01213 awaits your decision",
+    "body": "Credit Analyst stage · SLA 48h",
+    "href": "/applications/app-1213",
+    "createdAt": "2026-10-24T12:59:26.747Z",
+    "userId": "u-an-2",
+    "readAt": "2026-10-24T12:59:26.747Z",
+    "id": "ntf-316"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01325 awaits your decision",
+    "body": "Head of Credit stage · SLA 24h",
+    "href": "/applications/app-1325",
+    "createdAt": "2026-10-27T07:25:23.407Z",
+    "userId": "u-hoc-1",
+    "readAt": null,
+    "id": "ntf-317"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01230",
+    "body": "Head of Credit SLA of 24h has passed.",
+    "href": "/applications/app-1230",
+    "createdAt": "2026-10-27T04:44:45.522Z",
+    "userId": "u-hoc-1",
+    "readAt": null,
+    "id": "ntf-318"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01271 awaits your decision",
+    "body": "Head of Credit stage · SLA 24h",
+    "href": "/applications/app-1271",
+    "createdAt": "2026-10-26T17:31:07.026Z",
+    "userId": "u-hoc-1",
+    "readAt": null,
+    "id": "ntf-319"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01224",
+    "body": "Head of Credit SLA of 24h has passed.",
+    "href": "/applications/app-1224",
+    "createdAt": "2026-10-26T17:00:00.000Z",
+    "userId": "u-hoc-1",
+    "readAt": "2026-10-26T17:00:00.000Z",
+    "id": "ntf-320"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-RTL-2610-01205",
+    "body": "Head of Credit SLA of 24h has passed.",
+    "href": "/applications/app-1205",
+    "createdAt": "2026-10-26T16:22:42.844Z",
+    "userId": "u-hoc-1",
+    "readAt": null,
+    "id": "ntf-321"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01226 awaits your decision",
+    "body": "Head of Credit stage · SLA 24h",
+    "href": "/applications/app-1226",
+    "createdAt": "2026-10-26T15:31:35.641Z",
+    "userId": "u-hoc-1",
+    "readAt": null,
+    "id": "ntf-322"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01230 awaits your decision",
+    "body": "Head of Credit stage · SLA 24h",
+    "href": "/applications/app-1230",
+    "createdAt": "2026-10-26T04:44:45.522Z",
+    "userId": "u-hoc-1",
+    "readAt": null,
+    "id": "ntf-323"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01224 awaits your decision",
+    "body": "Head of Credit stage · SLA 24h",
+    "href": "/applications/app-1224",
+    "createdAt": "2026-10-25T17:00:00.000Z",
+    "userId": "u-hoc-1",
+    "readAt": "2026-10-25T17:00:00.000Z",
+    "id": "ntf-324"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01205 awaits your decision",
+    "body": "Head of Credit stage · SLA 24h",
+    "href": "/applications/app-1205",
+    "createdAt": "2026-10-25T16:22:42.844Z",
+    "userId": "u-hoc-1",
+    "readAt": null,
+    "id": "ntf-325"
+  },
+  {
+    "kind": "sla_breached",
+    "title": "SLA breached on ML-SME-2610-01170",
+    "body": "Head of Credit SLA of 24h has passed.",
+    "href": "/applications/app-1170",
+    "createdAt": "2026-10-24T04:00:00.000Z",
+    "userId": "u-hoc-1",
+    "readAt": "2026-10-24T04:00:00.000Z",
+    "id": "ntf-326"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01170 awaits your decision",
+    "body": "Head of Credit stage · SLA 24h",
+    "href": "/applications/app-1170",
+    "createdAt": "2026-10-23T04:00:00.000Z",
+    "userId": "u-hoc-1",
+    "readAt": "2026-10-23T04:00:00.000Z",
+    "id": "ntf-327"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01221 awaits your decision",
+    "body": "Final Approval Committee stage · SLA 72h",
+    "href": "/applications/app-1221",
+    "createdAt": "2026-10-27T03:00:00.000Z",
+    "userId": "u-fa-1",
+    "readAt": null,
+    "id": "ntf-328"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01229 awaits your decision",
+    "body": "Final Approval Committee stage · SLA 72h",
+    "href": "/applications/app-1229",
+    "createdAt": "2026-10-26T13:00:00.000Z",
+    "userId": "u-fa-1",
+    "readAt": null,
+    "id": "ntf-329"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01232 awaits your decision",
+    "body": "Final Approval Committee stage · SLA 72h",
+    "href": "/applications/app-1232",
+    "createdAt": "2026-10-26T03:00:00.000Z",
+    "userId": "u-fa-1",
+    "readAt": "2026-10-26T03:00:00.000Z",
+    "id": "ntf-330"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01207 awaits your decision",
+    "body": "Final Approval Committee stage · SLA 72h",
+    "href": "/applications/app-1207",
+    "createdAt": "2026-10-25T20:39:30.038Z",
+    "userId": "u-fa-1",
+    "readAt": null,
+    "id": "ntf-331"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01221 awaits your decision",
+    "body": "Final Approval Committee stage · SLA 72h",
+    "href": "/applications/app-1221",
+    "createdAt": "2026-10-27T03:00:00.000Z",
+    "userId": "u-fa-2",
+    "readAt": null,
+    "id": "ntf-332"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01229 awaits your decision",
+    "body": "Final Approval Committee stage · SLA 72h",
+    "href": "/applications/app-1229",
+    "createdAt": "2026-10-26T13:00:00.000Z",
+    "userId": "u-fa-2",
+    "readAt": null,
+    "id": "ntf-333"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01232 awaits your decision",
+    "body": "Final Approval Committee stage · SLA 72h",
+    "href": "/applications/app-1232",
+    "createdAt": "2026-10-26T03:00:00.000Z",
+    "userId": "u-fa-2",
+    "readAt": "2026-10-26T03:00:00.000Z",
+    "id": "ntf-334"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01207 awaits your decision",
+    "body": "Final Approval Committee stage · SLA 72h",
+    "href": "/applications/app-1207",
+    "createdAt": "2026-10-25T20:39:30.038Z",
+    "userId": "u-fa-2",
+    "readAt": null,
+    "id": "ntf-335"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01221 awaits your decision",
+    "body": "Final Approval Committee stage · SLA 72h",
+    "href": "/applications/app-1221",
+    "createdAt": "2026-10-27T03:00:00.000Z",
+    "userId": "u-fa-3",
+    "readAt": null,
+    "id": "ntf-336"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-RTL-2610-01229 awaits your decision",
+    "body": "Final Approval Committee stage · SLA 72h",
+    "href": "/applications/app-1229",
+    "createdAt": "2026-10-26T13:00:00.000Z",
+    "userId": "u-fa-3",
+    "readAt": null,
+    "id": "ntf-337"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01232 awaits your decision",
+    "body": "Final Approval Committee stage · SLA 72h",
+    "href": "/applications/app-1232",
+    "createdAt": "2026-10-26T03:00:00.000Z",
+    "userId": "u-fa-3",
+    "readAt": "2026-10-26T03:00:00.000Z",
+    "id": "ntf-338"
+  },
+  {
+    "kind": "approval_assigned",
+    "title": "ML-SME-2610-01207 awaits your decision",
+    "body": "Final Approval Committee stage · SLA 72h",
+    "href": "/applications/app-1207",
+    "createdAt": "2026-10-25T20:39:30.038Z",
+    "userId": "u-fa-3",
+    "readAt": null,
+    "id": "ntf-339"
+  },
+  {
+    "kind": "offer_accepted",
+    "title": "ML-RTL-2610-01211 ready for disbursement",
+    "body": "Customer accepted the offer.",
+    "href": "/handover",
+    "createdAt": "2026-10-24T11:00:00.000Z",
+    "userId": "u-fin-1",
+    "readAt": "2026-10-24T11:00:00.000Z",
+    "id": "ntf-340"
+  },
+  {
+    "kind": "offer_accepted",
+    "title": "ML-RTL-2610-01147 ready for disbursement",
+    "body": "Customer accepted the offer.",
+    "href": "/handover",
+    "createdAt": "2026-10-14T08:00:00.000Z",
+    "userId": "u-fin-1",
+    "readAt": "2026-10-14T08:00:00.000Z",
+    "id": "ntf-341"
+  },
+  {
+    "kind": "offer_accepted",
+    "title": "ML-SME-2610-01141 ready for disbursement",
+    "body": "Customer accepted the offer.",
+    "href": "/handover",
+    "createdAt": "2026-10-11T17:00:00.000Z",
+    "userId": "u-fin-1",
+    "readAt": "2026-10-11T17:00:00.000Z",
+    "id": "ntf-342"
+  },
+  {
+    "kind": "offer_accepted",
+    "title": "ML-SME-2609-01135 ready for disbursement",
+    "body": "Customer accepted the offer.",
+    "href": "/handover",
+    "createdAt": "2026-10-02T05:00:00.000Z",
+    "userId": "u-fin-1",
+    "readAt": "2026-10-02T05:00:00.000Z",
+    "id": "ntf-343"
+  },
+  {
+    "kind": "offer_accepted",
+    "title": "ML-SME-2609-01137 ready for disbursement",
+    "body": "Customer accepted the offer.",
+    "href": "/handover",
+    "createdAt": "2026-09-29T18:00:00.000Z",
+    "userId": "u-fin-1",
+    "readAt": "2026-09-29T18:00:00.000Z",
+    "id": "ntf-344"
+  },
+  {
+    "kind": "offer_accepted",
+    "title": "ML-RTL-2609-01134 ready for disbursement",
+    "body": "Customer accepted the offer.",
+    "href": "/handover",
+    "createdAt": "2026-09-26T03:00:00.000Z",
+    "userId": "u-fin-1",
+    "readAt": "2026-09-26T03:00:00.000Z",
+    "id": "ntf-345"
+  },
+  {
+    "kind": "offer_accepted",
+    "title": "ML-RTL-2609-01129 ready for disbursement",
+    "body": "Customer accepted the offer.",
+    "href": "/handover",
+    "createdAt": "2026-09-17T10:00:00.000Z",
+    "userId": "u-fin-1",
+    "readAt": "2026-09-17T10:00:00.000Z",
+    "id": "ntf-346"
+  },
+  {
+    "kind": "offer_accepted",
+    "title": "ML-SME-2609-01127 ready for disbursement",
+    "body": "Customer accepted the offer.",
+    "href": "/handover",
+    "createdAt": "2026-09-12T12:00:00.000Z",
+    "userId": "u-fin-1",
+    "readAt": "2026-09-12T12:00:00.000Z",
+    "id": "ntf-347"
+  },
+  {
+    "kind": "offer_accepted",
+    "title": "ML-SME-2609-01121 ready for disbursement",
+    "body": "Customer accepted the offer.",
+    "href": "/handover",
+    "createdAt": "2026-09-06T16:00:00.000Z",
+    "userId": "u-fin-1",
+    "readAt": "2026-09-06T16:00:00.000Z",
+    "id": "ntf-348"
+  },
+  {
+    "kind": "offer_accepted",
+    "title": "ML-SME-2609-01122 ready for disbursement",
+    "body": "Customer accepted the offer.",
+    "href": "/handover",
+    "createdAt": "2026-09-04T08:00:00.000Z",
+    "userId": "u-fin-1",
+    "readAt": "2026-09-04T08:00:00.000Z",
+    "id": "ntf-349"
+  },
+  {
+    "kind": "offer_accepted",
+    "title": "ML-RTL-2608-01120 ready for disbursement",
+    "body": "Customer accepted the offer.",
+    "href": "/handover",
+    "createdAt": "2026-09-03T02:00:00.000Z",
+    "userId": "u-fin-1",
+    "readAt": "2026-09-03T02:00:00.000Z",
+    "id": "ntf-350"
+  },
+  {
+    "kind": "offer_accepted",
+    "title": "ML-RTL-2608-01116 ready for disbursement",
+    "body": "Customer accepted the offer.",
+    "href": "/handover",
+    "createdAt": "2026-08-31T10:00:00.000Z",
+    "userId": "u-fin-1",
+    "readAt": "2026-08-31T10:00:00.000Z",
+    "id": "ntf-351"
+  },
+  {
+    "kind": "offer_accepted",
+    "title": "ML-RTL-2608-01113 ready for disbursement",
+    "body": "Customer accepted the offer.",
+    "href": "/handover",
+    "createdAt": "2026-08-27T13:00:00.000Z",
+    "userId": "u-fin-1",
+    "readAt": "2026-08-27T13:00:00.000Z",
+    "id": "ntf-352"
+  },
+  {
+    "kind": "offer_accepted",
+    "title": "ML-RTL-2608-01102 ready for disbursement",
+    "body": "Customer accepted the offer.",
+    "href": "/handover",
+    "createdAt": "2026-08-13T09:00:00.000Z",
+    "userId": "u-fin-1",
+    "readAt": "2026-08-13T09:00:00.000Z",
+    "id": "ntf-353"
+  },
+  {
+    "kind": "offer_accepted",
+    "title": "ML-RTL-2608-01101 ready for disbursement",
+    "body": "Customer accepted the offer.",
+    "href": "/handover",
+    "createdAt": "2026-08-10T09:00:00.000Z",
+    "userId": "u-fin-1",
+    "readAt": "2026-08-10T09:00:00.000Z",
+    "id": "ntf-354"
+  },
+  {
+    "kind": "offer_accepted",
+    "title": "ML-RTL-2608-01100 ready for disbursement",
+    "body": "Customer accepted the offer.",
+    "href": "/handover",
+    "createdAt": "2026-08-07T05:00:00.000Z",
+    "userId": "u-fin-1",
+    "readAt": "2026-08-07T05:00:00.000Z",
+    "id": "ntf-355"
+  },
+  {
+    "kind": "offer_accepted",
+    "title": "ML-RTL-2607-01099 ready for disbursement",
+    "body": "Customer accepted the offer.",
+    "href": "/handover",
+    "createdAt": "2026-08-03T09:00:00.000Z",
+    "userId": "u-fin-1",
+    "readAt": "2026-08-03T09:00:00.000Z",
+    "id": "ntf-356"
+  },
+  {
+    "kind": "offer_accepted",
+    "title": "ML-SME-2607-01094 ready for disbursement",
+    "body": "Customer accepted the offer.",
+    "href": "/handover",
+    "createdAt": "2026-07-29T17:00:00.000Z",
+    "userId": "u-fin-1",
+    "readAt": "2026-07-29T17:00:00.000Z",
+    "id": "ntf-357"
+  },
+  {
+    "kind": "offer_accepted",
+    "title": "ML-RTL-2607-01091 ready for disbursement",
+    "body": "Customer accepted the offer.",
+    "href": "/handover",
+    "createdAt": "2026-07-25T07:00:00.000Z",
+    "userId": "u-fin-1",
+    "readAt": "2026-07-25T07:00:00.000Z",
+    "id": "ntf-358"
+  },
+  {
+    "kind": "offer_accepted",
+    "title": "ML-RTL-2607-01087 ready for disbursement",
+    "body": "Customer accepted the offer.",
+    "href": "/handover",
+    "createdAt": "2026-07-08T01:00:00.000Z",
+    "userId": "u-fin-1",
+    "readAt": "2026-07-08T01:00:00.000Z",
+    "id": "ntf-359"
+  },
+  {
+    "kind": "offer_accepted",
+    "title": "ML-RTL-2607-01088 ready for disbursement",
+    "body": "Customer accepted the offer.",
+    "href": "/handover",
+    "createdAt": "2026-07-07T20:00:00.000Z",
+    "userId": "u-fin-1",
+    "readAt": "2026-07-07T20:00:00.000Z",
+    "id": "ntf-360"
+  },
+  {
+    "kind": "offer_accepted",
+    "title": "ML-SME-2606-01085 ready for disbursement",
+    "body": "Customer accepted the offer.",
+    "href": "/handover",
+    "createdAt": "2026-07-06T12:00:00.000Z",
+    "userId": "u-fin-1",
+    "readAt": "2026-07-06T12:00:00.000Z",
+    "id": "ntf-361"
+  },
+  {
+    "kind": "offer_accepted",
+    "title": "ML-RTL-2606-01084 ready for disbursement",
+    "body": "Customer accepted the offer.",
+    "href": "/handover",
+    "createdAt": "2026-07-03T01:00:00.000Z",
+    "userId": "u-fin-1",
+    "readAt": "2026-07-03T01:00:00.000Z",
+    "id": "ntf-362"
+  },
+  {
+    "kind": "offer_accepted",
+    "title": "ML-RTL-2606-01079 ready for disbursement",
+    "body": "Customer accepted the offer.",
+    "href": "/handover",
+    "createdAt": "2026-06-23T03:00:00.000Z",
+    "userId": "u-fin-1",
+    "readAt": "2026-06-23T03:00:00.000Z",
+    "id": "ntf-363"
+  },
+  {
+    "kind": "offer_accepted",
+    "title": "ML-RTL-2606-01080 ready for disbursement",
+    "body": "Customer accepted the offer.",
+    "href": "/handover",
+    "createdAt": "2026-06-22T15:00:00.000Z",
+    "userId": "u-fin-1",
+    "readAt": "2026-06-22T15:00:00.000Z",
+    "id": "ntf-364"
+  },
+  {
+    "kind": "offer_accepted",
+    "title": "ML-RTL-2606-01077 ready for disbursement",
+    "body": "Customer accepted the offer.",
+    "href": "/handover",
+    "createdAt": "2026-06-21T18:00:00.000Z",
+    "userId": "u-fin-1",
+    "readAt": "2026-06-21T18:00:00.000Z",
+    "id": "ntf-365"
+  },
+  {
+    "kind": "offer_accepted",
+    "title": "ML-SME-2606-01075 ready for disbursement",
+    "body": "Customer accepted the offer.",
+    "href": "/handover",
+    "createdAt": "2026-06-19T18:00:00.000Z",
+    "userId": "u-fin-1",
+    "readAt": "2026-06-19T18:00:00.000Z",
+    "id": "ntf-366"
+  },
+  {
+    "kind": "offer_accepted",
+    "title": "ML-SME-2606-01073 ready for disbursement",
+    "body": "Customer accepted the offer.",
+    "href": "/handover",
+    "createdAt": "2026-06-18T02:00:00.000Z",
+    "userId": "u-fin-1",
+    "readAt": "2026-06-18T02:00:00.000Z",
+    "id": "ntf-367"
+  },
+  {
+    "kind": "offer_accepted",
+    "title": "ML-RTL-2606-01069 ready for disbursement",
+    "body": "Customer accepted the offer.",
+    "href": "/handover",
+    "createdAt": "2026-06-13T05:00:00.000Z",
+    "userId": "u-fin-1",
+    "readAt": "2026-06-13T05:00:00.000Z",
+    "id": "ntf-368"
+  },
+  {
+    "kind": "offer_accepted",
+    "title": "ML-SME-2606-01066 ready for disbursement",
+    "body": "Customer accepted the offer.",
+    "href": "/handover",
+    "createdAt": "2026-06-07T08:00:00.000Z",
+    "userId": "u-fin-1",
+    "readAt": "2026-06-07T08:00:00.000Z",
+    "id": "ntf-369"
+  }
+]
