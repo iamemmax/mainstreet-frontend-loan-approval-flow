@@ -20,12 +20,7 @@ pnpm dev            # http://localhost:3000
 | `pnpm lint`                    | ESLint                                                        |
 | `pnpm mock:generate`           | Regenerates `src/mocks/data/*.json` from `scripts/mock-data/` |
 
-Environment variables (all optional). Copy `.env.example` to `.env.local` to set them:
-
-| Variable                      | Default | Purpose                                                |
-| ----------------------------- | ------- | ------------------------------------------------------ |
-| `NEXT_PUBLIC_MOCK_LATENCY_MS` | `300`   | Simulated network delay, so loading states are visible |
-| `NEXT_PUBLIC_API_BASE_URL`    | `/api`  | Base URL for `apiFetch` once a real backend exists     |
+Optional settings are listed in `.env.example`. Copy it to `.env.local` to change them.
 
 ## Demo
 
