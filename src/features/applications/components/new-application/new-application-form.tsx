@@ -204,9 +204,7 @@ export function NewApplicationForm({ defaultBranchId = "", draft }: NewApplicati
   ]
 
   return (
-    // On desktop the page fills the screen (minus the top bar and padding): the rail stays put,
-    // only the form scrolls, and the buttons sit at the foot of the form column.
-    <div className="flex flex-col gap-6 lg:h-[calc(100svh-8.5rem)]">
+     <div className="flex flex-col gap-6 lg:h-[calc(100svh-8.5rem)]">
       <PageHeader
         title={draft ? `Continue ${draft.reference}` : "New application"}
         description={
