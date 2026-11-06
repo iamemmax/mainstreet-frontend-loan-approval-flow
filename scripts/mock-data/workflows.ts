@@ -9,18 +9,8 @@ export const RETAIL_WORKFLOW: WorkflowDefinition = {
   id: "wf-retail",
   name: "Retail lending",
   segment: "retail",
-  version: 4,
+  version: 5,
   stages: [
-    {
-      key: "ro_review",
-      name: "Relationship Officer",
-      approverRoles: ["relationship_officer"],
-      quorum: "any",
-      slaHours: 8,
-      reminderAtPercent: 75,
-      autoEscalateAfterHours: null,
-      committee: null,
-    },
     {
       key: "credit_manager",
       name: "Credit Manager",
@@ -77,18 +67,8 @@ export const SME_WORKFLOW: WorkflowDefinition = {
   id: "wf-sme",
   name: "SME lending",
   segment: "sme",
-  version: 3,
+  version: 4,
   stages: [
-    {
-      key: "ro_review",
-      name: "Relationship Officer",
-      approverRoles: ["relationship_officer"],
-      quorum: "any",
-      slaHours: 12,
-      reminderAtPercent: 75,
-      autoEscalateAfterHours: null,
-      committee: null,
-    },
     {
       key: "credit_manager",
       name: "Credit Manager",

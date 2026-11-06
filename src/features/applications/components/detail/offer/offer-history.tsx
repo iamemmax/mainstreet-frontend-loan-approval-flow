@@ -4,10 +4,10 @@ import { ToneBadge } from "@/components/shared/status-badge"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { useUsers } from "@/features/admin/hooks/use-reference-data"
 import { formatDate } from "@/lib/format/date"
-import type { Application } from "../../../../types"
-import { isOfferExpired } from "../../../../utils/offer"
-import { OFFER_STATUS } from "../../constants"
-import { Section } from "../../ui"
+import type { Application } from "../../../types"
+import { isOfferExpired } from "../../../utils/offer"
+import { OFFER_STATUS } from "../constants"
+import { Section } from "../ui"
 
 /** Every offer issued, newest first. Only the newest link can be accepted. */
 export function OfferHistory({ offers }: { offers: Application["offers"] }) {
@@ -19,7 +19,7 @@ export function OfferHistory({ offers }: { offers: Application["offers"] }) {
       flush
     >
       <div className="px-3 pb-3 sm:px-5 sm:pb-5">
-        <div className="overflow-hidden rounded-xl border border-border/80">
+        <div className="overflow-x-auto rounded-xl border border-border/80">
           <Table>
             <TableHeader>
               <TableRow>

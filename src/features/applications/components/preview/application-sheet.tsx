@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { InitialsAvatar } from "@/components/shared/initials-avatar"
 import { SLABadge, StatusBadge } from "@/components/shared/status-badge"
+import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetDescription, SheetTitle } from "@/components/ui/sheet"
 import { Skeleton } from "@/components/ui/skeleton"
 import { useReferenceData, useUsers } from "@/features/admin/hooks/use-reference-data"
@@ -108,15 +109,6 @@ function SheetBody({
       </header>
 
       <div className="min-h-0 flex-1 space-y-3 overflow-y-auto p-4 [scrollbar-width:thin]">
-        <button
-          type="button"
-          onClick={() => onOpenFull()}
-          className="group flex w-full items-center justify-center gap-2 rounded-xl border border-border/80 bg-card px-4 py-2.5 text-sm font-semibold text-primary shadow-xs transition-colors hover:bg-primary/[0.04]"
-        >
-          <Eye className="size-4" aria-hidden /> Open full details page
-          <ChevronRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden />
-        </button>
-
         <SheetSection icon={ScanFace} title="Identity check">
           <IdentityPhotos app={app} name={name} />
         </SheetSection>
@@ -150,6 +142,13 @@ function SheetBody({
 
         <GuarantorsSection guarantors={app.guarantors} />
       </div>
+
+      <footer className="shrink-0 border-t bg-card p-4">
+        <Button className="group h-11 w-full" onClick={() => onOpenFull()}>
+          <Eye aria-hidden /> View application
+          <ChevronRight className="transition-transform group-hover:translate-x-0.5" aria-hidden />
+        </Button>
+      </footer>
 
       <DocumentViewer items={items} index={viewing} onIndexChange={setViewing} />
     </>

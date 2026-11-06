@@ -137,6 +137,8 @@ export const collateralSchema = z.object({
   description: z.string().trim().min(3),
   estimatedValue: koboSchema,
   forcedSaleValue: koboSchema.nullable(),
+  /** Photo of the asset. A data URL from intake until the real API stores uploads. */
+  photoUrl: z.string().nullable().default(null),
 })
 
 export const VERIFICATION_CHECKS = [

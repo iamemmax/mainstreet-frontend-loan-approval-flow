@@ -26,29 +26,86 @@ export interface RoleProfile {
   owns: readonly ApplicationStatus[]
   /** Sees where the book is slowing down: stage times, turnaround and volume. */
   insights: boolean
+  /** Their own performance shows on the dashboard instead of on a Reports page. */
+  performanceOnDashboard: boolean
+  /** Sees the verification checks on an application. Relationship officers capture, they don't verify. */
+  seesVerification: boolean
 }
 
 /** Everything that differs by role, apart from permissions, in one place. */
 export const ROLE_PROFILE: Record<Role, RoleProfile> = {
-  relationship_officer: { dashboard: "origination", report: "personal", owns: [], insights: false },
+  relationship_officer: {
+    dashboard: "origination",
+    report: "personal",
+    owns: [],
+    insights: false,
+    performanceOnDashboard: true,
+    seesVerification: false,
+  },
   verification_officer: {
     dashboard: "verification",
     report: "personal",
     owns: ["submitted", "in_verification"],
     insights: false,
+    performanceOnDashboard: true,
+    seesVerification: true,
   },
-  credit_analyst: { dashboard: "assessment", report: "personal", owns: ["in_assessment"], insights: false },
-  credit_manager: { dashboard: "approval", report: "management", owns: [], insights: true },
-  final_approver: { dashboard: "approval", report: "management", owns: [], insights: true },
+  credit_analyst: {
+    dashboard: "assessment",
+    report: "personal",
+    owns: ["in_assessment"],
+    insights: false,
+    performanceOnDashboard: false,
+    seesVerification: true,
+  },
+  credit_manager: {
+    dashboard: "approval",
+    report: "management",
+    owns: [],
+    insights: true,
+    performanceOnDashboard: false,
+    seesVerification: true,
+  },
+  final_approver: {
+    dashboard: "approval",
+    report: "management",
+    owns: [],
+    insights: true,
+    performanceOnDashboard: false,
+    seesVerification: true,
+  },
   finance_officer: {
     dashboard: "finance",
     report: "finance",
     owns: ["offer_accepted", "ready_for_disbursement"],
     insights: false,
+    performanceOnDashboard: false,
+    seesVerification: true,
   },
-  head_of_credit: { dashboard: "oversight", report: "management", owns: [], insights: true },
-  auditor: { dashboard: "oversight", report: "management", owns: [], insights: true },
-  admin: { dashboard: "oversight", report: "management", owns: [], insights: true },
+  head_of_credit: {
+    dashboard: "oversight",
+    report: "management",
+    owns: [],
+    insights: true,
+    performanceOnDashboard: false,
+    seesVerification: true,
+  },
+  auditor: {
+    dashboard: "oversight",
+    report: "management",
+    owns: [],
+    insights: true,
+    performanceOnDashboard: false,
+    seesVerification: true,
+  },
+  admin: {
+    dashboard: "oversight",
+    report: "management",
+    owns: [],
+    insights: true,
+    performanceOnDashboard: false,
+    seesVerification: true,
+  },
 }
 
 /** The "My performance" report for a role, if it gets one. */

@@ -78,7 +78,6 @@ export function AssessmentTab({ app, product }: { app: Application; product: Pro
     existingK !== app.assessment.existingLoanRepayments ||
     (recommendation || null) !== app.assessment.recommendation ||
     notes.trim() !== app.assessment.notes
-  const REC_LABEL = { approve: "Approve", refer: "Approve with conditions", decline: "Decline" } as const
   const dtiOver = result.dti !== null && result.dti > DTI_LIMIT
   const saved = RECOMMENDATIONS.find((r) => r.value === app.assessment?.recommendation)
 
@@ -98,7 +97,7 @@ export function AssessmentTab({ app, product }: { app: Application; product: Pro
   return (
     <div className="space-y-5">
       <Card className="gap-0 py-0">
-        <dl className="grid grid-cols-1 @lg:grid-cols-2 @3xl:grid-cols-4 [&>div]:px-6 [&>div]:py-5 @3xl:[&>div:not(:last-child)]:border-r @max-3xl:[&>div]:border-b @lg:@max-3xl:[&>div:nth-child(odd)]:border-r [&>div]:border-border/70">
+        <dl className="grid grid-cols-1 @lg:grid-cols-2 @3xl:grid-cols-3 [&>div]:px-6 [&>div]:py-5 @3xl:[&>div:not(:last-child)]:border-r @max-3xl:[&>div]:border-b @lg:@max-3xl:[&>div:nth-child(odd)]:border-r [&>div]:border-border/70">
           <div>
             <dt className="text-[13px] text-muted-foreground">Credit score</dt>
             <dd className="mt-1.5 flex items-center gap-3">
@@ -130,11 +129,6 @@ export function AssessmentTab({ app, product }: { app: Application; product: Pro
             <dd className="mt-2 text-xs text-muted-foreground">
               {headroom < 0 ? `A month over the ${formatPercent(DTI_LIMIT, 0)} limit` : `A month more it could repay`}
             </dd>
-          </div>
-          <div>
-            <dt className="text-[13px] text-muted-foreground">System recommends</dt>
-            <dd className="mt-1.5 text-lg leading-tight font-bold">{REC_LABEL[result.recommendation]}</dd>
-            <dd className="mt-2 text-xs text-muted-foreground">From the product scorecard</dd>
           </div>
         </dl>
       </Card>

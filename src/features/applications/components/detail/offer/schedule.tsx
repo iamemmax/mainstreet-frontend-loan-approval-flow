@@ -3,7 +3,7 @@
 import { MoneyText } from "@/components/shared/money-text"
 import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { formatDate } from "@/lib/format/date"
-import { type OfferTerms } from "../../../../utils/offer"
+import { type OfferTerms } from "../../../utils/offer"
 
 export function Schedule({ terms, start }: { terms: OfferTerms; start: Date }) {
   const principalPart = Math.round(terms.principal / terms.tenorMonths)
@@ -11,7 +11,7 @@ export function Schedule({ terms, start }: { terms: OfferTerms; start: Date }) {
   let balance = terms.totalRepayable
   return (
     <div className="max-h-[30rem] overflow-auto px-3 pb-3 sm:px-5 sm:pb-5">
-      <div className="overflow-hidden rounded-xl border border-border/80">
+      <div className="overflow-x-auto rounded-xl border border-border/80">
         <Table>
           <TableHeader>
             <TableRow>

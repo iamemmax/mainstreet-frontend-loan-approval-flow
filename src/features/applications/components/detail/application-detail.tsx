@@ -8,6 +8,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Card } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
 import { useReferenceData, useUsers } from "@/features/admin/hooks/use-reference-data"
+import { useSession } from "@/features/auth/hooks/use-session"
 import { computeSla, getStage } from "@/features/workflow/engine"
 import { useWorkflowDefinitions } from "@/features/workflow/hooks/use-workflows"
 import { useNow } from "@/hooks/use-now"
@@ -19,6 +20,7 @@ import type { Application } from "../../types"
 import { computeOffer } from "../../utils/offer"
 import { ApplicationActions, EligibilityNote } from "../application-actions"
 import { FLAG_TEXT, type Tab, TAB_LABELS, TABS, visibleTabs } from "./constants"
+import { OfferSheet } from "./offer/offer-sheet"
 import { ReviewRail } from "./review-rail"
 import { SummaryHeader } from "./summary-header"
 import { ActivityTab } from "./tabs/activity-tab"
@@ -26,7 +28,6 @@ import { ApplicantTab } from "./tabs/applicant-tab"
 import { ApprovalsTab } from "./tabs/approvals-tab"
 import { AssessmentTab } from "./tabs/assessment-tab"
 import { CreditHistoryTab } from "./tabs/credit-history-tab"
-import { OfferTab } from "./tabs/offer-tab"
 import { OverviewTab } from "./tabs/overview-tab"
 import { VerificationTab } from "./tabs/verification-tab"
 
@@ -41,10 +42,11 @@ export function ApplicationDetail({ id }: { id: string }) {
   const { data: definitions } = useWorkflowDefinitions()
   const { data: ref } = useReferenceData()
   const { data: users } = useUsers()
-  const [wantedTab, setTab] = useState<Tab>(() => {
-    const wanted = takeIntent("applicationTab")
-    return TABS.includes(wanted as Tab) ? (wanted as Tab) : "overview"
-  })
+  const { user } = useSession()
+  // Other screens can ask for a tab, or for the offer (which opens in a sheet).
+  const [intent] = useState(() => takeIntent("applicationTab"))
+  const [wantedTab, setTab] = useState<Tab>(() => (TABS.includes(intent as Tab) ? (intent as Tab) : "overview"))
+  const [offerOpen, setOfferOpen] = useState(intent === "offer")
   const now = useNow()
 
   if (error) {
@@ -55,7 +57,7 @@ export function ApplicationDetail({ id }: { id: string }) {
     )
   }
   if (isPending || !app) return <DetailSkeleton />
-  const tabs = visibleTabs(app)
+  const tabs = visibleTabs(app, user.role)
   // A tab can disappear (or be asked for before it exists); fall back to the overview.
   const tab = tabs.includes(wantedTab) ? wantedTab : "overview"
 
@@ -176,9 +178,6 @@ export function ApplicationDetail({ id }: { id: string }) {
 
             {tab === "workflow" && <ApprovalsTab app={app} definition={definition} userName={userName} />}
 
-            {tab === "offer" &&
-              (product ? <OfferTab app={app} product={product} /> : <Skeleton className="h-64 w-full" />)}
-
             {tab === "activity" && <ActivityTab id={app.id} />}
           </div>
         </div>
@@ -189,9 +188,12 @@ export function ApplicationDetail({ id }: { id: string }) {
           stage={stage}
           definition={definition}
           applicantName={name}
+          onOpenOffer={() => setOfferOpen(true)}
           className="max-xl:max-h-[48rem] xl:sticky xl:top-[6.5rem] xl:h-[calc(100svh-10rem)]"
         />
       </div>
+
+      {product && <OfferSheet app={app} product={product} open={offerOpen} onOpenChange={setOfferOpen} />}
     </div>
   )
 }

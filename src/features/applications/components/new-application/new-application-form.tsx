@@ -186,7 +186,7 @@ export function NewApplicationForm({ defaultBranchId = "", draft }: NewApplicati
     }
     try {
       const app = await save.mutateAsync(toInput(values, extras(false)))
-      toast.success(`Application ${app.reference} submitted`)
+      toast.success(`Application ${app.reference} sent to verification`)
       router.push(`/applications/${app.id}`)
     } catch {
       // The error modal explains what went wrong.
@@ -204,7 +204,7 @@ export function NewApplicationForm({ defaultBranchId = "", draft }: NewApplicati
   ]
 
   return (
-     <div className="flex flex-col gap-6 lg:h-[calc(100svh-8.5rem)]">
+    <div className="flex flex-col gap-6 lg:h-[calc(100svh-8.5rem)]">
       <PageHeader
         title={draft ? `Continue ${draft.reference}` : "New application"}
         description={
@@ -297,7 +297,7 @@ export function NewApplicationForm({ defaultBranchId = "", draft }: NewApplicati
                 ) : (
                   <Button type="submit" disabled={pending}>
                     {pending ? <Loader2 className="animate-spin" aria-hidden /> : <Send aria-hidden />}
-                    Submit application
+                    Send to verification
                   </Button>
                 )}
               </div>

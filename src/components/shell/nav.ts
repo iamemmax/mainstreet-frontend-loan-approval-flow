@@ -1,7 +1,6 @@
 import {
   Building2,
   ChartColumn,
-  FilePlus,
   FileText,
   Inbox,
   LayoutDashboard,
@@ -59,18 +58,11 @@ export const NAV_GROUPS: NavGroup[] = [
         keywords: ["approvals", "queue", "pending"],
       },
       {
-        title: "Applications",
+        title: "Loan Applications",
         href: "/applications",
         icon: FileText,
         permission: "application:view",
         keywords: ["loans", "pipeline"],
-      },
-      {
-        title: "New application",
-        href: "/applications/new",
-        icon: FilePlus,
-        permission: "application:create",
-        keywords: ["create", "intake"],
       },
     ],
   },

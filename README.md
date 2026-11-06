@@ -24,7 +24,7 @@ Optional settings are listed in `.env.example`. Copy it to `.env.local` to chang
 
 ## Demo
 
-Sign in at `/login` in three steps: choose a staff account, enter its password (**Mainstreet@2026** for every demo account until changed in Settings), then its PIN (**1234**). Every action that changes an application — approval decisions, running checks, saving the assessment, submitting, sending or re-sending an offer, handing over to finance — is confirmed with the user's PIN: **1234** for all demo users (three wrong tries lock the PIN for 15 minutes). Everyone lands on the **Dashboard**; navigation and actions change with the role.
+Sign in at `/login`: choose a staff account, then enter its password (**Mainstreet@2026** for every demo account until changed in Settings). Every action that changes an application — approval decisions, running checks, saving the assessment, submitting, sending or re-sending an offer, handing over to finance — is confirmed with the user's PIN: **1234** for all demo users (three wrong tries lock the PIN for 15 minutes). Everyone lands on the **Dashboard**; navigation and actions change with the role.
 
 **Documents** open in a full-screen viewer from the Applications sheet or the Applicant tab: PDFs in the browser's own PDF reader (with Open and Download, and a fallback where a browser can't show PDFs inline), images as images. Each document carries a `url`; a real backend returns a short-lived signed link. The demo's files live in `public/samples` and are regenerated with `python3 scripts/mock-data/sample-files.py`.
 

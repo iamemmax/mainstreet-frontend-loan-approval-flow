@@ -6,31 +6,25 @@ import { cn } from "@/lib/utils"
 import type { User } from "../../types"
 import { AccountStep } from "./account-step"
 import { PasswordStep } from "./password-step"
-import { PinStep } from "./pin-step"
 
 const STEPS = [
   { id: "account", title: "Sign in", description: "Choose your staff account to continue." },
   { id: "password", title: "Enter your password", description: "Your sign-in password for this account." },
-  { id: "pin", title: "Confirm it's you", description: "Your PIN is the second step that keeps the account secure." },
 ] as const
 
 type Step = (typeof STEPS)[number]["id"]
 
-/** Account, then password, then PIN. Both factors are checked by the server before a session starts. */
+/** Account, then password. The server checks the password before a session starts. */
 export function SignInFlow() {
   const [next] = useState(() => takeIntent("afterSignIn"))
   // Only accept in-app paths, never an absolute URL.
   const safeNext = next && next.startsWith("/") && !next.startsWith("//") ? next : undefined
   const [step, setStep] = useState<Step>("account")
   const [user, setUser] = useState<User | null>(null)
-  const [password, setPassword] = useState("")
   const index = STEPS.findIndex((s) => s.id === step)
   const current = STEPS[index]
 
-  const restart = () => {
-    setPassword("")
-    setStep("account")
-  }
+  const restart = () => setStep("account")
 
   return (
     <div className="space-y-6">
@@ -61,17 +55,7 @@ export function SignInFlow() {
             }}
           />
         )}
-        {step === "password" && user && (
-          <PasswordStep
-            user={user}
-            onBack={restart}
-            onNext={(p) => {
-              setPassword(p)
-              setStep("pin")
-            }}
-          />
-        )}
-        {step === "pin" && user && <PinStep user={user} password={password} next={safeNext} onBack={restart} />}
+        {step === "password" && user && <PasswordStep user={user} next={safeNext} onBack={restart} />}
       </div>
     </div>
   )

@@ -10,6 +10,7 @@ import { formatNaira, koboToNaira, nairaToKobo } from "@/lib/format/money"
 import { cn } from "@/lib/utils"
 import { DOCUMENT_TYPE_LABELS, REQUIRED_DOCUMENTS } from "../../schemas/application"
 import type { ApplicationDocument, Collateral, Guarantor, NextOfKin } from "../../types"
+import { CollateralPhotoField } from "./collateral-photo-field"
 import { FormCard } from "./fields"
 
 export type DocumentDraft = Pick<ApplicationDocument, "type" | "fileName" | "sizeBytes">
@@ -24,7 +25,13 @@ export const emptyGuarantor = (): Guarantor => ({
   bvn: null,
 })
 export const emptyNextOfKin = (): NextOfKin => ({ name: "", relationship: "", phone: "", address: "" })
-const emptyCollateral = (): Collateral => ({ type: "", description: "", estimatedValue: 0, forcedSaleValue: null })
+const emptyCollateral = (): Collateral => ({
+  type: "",
+  description: "",
+  estimatedValue: 0,
+  forcedSaleValue: null,
+  photoUrl: null,
+})
 
 const PHONE = /^(\+234|0)[789]\d{9}$/
 
@@ -245,6 +252,11 @@ export function PartiesStep({
                 grouped
                 value={c.forcedSaleValue === null ? "" : String(koboToNaira(c.forcedSaleValue))}
                 onChange={(v) => setC(i, { forcedSaleValue: v ? nairaToKobo(Number(v)) : null })}
+              />
+              <CollateralPhotoField
+                className="sm:col-span-2"
+                photoUrl={c.photoUrl}
+                onChange={(photoUrl) => setC(i, { photoUrl })}
               />
             </fieldset>
           ))}

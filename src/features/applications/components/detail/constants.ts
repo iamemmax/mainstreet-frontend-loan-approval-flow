@@ -1,18 +1,11 @@
 import type { Tone } from "@/components/shared/tone"
 import type { Decision } from "@/features/workflow/types"
-import { OFFER_ADJUSTABLE_STATUSES } from "../../schemas/status"
+import { ROLE_PROFILE } from "@/lib/rbac/profiles"
+import type { Role } from "@/lib/rbac/roles"
+import { APPROVED_STATUSES } from "../../schemas/status"
 import type { Application, ApplicationFlag, OfferRecord, VerificationResult } from "../../types"
 
-export const TABS = [
-  "overview",
-  "applicant",
-  "verification",
-  "credit",
-  "assessment",
-  "workflow",
-  "offer",
-  "activity",
-] as const
+export const TABS = ["overview", "applicant", "verification", "credit", "assessment", "workflow", "activity"] as const
 
 export const TAB_LABELS: Record<(typeof TABS)[number], string> = {
   overview: "Overview",
@@ -21,26 +14,28 @@ export const TAB_LABELS: Record<(typeof TABS)[number], string> = {
   credit: "Credit history",
   assessment: "Assessment",
   workflow: "Approvals",
-  offer: "Offer",
   activity: "Activity",
 }
 
 export type Tab = (typeof TABS)[number]
 
-/** Tabs that have something to show yet. A tab appears once the application reaches its step, so nobody opens an empty one. */
-export function visibleTabs(app: Application): Tab[] {
+/** Tabs that have something to show yet and that this role works with, so nobody opens an empty one. */
+export function visibleTabs(app: Application, role: Role): Tab[] {
   const shown: Record<Tab, boolean> = {
     overview: true,
     applicant: true,
-    verification: app.submittedAt !== null || app.verification.length > 0,
+    verification: ROLE_PROFILE[role].seesVerification && (app.submittedAt !== null || app.verification.length > 0),
     credit: app.creditHistory !== null,
     assessment: app.assessment !== null || app.status === "in_assessment",
     workflow: app.workflow !== null,
-    // The offer can be adjusted at any step, so its tab shows from the start.
-    offer: app.offers.length > 0 || OFFER_ADJUSTABLE_STATUSES.includes(app.status),
     activity: true,
   }
   return TABS.filter((t) => shown[t])
+}
+
+/** There's an offer to look at once the loan is approved, or once one has been issued. */
+export function hasOffer(app: Application): boolean {
+  return app.offers.length > 0 || APPROVED_STATUSES.includes(app.status)
 }
 
 export const FLAG_TEXT: Record<ApplicationFlag, { title: string; body: string }> = {
@@ -55,20 +50,6 @@ export const FLAG_TEXT: Record<ApplicationFlag, { title: string; body: string }>
     body: "The creator tried to approve their own application. It was blocked.",
   },
   auto_escalated: { title: "Auto-escalated", body: "This application moved up a level after its SLA was breached." },
-}
-
-export const NEXT_STEP: Partial<Record<Application["status"], string>> = {
-  draft: "Complete intake and submit the application",
-  submitted: "Verification officer to start verification",
-  in_verification: "Run all checks, then complete verification",
-  in_assessment: "Credit analyst to save the assessment and submit for approval",
-  returned: "Relationship officer to correct and resubmit",
-  more_info_requested: "Relationship officer to provide the information requested",
-  approved: "Send the offer to the customer",
-  offer_sent: "Waiting for the customer to accept the offer",
-  offer_accepted: "Finance to take the loan over for disbursement",
-  ready_for_disbursement: "Handed over to finance",
-  rejected: "Closed — the application was declined",
 }
 
 export const DECISION_TONE: Record<Decision["action"], Tone> = {

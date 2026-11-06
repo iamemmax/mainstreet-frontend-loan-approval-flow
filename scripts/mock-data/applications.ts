@@ -565,7 +565,7 @@ export function seedApplications(now: Date, count = 340): SeedResult {
     amount: 350_000 * N,
     branchId: "b-lis",
     createdById: "u-cm-1",
-    stageIndex: 1,
+    stageIndex: 0,
     stageAgeHours: 5,
     flags: ["self_approval_attempt"],
   })
@@ -585,7 +585,7 @@ export function seedApplications(now: Date, count = 340): SeedResult {
     productId: "p-payroll",
     amount: 2_400_000 * N,
     branchId: "b-ikj",
-    stageIndex: 1,
+    stageIndex: 0,
     stageAgeHours: 10,
   })
   const duplicate = build({
@@ -644,7 +644,7 @@ export function seedApplications(now: Date, count = 340): SeedResult {
       productId: "p-payroll",
       amount: 12_500_000 * N,
       branchId: "b-lis",
-      stageIndex: 4,
+      stageIndex: 3,
       stageAgeHours: 20,
     })
     castVotes(retail, [["u-fa-2", "approve"]])
@@ -654,7 +654,7 @@ export function seedApplications(now: Date, count = 340): SeedResult {
       productId: "p-asset-sme",
       amount: 68_000_000 * N,
       branchId: "b-ikj",
-      stageIndex: 4,
+      stageIndex: 3,
       stageAgeHours: 6,
     })
     const split = build({
@@ -663,7 +663,7 @@ export function seedApplications(now: Date, count = 340): SeedResult {
       productId: "p-asset-sme",
       amount: 85_000_000 * N,
       branchId: "b-phc",
-      stageIndex: 4,
+      stageIndex: 3,
       stageAgeHours: 30,
     })
     castVotes(split, [
@@ -673,13 +673,13 @@ export function seedApplications(now: Date, count = 340): SeedResult {
   }
 
   // 4. Hard SLA breaches across stages.
-  build({ status: "pending_approval", segment: "retail", branchId: "b-wse", stageIndex: 0, stageAgeHours: 19 })
+  build({ status: "pending_approval", segment: "retail", branchId: "b-wse", stageIndex: 0, stageAgeHours: 30 })
   build({
     status: "pending_approval",
     segment: "sme",
     amount: 32_000_000 * N,
     branchId: "b-phc",
-    stageIndex: 3,
+    stageIndex: 2,
     stageAgeHours: 101,
   })
   build({
@@ -688,7 +688,7 @@ export function seedApplications(now: Date, count = 340): SeedResult {
     amount: 6_500_000 * N,
     productId: "p-payroll",
     branchId: "b-lis",
-    stageIndex: 3,
+    stageIndex: 2,
     stageAgeHours: 40,
   })
 
@@ -701,7 +701,7 @@ export function seedApplications(now: Date, count = 340): SeedResult {
       productId: "p-salary",
       amount: rnd.int(15, 45) * 10_000 * N,
       branchId,
-      stageIndex: 1,
+      stageIndex: 0,
       stageAgeHours: 35,
     })
     const wf = app.workflow!
@@ -719,7 +719,7 @@ export function seedApplications(now: Date, count = 340): SeedResult {
       automated: true,
       at: iso(enteredAt),
     })
-    wf.route = ["ro_review", "credit_manager", "analyst"]
+    wf.route = ["credit_manager", "analyst"]
     wf.currentStageKey = "analyst"
     app.flags.push("auto_escalated")
     log(app, enteredAt, "system", "workflow.auto_escalated", "Auto-escalated after Credit Manager SLA breach", {

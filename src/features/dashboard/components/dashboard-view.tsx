@@ -10,11 +10,13 @@ import { useSession } from "@/features/auth/hooks/use-session"
 import { formatDate } from "@/lib/format/date"
 import { type ListIntent, setIntent } from "@/lib/navigation/intent"
 import type { Permission } from "@/lib/rbac/permissions"
+import { ROLE_PROFILE } from "@/lib/rbac/profiles"
 import { cn } from "@/lib/utils"
 import { useDashboardSummary } from "../hooks/use-dashboard"
 import type { DashboardFocus } from "../schemas/dashboard"
 import { AttentionCard } from "./attention-card"
 import { FigureRow } from "./figure-row"
+import { PerformanceFigures } from "./performance-figures"
 import { QueueCard } from "./queue-card"
 import { StageAgingCard } from "./stage-aging-card"
 import { VolumeCard } from "./volume-card"
@@ -102,6 +104,7 @@ export function DashboardView() {
       ) : (
         <>
           <FigureRow figures={data?.figures} ctx={ctx} loading={isPending} />
+          {ROLE_PROFILE[user.role].performanceOnDashboard && <PerformanceFigures />}
           <div className="grid gap-4 lg:grid-cols-3">
             {hasQueue ? (
               <QueueCard queue={data?.queue} focus={focus} loading={isPending} className="lg:col-span-2" />

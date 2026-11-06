@@ -6,23 +6,24 @@ import { PasswordInput } from "@/components/shared/password-input"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { errorMessage, isApiError } from "@/lib/api/errors"
-import { useCheckPassword } from "../../hooks/use-auth-actions"
+import { useSignIn } from "../../hooks/use-auth-actions"
 import type { User } from "../../types"
 import { AccountChip } from "./account-chip"
 
-/** Step 2: the account's password. Checked before the PIN is asked for. */
+/** Step 2: the account's password. Signs in when it's right. */
 export function PasswordStep({
   user,
+  next,
   onBack,
-  onNext,
 }: {
   user: User
+  /** Where to go after signing in, if not the user's landing page. */
+  next?: string
   onBack: () => void
-  onNext: (password: string) => void
 }) {
   const [password, setPassword] = useState("")
-  const check = useCheckPassword()
-  const wrong = isApiError(check.error) && check.error.code === "invalid_password" ? errorMessage(check.error) : null
+  const signIn = useSignIn({ next })
+  const wrong = isApiError(signIn.error) && signIn.error.code === "invalid_password" ? errorMessage(signIn.error) : null
 
   return (
     <form
@@ -31,7 +32,7 @@ export function PasswordStep({
       onSubmit={(e) => {
         e.preventDefault()
         if (!password) return
-        check.mutate({ userId: user.id, password }, { onSuccess: () => onNext(password) })
+        signIn.mutate({ userId: user.id, password })
       }}
     >
       <AccountChip user={user} onChange={onBack} />
@@ -47,7 +48,7 @@ export function PasswordStep({
           autoFocus
           value={password}
           onChange={(e) => {
-            if (check.error) check.reset()
+            if (signIn.error) signIn.reset()
             setPassword(e.target.value)
           }}
           aria-invalid={!!wrong}
@@ -58,9 +59,9 @@ export function PasswordStep({
           </p>
         )}
       </div>
-      <Button type="submit" className="h-11 w-full" disabled={!password || check.isPending}>
-        {check.isPending ? <Loader2 className="animate-spin" aria-hidden /> : null}
-        Continue <ArrowRight aria-hidden />
+      <Button type="submit" className="h-11 w-full" disabled={!password || signIn.isPending}>
+        {signIn.isPending ? <Loader2 className="animate-spin" aria-hidden /> : null}
+        Sign in <ArrowRight aria-hidden />
       </Button>
     </form>
   )

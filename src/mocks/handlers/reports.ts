@@ -5,10 +5,12 @@ import type {
   FinanceReport,
   ManagementReport,
   PersonalReport,
+  ReportRange,
   ReportsParams,
   ReportsSummary,
 } from "@/features/reports/schemas/reports"
 import { DECISION_REASONS } from "@/features/workflow/engine"
+import { ApiError } from "@/lib/api/errors"
 import { formatNaira, formatPercent } from "@/lib/format/money"
 import { APPROVED_STATUSES } from "@/features/applications/schemas/status"
 import { personalFocus, ROLE_PROFILE } from "@/lib/rbac/profiles"
@@ -113,17 +115,34 @@ export function reportsSummary(
   params: ReportsParams = {},
   now = new Date(),
 ): ReportsSummary {
-  const from = periodStart(params.range ?? "90d", now)
-  const period = { from: from?.toISOString() ?? null, to: now.toISOString() }
-  const inPeriod = (at: string | null | undefined): at is string =>
-    !!at && (!from || Date.parse(at) >= from.getTime()) && Date.parse(at) <= now.getTime()
-  const latest = auditIndex(store)
-  const ctx = { store, session, now, period, inPeriod, latest }
+  const ctx = reportContext(store, session, params.range ?? "90d", now)
   const { role } = session.user
   const kind = ROLE_PROFILE[role].report
   if (kind === "finance") return financeReport(ctx)
   if (kind === "management") return managementReport(ctx, params)
   return personalReport(ctx, personalFocus(role) ?? "origination")
+}
+
+/** The signed-in person's own work, for roles that see it on the dashboard rather than on a Reports page. */
+export function myPerformance(
+  store: MockStore,
+  session: Session,
+  range: ReportRange = "30d",
+  now = new Date(),
+): PersonalReport {
+  const { role } = session.user
+  const focus = personalFocus(role)
+  if (!ROLE_PROFILE[role].performanceOnDashboard || !focus)
+    throw new ApiError(403, "forbidden", "You do not have permission to do this")
+  return personalReport(reportContext(store, session, range, now), focus)
+}
+
+function reportContext(store: MockStore, session: Session, range: ReportRange, now: Date): Ctx {
+  const from = periodStart(range, now)
+  const period = { from: from?.toISOString() ?? null, to: now.toISOString() }
+  const inPeriod = (at: string | null | undefined): at is string =>
+    !!at && (!from || Date.parse(at) >= from.getTime()) && Date.parse(at) <= now.getTime()
+  return { store, session, now, period, inPeriod, latest: auditIndex(store) }
 }
 
 interface Ctx {

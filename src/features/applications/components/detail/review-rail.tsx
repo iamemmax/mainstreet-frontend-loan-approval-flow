@@ -3,35 +3,42 @@
 import { useRef } from "react"
 import { useUsers } from "@/features/admin/hooks/use-reference-data"
 import { useSession } from "@/features/auth/hooks/use-session"
-import { useAllDelegations } from "@/features/workflow/hooks/use-workflows"
 import type { WorkflowDefinition, WorkflowStage } from "@/features/workflow/types"
 import { cn } from "@/lib/utils"
 import type { Application } from "../../types"
-import type { scoreApplication } from "../../utils/scorecard"
-import { Checklist } from "./rail/checklist"
+import { RailActions } from "./rail/actions"
 import { Composer } from "./rail/composer"
 import { CreditView } from "./rail/credit-view"
 import { Discussion } from "./rail/discussion"
 import { IdentityCheck } from "./rail/identity-check"
-import { NextStep } from "./rail/next-step"
+import { Pricing } from "./rail/pricing"
+import type { ProductInfo } from "./ui"
 
 interface ReviewRailProps {
   app: Application
-  product?: Parameters<typeof scoreApplication>[1]
+  product?: ProductInfo
   stage: WorkflowStage | null
   definition?: WorkflowDefinition
   applicantName: string
+  onOpenOffer: () => void
   className?: string
 }
 
 /**
- * One panel from top to bottom: what happens next, the identity check, the credit view, the
- * checklist, then the team's discussion with the message box pinned at the foot.
+ * One panel from top to bottom: the actions, the identity check, the pricing, the credit view,
+ * then the team's comments with the comment box pinned at the foot.
  */
-export function ReviewRail({ app, product, stage, definition, applicantName, className }: ReviewRailProps) {
+export function ReviewRail({
+  app,
+  product,
+  stage,
+  definition,
+  applicantName,
+  onOpenOffer,
+  className,
+}: ReviewRailProps) {
   const session = useSession()
   const { data: users = [] } = useUsers()
-  const { data: delegations = [] } = useAllDelegations()
   const scroller = useRef<HTMLDivElement>(null)
   const toLatest = () =>
     requestAnimationFrame(() => scroller.current?.scrollTo({ top: scroller.current.scrollHeight, behavior: "smooth" }))
@@ -45,10 +52,10 @@ export function ReviewRail({ app, product, stage, definition, applicantName, cla
       )}
     >
       <div ref={scroller} className="min-h-0 flex-1 divide-y divide-border/70 overflow-y-auto overscroll-contain">
-        <NextStep app={app} stage={stage} applicantName={applicantName} users={users} delegations={delegations} />
+        <RailActions app={app} stage={stage} applicantName={applicantName} users={users} onOpenOffer={onOpenOffer} />
         <IdentityCheck app={app} name={applicantName} />
+        {product && <Pricing app={app} product={product} />}
         <CreditView app={app} product={product} />
-        <Checklist app={app} />
         <Discussion app={app} definition={definition} users={users} meId={session.user.id} />
       </div>
       <Composer applicationId={app.id} onSent={toLatest} />

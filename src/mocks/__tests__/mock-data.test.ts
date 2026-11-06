@@ -1,6 +1,7 @@
 import { computeSla, getStage, validateWorkflow } from "@/features/workflow/engine"
 import { applicationListParamsSchema } from "@/features/applications/schemas/application"
 import { listApplications } from "../handlers/applications"
+import { myPerformance } from "../handlers/reports"
 import { getStore, type MockStore } from "../store"
 
 let store: MockStore
@@ -98,5 +99,18 @@ describe("applications handler", () => {
     const ref = store.applications[10].reference
     const res = listApplications(store, sessionFor("u-adm-1"), params({ q: ref }))
     expect(res.items.map((i) => i.reference)).toEqual([ref])
+  })
+})
+
+describe("my performance", () => {
+  const firstOf = (role: string) => store.users.find((u) => u.role === role)!.id
+
+  it("gives relationship and verification officers their own figures", () => {
+    expect(myPerformance(store, sessionFor(firstOf("relationship_officer"))).focus).toBe("origination")
+    expect(myPerformance(store, sessionFor(firstOf("verification_officer"))).focus).toBe("verification")
+  })
+
+  it("refuses roles that have a Reports page", () => {
+    expect(() => myPerformance(store, sessionFor(firstOf("credit_manager")))).toThrow("permission")
   })
 })

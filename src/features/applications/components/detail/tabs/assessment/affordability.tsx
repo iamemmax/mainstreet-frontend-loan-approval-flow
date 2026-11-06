@@ -83,10 +83,6 @@ export function Affordability({
           </div>
           <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs">
             <span className="inline-flex items-center gap-1.5">
-              <span className="size-2 rounded-full bg-muted-foreground/50" />
-              Other loans <MoneyText value={existing} className="font-medium" />
-            </span>
-            <span className="inline-flex items-center gap-1.5">
               <span className={cn("size-2 rounded-full", ok ? "bg-primary" : "bg-destructive")} />
               This loan <MoneyText value={repayment} className="font-medium" />
             </span>

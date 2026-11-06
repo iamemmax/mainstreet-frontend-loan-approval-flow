@@ -3,7 +3,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { useRouter } from "next/navigation"
 import { landingPathFor } from "@/lib/rbac/landing"
-import { authKeys, checkPassword, signIn, signOut } from "../api/session"
+import { authKeys, signIn, signOut } from "../api/session"
 
 export function useSignIn({ next }: { next?: string } = {}) {
   const queryClient = useQueryClient()
@@ -17,10 +17,6 @@ export function useSignIn({ next }: { next?: string } = {}) {
       router.replace(next ?? landingPathFor())
     },
   })
-}
-
-export function useCheckPassword() {
-  return useMutation({ mutationFn: checkPassword })
 }
 
 export function useSignOut() {

@@ -2,7 +2,6 @@ import { z } from "zod"
 import { setMockUserId } from "@/mocks/auth"
 import { mockRequest, sessionFrom } from "@/mocks/transport"
 import { ApiError } from "@/lib/api/errors"
-import { verifyApprovalPin } from "@/mocks/handlers/pin"
 import { verifyPassword } from "@/mocks/handlers/settings"
 import { sessionSchema, userSchema } from "../schemas/user"
 
@@ -18,34 +17,17 @@ export function fetchSession() {
 export interface SignInInput {
   userId: string
   password: string
-  pin: string
 }
 
-/** Checks the account's password; the PIN step comes after. Nothing is signed in yet. */
-// Real backend: apiFetch("/auth/password", { method: "POST", body: { userId, password } })
-export function checkPassword({ userId, password }: Omit<SignInInput, "pin">) {
-  return mockRequest(
-    z.null(),
-    ({ store }) => {
-      if (!store.users.some((u) => u.id === userId && u.status !== "inactive"))
-        throw new ApiError(404, "not_found", "Unknown user")
-      verifyPassword(store, userId, password)
-      return null
-    },
-    { auth: false },
-  )
-}
-
-/** Signs in only with both factors: the password, then the PIN (wrong PINs count towards the lockout). */
+/** Signs in with the account's password. The PIN is asked for later, on each action that needs it. */
 // Real backend: apiFetch("/auth/sign-in", { method: "POST", body: input, schema: sessionSchema })
-export function signIn({ userId, password, pin }: SignInInput) {
+export function signIn({ userId, password }: SignInInput) {
   return mockRequest(
     sessionSchema,
     ({ store }) => {
       const user = store.users.find((u) => u.id === userId && u.status !== "inactive")
       if (!user) throw new ApiError(404, "not_found", "Unknown user")
       verifyPassword(store, user.id, password)
-      verifyApprovalPin(store, user.id, pin)
       setMockUserId(user.id)
       return sessionFrom(store)
     },

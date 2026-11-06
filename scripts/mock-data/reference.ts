@@ -37,11 +37,6 @@ export const AGENTS: Agent[] = [
   { id: "a-08", code: "AG-0702", name: "Ogbete Market Agency", branchId: "b-enu" },
 ]
 
-const fees = (mgmt: number, insurance: number) => [
-  { code: "management", label: "Management fee", rateBps: mgmt },
-  { code: "insurance", label: "Credit life insurance", rateBps: insurance },
-]
-
 export const PRODUCTS: Product[] = [
   {
     id: "p-salary",
@@ -49,7 +44,7 @@ export const PRODUCTS: Product[] = [
     name: "Salary Advance",
     segment: "retail",
     monthlyRateBps: 350,
-    fees: fees(100, 50),
+    fees: [],
     minAmount: 50_000 * NAIRA,
     maxAmount: 2_000_000 * NAIRA,
     minTenorMonths: 1,
@@ -62,7 +57,7 @@ export const PRODUCTS: Product[] = [
     name: "Payroll Personal Loan",
     segment: "retail",
     monthlyRateBps: 300,
-    fees: fees(100, 50),
+    fees: [],
     minAmount: 200_000 * NAIRA,
     maxAmount: 15_000_000 * NAIRA,
     minTenorMonths: 6,
@@ -75,7 +70,7 @@ export const PRODUCTS: Product[] = [
     name: "Consumer Asset Finance",
     segment: "retail",
     monthlyRateBps: 325,
-    fees: fees(150, 75),
+    fees: [],
     minAmount: 150_000 * NAIRA,
     maxAmount: 5_000_000 * NAIRA,
     minTenorMonths: 6,
@@ -88,7 +83,7 @@ export const PRODUCTS: Product[] = [
     name: "SME Working Capital",
     segment: "sme",
     monthlyRateBps: 400,
-    fees: fees(150, 50),
+    fees: [],
     minAmount: 1_000_000 * NAIRA,
     maxAmount: 50_000_000 * NAIRA,
     minTenorMonths: 3,
@@ -101,7 +96,7 @@ export const PRODUCTS: Product[] = [
     name: "SME Asset Finance",
     segment: "sme",
     monthlyRateBps: 350,
-    fees: fees(200, 75),
+    fees: [],
     minAmount: 2_000_000 * NAIRA,
     maxAmount: 100_000_000 * NAIRA,
     minTenorMonths: 12,
@@ -114,7 +109,7 @@ export const PRODUCTS: Product[] = [
     name: "LPO Financing",
     segment: "sme",
     monthlyRateBps: 450,
-    fees: fees(200, 50),
+    fees: [],
     minAmount: 1_000_000 * NAIRA,
     maxAmount: 30_000_000 * NAIRA,
     minTenorMonths: 1,

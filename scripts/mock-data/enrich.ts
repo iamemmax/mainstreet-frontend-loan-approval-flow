@@ -27,12 +27,44 @@ const OCCUPATIONS = [
   "Pharmacist",
 ] as const
 const COLLATERAL = [
-  { type: "Vehicle", description: "Toyota Hilux 2019, registered to the business" },
-  { type: "Equipment", description: "Industrial generator and cold-room equipment" },
-  { type: "Inventory", description: "Warehouse stock under tripartite agreement" },
-  { type: "Property", description: "Certificate of Occupancy, 2-bedroom flat" },
-  { type: "Fixed deposit", description: "Lien on fixed deposit held with the Bank" },
+  {
+    type: "Vehicle",
+    description: "Toyota Hilux 2019, registered to the business",
+    photoUrl: "/samples/collateral/vehicle.svg",
+  },
+  {
+    type: "Equipment",
+    description: "Industrial generator and cold-room equipment",
+    photoUrl: "/samples/collateral/equipment.svg",
+  },
+  {
+    type: "Inventory",
+    description: "Warehouse stock under tripartite agreement",
+    photoUrl: "/samples/collateral/inventory.svg",
+  },
+  {
+    type: "Property",
+    description: "Certificate of Occupancy, 2-bedroom flat",
+    photoUrl: "/samples/collateral/property.svg",
+  },
+  {
+    type: "Fixed deposit",
+    description: "Lien on fixed deposit held with the Bank",
+    photoUrl: "/samples/collateral/fixed-deposit.svg",
+  },
 ] as const
+
+/** One or two assets pledged against an SME loan, each a different kind, worth 110–180% of the loan. */
+function pledgedCollateral(rnd: Random, amountRequested: number) {
+  const count = rnd.int(1, 2)
+  const items: Application["collateral"] = []
+  for (let i = 0; i < count; i++) {
+    const kind = rnd.pick(COLLATERAL.filter((option) => !items.some((item) => item.type === option.type)))
+    const value = Math.round((amountRequested * rnd.int(110, 180)) / 100 / 100_000) * 100_000
+    items.push({ ...kind, estimatedValue: value, forcedSaleValue: Math.round((value * 0.7) / 100_000) * 100_000 })
+  }
+  return items
+}
 
 const FILE_NAMES: Record<string, string> = {
   id_card: "national-id.jpg",
@@ -246,14 +278,7 @@ function enrichCore(seed: Application, index: number): Application {
       ? null
       : { name: person(rnd), relationship: rnd.pick(RELATIONSHIPS), phone: phone(rnd), address: address(rnd, state) }
 
-  const collateral =
-    app.segment === "sme" && !isDraft
-      ? Array.from({ length: rnd.int(1, 2) }, () => {
-          const c = rnd.pick(COLLATERAL)
-          const value = Math.round((app.amountRequested * rnd.int(110, 180)) / 100 / 100_000) * 100_000
-          return { ...c, estimatedValue: value, forcedSaleValue: Math.round((value * 0.7) / 100_000) * 100_000 }
-        })
-      : []
+  const collateral = app.segment === "sme" && !isDraft ? pledgedCollateral(rnd, app.amountRequested) : []
 
   const income =
     app.employment?.monthlyNetIncome ?? (app.business ? app.business.monthlyRevenue - app.business.monthlyExpenses : 0)

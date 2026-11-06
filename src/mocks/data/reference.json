@@ -168,18 +168,7 @@
       "name": "Salary Advance",
       "segment": "retail",
       "monthlyRateBps": 350,
-      "fees": [
-        {
-          "code": "management",
-          "label": "Management fee",
-          "rateBps": 100
-        },
-        {
-          "code": "insurance",
-          "label": "Credit life insurance",
-          "rateBps": 50
-        }
-      ],
+      "fees": [],
       "minAmount": 5000000,
       "maxAmount": 200000000,
       "minTenorMonths": 1,
@@ -192,18 +181,7 @@
       "name": "Payroll Personal Loan",
       "segment": "retail",
       "monthlyRateBps": 300,
-      "fees": [
-        {
-          "code": "management",
-          "label": "Management fee",
-          "rateBps": 100
-        },
-        {
-          "code": "insurance",
-          "label": "Credit life insurance",
-          "rateBps": 50
-        }
-      ],
+      "fees": [],
       "minAmount": 20000000,
       "maxAmount": 1500000000,
       "minTenorMonths": 6,
@@ -216,18 +194,7 @@
       "name": "Consumer Asset Finance",
       "segment": "retail",
       "monthlyRateBps": 325,
-      "fees": [
-        {
-          "code": "management",
-          "label": "Management fee",
-          "rateBps": 150
-        },
-        {
-          "code": "insurance",
-          "label": "Credit life insurance",
-          "rateBps": 75
-        }
-      ],
+      "fees": [],
       "minAmount": 15000000,
       "maxAmount": 500000000,
       "minTenorMonths": 6,
@@ -240,18 +207,7 @@
       "name": "SME Working Capital",
       "segment": "sme",
       "monthlyRateBps": 400,
-      "fees": [
-        {
-          "code": "management",
-          "label": "Management fee",
-          "rateBps": 150
-        },
-        {
-          "code": "insurance",
-          "label": "Credit life insurance",
-          "rateBps": 50
-        }
-      ],
+      "fees": [],
       "minAmount": 100000000,
       "maxAmount": 5000000000,
       "minTenorMonths": 3,
@@ -264,18 +220,7 @@
       "name": "SME Asset Finance",
       "segment": "sme",
       "monthlyRateBps": 350,
-      "fees": [
-        {
-          "code": "management",
-          "label": "Management fee",
-          "rateBps": 200
-        },
-        {
-          "code": "insurance",
-          "label": "Credit life insurance",
-          "rateBps": 75
-        }
-      ],
+      "fees": [],
       "minAmount": 200000000,
       "maxAmount": 10000000000,
       "minTenorMonths": 12,
@@ -288,18 +233,7 @@
       "name": "LPO Financing",
       "segment": "sme",
       "monthlyRateBps": 450,
-      "fees": [
-        {
-          "code": "management",
-          "label": "Management fee",
-          "rateBps": 200
-        },
-        {
-          "code": "insurance",
-          "label": "Credit life insurance",
-          "rateBps": 50
-        }
-      ],
+      "fees": [],
       "minAmount": 100000000,
       "maxAmount": 3000000000,
       "minTenorMonths": 1,

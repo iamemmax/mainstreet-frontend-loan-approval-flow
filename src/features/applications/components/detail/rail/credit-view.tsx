@@ -42,7 +42,6 @@ export function CreditView({ app, product }: { app: Application; product?: Prici
             </div>
           </div>
           <dl className="space-y-2">
-            <RailRow label="System recommends">{REC[result.recommendation]}</RailRow>
             <RailRow label="Analyst recommends">
               {app.assessment?.recommendation ? REC[app.assessment.recommendation] : "—"}
             </RailRow>

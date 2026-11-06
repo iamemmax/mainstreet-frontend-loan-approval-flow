@@ -150,7 +150,7 @@ describe("application lifecycle", () => {
     transitionApplication(store, analyst, app.id, "submit_for_approval", DEMO_PIN)
     expect(app.status).toBe("pending_approval")
 
-    // Small loan: closes at Credit Manager. RO can't decide on their own application (maker-checker).
+    // Small loan: closes at Credit Manager. Relationship officers never decide on applications.
     expect(() =>
       decideOnApplication(
         store,
@@ -160,16 +160,6 @@ describe("application lifecycle", () => {
         DEMO_PIN,
       ),
     ).toThrow()
-    const otherRo = store.users.find(
-      (u) => u.role === "relationship_officer" && u.id !== ro.user.id && u.status === "active",
-    )!
-    decideOnApplication(
-      store,
-      { user: otherRo, permissions: store.rolePermissions.relationship_officer },
-      app.id,
-      { action: "approve", reasonCode: "meets_policy", comment: "Affordability confirmed from payslip." },
-      DEMO_PIN,
-    )
     decideOnApplication(
       store,
       sessionFor("credit_manager"),
@@ -324,11 +314,11 @@ describe("workflow builder", () => {
     const admin = sessionFor("admin")
     const wf = store.workflows.find((w) => w.segment === "retail")!
     const draft = structuredClone(wf)
-    draft.stages = draft.stages.filter((s) => s.key !== "credit_manager")
+    draft.stages = draft.stages.filter((s) => s.key !== "analyst")
     draft.bands = draft.bands.map((b) =>
-      b.finalStageKey === "credit_manager" ? { ...b, finalStageKey: "ro_review" } : b,
+      b.finalStageKey === "analyst" ? { ...b, finalStageKey: "credit_manager" } : b,
     )
-    expect(() => saveWorkflow(store, admin, draft)).toThrow(/still routed through Credit Manager/)
+    expect(() => saveWorkflow(store, admin, draft)).toThrow(/still routed through Credit Analyst/)
   })
 })
 

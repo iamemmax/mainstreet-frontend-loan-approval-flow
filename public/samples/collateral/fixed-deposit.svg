@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" width="640" height="400">
+  <rect width="640" height="400" fill="#f4f1f5"/>
+  <rect x="110" y="70" width="420" height="260" rx="14" fill="#fff" stroke="#d9d2dc" stroke-width="3"/>
+  <rect x="110" y="70" width="420" height="56" rx="14" fill="#7c1f74"/><rect x="110" y="104" width="420" height="22" fill="#7c1f74"/>
+  <text x="140" y="106" font-family="Helvetica, Arial" font-size="22" font-weight="700" fill="#fff">FIXED DEPOSIT CERTIFICATE</text>
+  <g fill="#e4dee7"><rect x="140" y="160" width="220" height="14" rx="4"/><rect x="140" y="190" width="300" height="14" rx="4"/><rect x="140" y="220" width="180" height="14" rx="4"/></g>
+  <text x="140" y="290" font-family="Helvetica, Arial" font-size="20" font-weight="700" fill="#3b2a3a">LIEN MARKED</text>
+  <circle cx="450" cy="270" r="40" fill="none" stroke="#c0392b" stroke-width="5"/>
+  <path d="M430 270l14 14 26-30" fill="none" stroke="#c0392b" stroke-width="6" stroke-linecap="round"/>
+</svg>

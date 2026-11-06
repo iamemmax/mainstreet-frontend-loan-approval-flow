@@ -35,17 +35,24 @@ function display(f: Report["figures"][number]) {
   return formatCount(f.value)
 }
 
+/** The four headline numbers of one person's own work. */
+export function PersonalFigures({ data, loading }: { data?: Report; loading: boolean }) {
+  return (
+    <section aria-label="My performance" className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      {loading || !data
+        ? Array.from({ length: 4 }, (_, i) => <StatCard key={i} label=" " value={null} loading />)
+        : data.figures.map((f) => (
+            <StatCard key={f.key} label={FIGURE[f.key].label} value={display(f)} hint={f.note ?? undefined} />
+          ))}
+    </section>
+  )
+}
+
 /** One person's own work in the period: nobody else's numbers. */
 export function PersonalReport({ data, loading }: { data?: Report; loading: boolean }) {
   return (
     <>
-      <section aria-label="Key figures" className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        {loading || !data
-          ? Array.from({ length: 4 }, (_, i) => <StatCard key={i} label=" " value={null} loading />)
-          : data.figures.map((f) => (
-              <StatCard key={f.key} label={FIGURE[f.key].label} value={display(f)} hint={f.note ?? undefined} />
-            ))}
-      </section>
+      <PersonalFigures data={data} loading={loading} />
 
       <Card>
         <CardHeader className="border-b">
