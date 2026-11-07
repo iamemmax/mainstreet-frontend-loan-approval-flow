@@ -14,10 +14,10 @@ import {
   PHONE_PREFIXES,
   RETAIL_EMPLOYERS,
   SME_NAME_PARTS,
-  SME_SECTORS,
   STREETS,
   type Ethnicity,
 } from "./names"
+import { sectorAndActivity } from "./sectors"
 import { createRandom, type Random } from "./random"
 import { AGENTS, BRANCHES, PRODUCTS } from "./reference"
 import { USERS } from "./users"
@@ -315,7 +315,7 @@ export function seedApplications(now: Date, count = 340): SeedResult {
         businessName: `${rnd.pick(SME_NAME_PARTS.prefix)} ${rnd.pick(SME_NAME_PARTS.noun)} ${rnd.pick(SME_NAME_PARTS.suffix)}`,
         rcNumber: `RC${rnd.int(150_000, 1_950_000)}`,
         tin: `${rnd.digits(8)}-0001`,
-        sector: rnd.pick(SME_SECTORS),
+        ...sectorAndActivity(rnd),
         yearsInOperation: rnd.int(1, 22),
         address: `${rnd.int(1, 120)} ${rnd.pick(STREETS)}`,
         state: branch.state,
@@ -482,6 +482,8 @@ export function seedApplications(now: Date, count = 340): SeedResult {
       workflow,
       flags,
       duplicateOfId: null,
+      businessDescription: null,
+      businessAddress: null,
       guarantors: [],
       nextOfKin: null,
       documents: [],

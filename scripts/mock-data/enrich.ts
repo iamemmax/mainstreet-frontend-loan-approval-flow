@@ -2,8 +2,7 @@
  * Adds intake, KYC and assessment detail to generated applications. Uses its
  * own random stream per application so the core seed stays byte-identical.
  */
-import type { Application, VerificationResult } from "@/features/applications/types"
-import { REQUIRED_DOCUMENTS } from "@/features/applications/schemas/application"
+import type { Application, ApplicationDocument, VerificationResult } from "@/features/applications/types"
 import { NAME_POOLS, PHONE_PREFIXES, STREETS } from "./names"
 import { computeOffer } from "@/features/applications/utils/offer"
 import { scoreApplication } from "@/features/applications/utils/scorecard"
@@ -30,38 +29,44 @@ const COLLATERAL = [
   {
     type: "Vehicle",
     description: "Toyota Hilux 2019, registered to the business",
-    photoUrl: "/samples/collateral/vehicle.svg",
+    files: [{ url: "/samples/collateral/vehicle.svg", fileName: "vehicle.svg" }],
   },
   {
     type: "Equipment",
     description: "Industrial generator and cold-room equipment",
-    photoUrl: "/samples/collateral/equipment.svg",
+    files: [{ url: "/samples/collateral/equipment.svg", fileName: "equipment.svg" }],
   },
   {
     type: "Inventory",
     description: "Warehouse stock under tripartite agreement",
-    photoUrl: "/samples/collateral/inventory.svg",
+    files: [{ url: "/samples/collateral/inventory.svg", fileName: "inventory.svg" }],
   },
   {
     type: "Property",
     description: "Certificate of Occupancy, 2-bedroom flat",
-    photoUrl: "/samples/collateral/property.svg",
+    files: [{ url: "/samples/collateral/property.svg", fileName: "property.svg" }],
   },
   {
     type: "Fixed deposit",
     description: "Lien on fixed deposit held with the Bank",
-    photoUrl: "/samples/collateral/fixed-deposit.svg",
+    files: [{ url: "/samples/collateral/fixed-deposit.svg", fileName: "fixed-deposit.svg" }],
   },
 ] as const
 
-/** One or two assets pledged against an SME loan, each a different kind, worth 110–180% of the loan. */
-function pledgedCollateral(rnd: Random, amountRequested: number) {
+/** One or two of the borrower's assets pledged against an SME loan, each a different kind, worth 110–180% of the loan. */
+function pledgedCollateral(rnd: Random, amountRequested: number, borrowerName: string) {
   const count = rnd.int(1, 2)
   const items: Application["collateral"] = []
   for (let i = 0; i < count; i++) {
     const kind = rnd.pick(COLLATERAL.filter((option) => !items.some((item) => item.type === option.type)))
     const value = Math.round((amountRequested * rnd.int(110, 180)) / 100 / 100_000) * 100_000
-    items.push({ ...kind, estimatedValue: value, forcedSaleValue: Math.round((value * 0.7) / 100_000) * 100_000 })
+    items.push({
+      ...kind,
+      files: [...kind.files],
+      estimatedValue: value,
+      forcedSaleValue: Math.round((value * 0.7) / 100_000) * 100_000,
+      owner: { role: "borrower", name: borrowerName },
+    })
   }
   return items
 }
@@ -87,12 +92,52 @@ const SAMPLE_FILES: Record<string, string> = {
   guarantor_form: "signed-guarantor-form.pdf",
 }
 
+/** The documents a seeded application comes with. Staff can upload anything; these are the usual ones. */
+const SEED_DOCUMENTS: Record<"retail" | "sme", ApplicationDocument["type"][]> = {
+  retail: ["id_card", "bank_statement", "payslip", "guarantor_form"],
+  sme: ["cac_certificate", "id_card", "bank_statement", "management_accounts", "guarantor_form"],
+}
+
+/** How an officer would describe each seeded document. */
+const DOCUMENT_DESCRIPTIONS: Record<ApplicationDocument["type"], string> = {
+  id_card: "National ID card",
+  bank_statement: "Bank statement for the last 6 months",
+  payslip: "Payslips for the last 3 months",
+  utility_bill: "Recent utility bill",
+  cac_certificate: "CAC certificate and status report",
+  management_accounts: "Management accounts for FY2025",
+  collateral: "Collateral title document",
+  guarantor_form: "Signed guarantor form",
+  other: "Supporting document",
+}
+
 const analysts = USERS.filter((u) => u.role === "credit_analyst")
 
-function person(rnd: Random) {
+/** The bank a seeded statement comes from: where the salary is paid, or the business's main bank. */
+function statementBank(app: Application): string | null {
+  return app.employment?.salaryBank ?? app.business?.primaryBank ?? null
+}
+
+/** An SME's description and trading address; Retail applicants have none recorded. */
+function businessDetails(app: Application): Pick<Application, "businessDescription" | "businessAddress"> {
+  if (app.applicant.kind !== "business") return { businessDescription: null, businessAddress: null }
+  const { activity, sector, yearsInOperation, address } = app.applicant
+  return {
+    businessDescription: `${activity} (${sector.toLowerCase()}), trading for ${yearsInOperation} ${yearsInOperation === 1 ? "year" : "years"}.`,
+    businessAddress: address,
+  }
+}
+
+/** A person as the BVN register holds them: name, BVN, date of birth and gender. */
+function registeredPerson(rnd: Random) {
   const pool = NAME_POOLS[rnd.pick(Object.keys(NAME_POOLS) as (keyof typeof NAME_POOLS)[])]
-  const first = rnd.chance(0.5) ? rnd.pick(pool.male) : rnd.pick(pool.female)
-  return `${first} ${rnd.pick(pool.last)}`
+  const gender = rnd.chance(0.5) ? ("male" as const) : ("female" as const)
+  return {
+    name: `${rnd.pick(pool[gender])} ${rnd.pick(pool.last)}`,
+    bvn: `22${rnd.digits(9)}`,
+    dateOfBirth: `${rnd.int(1960, 1998)}-${String(rnd.int(1, 12)).padStart(2, "0")}-${String(rnd.int(1, 28)).padStart(2, "0")}`,
+    gender,
+  }
 }
 
 const phone = (rnd: Random) => `+234${rnd.pick(PHONE_PREFIXES).slice(1)}${rnd.digits(7)}`
@@ -250,8 +295,33 @@ function enrichCore(seed: Application, index: number): Application {
   const created = new Date(app.createdAt).getTime()
   const isDraft = app.status === "draft"
 
-  const required = REQUIRED_DOCUMENTS[app.segment]
-  const docTypes = isDraft ? required.filter(() => rnd.chance(0.5)) : required
+  // Every seeded applicant has two guarantors; a draft may not have reached that step yet.
+  const guarantorCount = isDraft && rnd.chance(0.5) ? 0 : 2
+  const guarantors = Array.from({ length: guarantorCount }, () => ({
+    ...registeredPerson(rnd),
+    relationship: rnd.pick(RELATIONSHIPS),
+    phone: phone(rnd),
+    address: address(rnd, state),
+    occupation: rnd.pick(OCCUPATIONS),
+    monthlyIncome: rnd.int(15, 120) * 10_000 * 100,
+  }))
+
+  const nextOfKin =
+    isDraft && rnd.chance(0.4)
+      ? null
+      : {
+          ...registeredPerson(rnd),
+          relationship: rnd.pick(RELATIONSHIPS),
+          phone: phone(rnd),
+          address: address(rnd, state),
+        }
+
+  const borrowerName =
+    app.applicant.kind === "business"
+      ? app.applicant.businessName
+      : `${app.applicant.firstName} ${app.applicant.lastName}`
+  const seeded = SEED_DOCUMENTS[app.segment]
+  const docTypes = isDraft ? seeded.filter(() => rnd.chance(0.5)) : seeded
   const documents = docTypes.map((type, i) => ({
     id: `${app.id}-doc-${i + 1}`,
     type,
@@ -260,25 +330,15 @@ function enrichCore(seed: Application, index: number): Application {
     sizeBytes: rnd.int(120, 4_800) * 1024,
     uploadedAt: iso(created + (i + 1) * 6 * 60_000),
     uploadedById: app.createdById,
+    description: DOCUMENT_DESCRIPTIONS[type],
+    bank: type === "bank_statement" ? statementBank(app) : null,
+    owner:
+      type === "guarantor_form" && guarantors[0]
+        ? { role: "other" as const, name: guarantors[0].name }
+        : { role: "borrower" as const, name: borrowerName },
   }))
 
-  const guarantorCount = isDraft && rnd.chance(0.5) ? 0 : app.segment === "sme" ? 2 : 1
-  const guarantors = Array.from({ length: guarantorCount }, () => ({
-    name: person(rnd),
-    relationship: rnd.pick(RELATIONSHIPS),
-    phone: phone(rnd),
-    address: address(rnd, state),
-    occupation: rnd.pick(OCCUPATIONS),
-    monthlyIncome: rnd.int(15, 120) * 10_000 * 100,
-    bvn: rnd.chance(0.8) ? `22${rnd.digits(9)}` : null,
-  }))
-
-  const nextOfKin =
-    isDraft && rnd.chance(0.4)
-      ? null
-      : { name: person(rnd), relationship: rnd.pick(RELATIONSHIPS), phone: phone(rnd), address: address(rnd, state) }
-
-  const collateral = app.segment === "sme" && !isDraft ? pledgedCollateral(rnd, app.amountRequested) : []
+  const collateral = app.segment === "sme" && !isDraft ? pledgedCollateral(rnd, app.amountRequested, borrowerName) : []
 
   const income =
     app.employment?.monthlyNetIncome ?? (app.business ? app.business.monthlyRevenue - app.business.monthlyExpenses : 0)
@@ -308,6 +368,7 @@ function enrichCore(seed: Application, index: number): Application {
 
   const enriched: Application = {
     ...app,
+    ...businessDetails(app),
     guarantors,
     nextOfKin,
     documents,

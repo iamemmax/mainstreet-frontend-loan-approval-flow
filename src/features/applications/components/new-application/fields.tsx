@@ -21,13 +21,19 @@ export function Section({ title, description, children }: { title: string; descr
   )
 }
 
-export function ContactFields() {
+/** Phone, email and address. A person's address is their home; a business's is where it's registered. */
+export function ContactFields({ segment }: { segment: FormValues["segment"] }) {
   return (
     <>
       <TextField name="phone" label="Phone" type="tel" autoComplete="tel" placeholder="0803 000 0000" />
       <TextField name="email" label="Email" type="email" autoComplete="email" />
       <TextField name="state" label="State" />
-      <TextField name="address" label="Address" autoComplete="street-address" span />
+      <TextField
+        name="address"
+        label={segment === "retail" ? "Home address" : "Registered address"}
+        autoComplete="street-address"
+        span
+      />
     </>
   )
 }
@@ -85,6 +91,7 @@ export function SelectField({
   description,
   span,
   disabled,
+  onChange,
 }: {
   name: Field
   label: string
@@ -92,6 +99,8 @@ export function SelectField({
   description?: ReactNode
   span?: boolean
   disabled?: boolean
+  /** Runs after the value is set, e.g. to clear a field that depends on this one. */
+  onChange?: (value: string) => void
 }) {
   const { control } = useFormContext<FormValues>()
   return (
@@ -101,7 +110,14 @@ export function SelectField({
       render={({ field }) => (
         <FormItem className={cn(span && "sm:col-span-2")}>
           <FormLabel>{label}</FormLabel>
-          <Select value={field.value ?? ""} onValueChange={field.onChange} disabled={disabled}>
+          <Select
+            value={field.value ?? ""}
+            onValueChange={(value) => {
+              field.onChange(value)
+              onChange?.(value)
+            }}
+            disabled={disabled}
+          >
             <FormControl>
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Select…" />

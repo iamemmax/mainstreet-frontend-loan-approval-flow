@@ -2,6 +2,7 @@
 
 import { MoneyText } from "@/components/shared/money-text"
 import { StatCard } from "@/components/shared/stat-card"
+import type { Tone } from "@/components/shared/tone"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { formatDays } from "@/features/dashboard/components/figures"
 import { formatCount, formatPercent } from "@/lib/format/money"
@@ -26,6 +27,12 @@ const FIGURE: Record<
   recommendation_match: { label: "Final decision matched you", format: "percent" },
 }
 
+/** Good news reads green, work coming back reads red; the rest stay neutral. */
+const FIGURE_TONE: Partial<Record<Report["figures"][number]["key"], Tone>> = {
+  approved: "success",
+  returned: "danger",
+}
+
 function display(f: Report["figures"][number]) {
   if (f.value === null) return "—"
   const { format } = FIGURE[f.key]
@@ -42,7 +49,13 @@ export function PersonalFigures({ data, loading }: { data?: Report; loading: boo
       {loading || !data
         ? Array.from({ length: 4 }, (_, i) => <StatCard key={i} label=" " value={null} loading />)
         : data.figures.map((f) => (
-            <StatCard key={f.key} label={FIGURE[f.key].label} value={display(f)} hint={f.note ?? undefined} />
+            <StatCard
+              key={f.key}
+              label={FIGURE[f.key].label}
+              value={display(f)}
+              hint={f.note ?? undefined}
+              tone={FIGURE_TONE[f.key]}
+            />
           ))}
     </section>
   )

@@ -64,7 +64,7 @@ function originationFigures(ctx: DashboardContext): DashboardFigure[] {
   return [
     figure("my_drafts", drafts.length, "Not yet submitted"),
     figure("returned_to_me", returned.length, returned.length > 0 ? "Fix and resubmit" : "Nothing to correct", {
-      tone: returned.length > 0 ? "warning" : "neutral",
+      tone: returned.length > 0 ? "danger" : "neutral",
     }),
     figure(
       "offers_out",

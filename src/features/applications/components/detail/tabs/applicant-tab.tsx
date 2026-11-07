@@ -1,21 +1,19 @@
 "use client"
 
-import { Building2, CircleAlert, Eye, FileText, Mail, MapPin, Phone, UserRound } from "lucide-react"
+import { Building2, Eye, FileText, Mail, MapPin, Phone, UserRound } from "lucide-react"
 import { useState, type ReactNode } from "react"
 import { MaskedValue } from "@/components/shared/masked-value"
 import { MoneyText } from "@/components/shared/money-text"
-import { ToneBadge } from "@/components/shared/status-badge"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { formatDate } from "@/lib/format/date"
 import { formatPercent } from "@/lib/format/money"
-import { cn } from "@/lib/utils"
-import { DOCUMENT_TYPE_LABELS, REQUIRED_DOCUMENTS } from "../../../schemas/application"
 import type { Application } from "../../../types"
 import { Facts, Section } from "../ui"
+import { BusinessProfile } from "./applicant/business"
 import { Collateral } from "./applicant/collateral"
 import { Guarantors, NextOfKin } from "./applicant/people"
-import { formatFileSize } from "../../../utils/documents"
+import { Statements } from "./applicant/statements"
 import { DocumentViewer } from "../../preview/document-viewer"
 import { documentViewerItems } from "../../preview/viewer-items"
 
@@ -105,6 +103,8 @@ export function ApplicantTab({ app }: { app: Application }) {
         </p>
       </Card>
 
+      <BusinessProfile app={app} />
+
       <div className="grid gap-5 @4xl:grid-cols-2">
         {app.employment ? (
           <Section title="Employment">
@@ -154,15 +154,18 @@ export function ApplicantTab({ app }: { app: Application }) {
         <Guarantors guarantors={app.guarantors} />
       </div>
 
+      <Statements app={app} name={name} />
+
       <div className="grid gap-5 @4xl:grid-cols-2">
         <NextOfKin nextOfKin={app.nextOfKin} />
         <Documents app={app} />
       </div>
 
-      {app.segment === "sme" && <Collateral app={app} />}
+      {(app.segment === "sme" || app.collateral.length > 0) && <Collateral app={app} />}
     </div>
   )
 }
+/** Every document uploaded, described in the officer's words and tied to the borrower or a guarantor. */
 export function Documents({ app }: { app: Application }) {
   const [viewing, setViewing] = useState<number | null>(null)
   const name =
@@ -170,60 +173,35 @@ export function Documents({ app }: { app: Application }) {
       ? `${app.applicant.firstName} ${app.applicant.lastName}`
       : app.applicant.businessName
   const items = documentViewerItems(app, name)
-  const required = REQUIRED_DOCUMENTS[app.segment]
-  const extras = app.documents.filter((d) => !required.includes(d.type))
-  const received = required.filter((t) => app.documents.some((d) => d.type === t)).length
   return (
     <Section
       title="Documents"
-      description={`${received} of ${required.length} required received`}
-      action={
-        <ToneBadge tone={received === required.length ? "success" : "warning"}>
-          {received === required.length ? "Complete" : "Incomplete"}
-        </ToneBadge>
-      }
-      flush
+      description={app.documents.length ? `${app.documents.length} uploaded` : "No documents uploaded yet"}
+      flush={items.length > 0}
     >
-      <ul className="divide-y">
-        {[
-          ...required.map((t) => ({ type: t, doc: app.documents.find((d) => d.type === t), required: true })),
-          ...extras.map((d) => ({ type: d.type, doc: d, required: false })),
-        ].map(({ type, doc, required: req }) => (
-          <li key={type + (doc?.id ?? "")} className="flex items-center gap-4 px-6 py-3.5">
-            <span
-              className={cn(
-                "flex size-9 shrink-0 items-center justify-center rounded-lg",
-                doc ? "bg-success/10 text-success" : "bg-warning/12 text-warning",
-              )}
-            >
-              {doc ? <FileText className="size-4" aria-hidden /> : <CircleAlert className="size-4" aria-hidden />}
-            </span>
-            <div className="min-w-0 flex-1">
-              <div className="text-sm font-semibold">
-                {DOCUMENT_TYPE_LABELS[type]}
-                {!req && <span className="ml-2 text-xs font-normal text-muted-foreground">Optional</span>}
+      {items.length > 0 && (
+        <ul className="divide-y">
+          {items.map((item, i) => (
+            <li key={item.id} className="flex items-center gap-4 px-6 py-3.5">
+              <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-success/10 text-success">
+                <FileText className="size-4" aria-hidden />
+              </span>
+              <div className="min-w-0 flex-1">
+                <div className="text-sm font-semibold">{item.title}</div>
+                <div className="truncate text-xs text-muted-foreground">{item.subtitle}</div>
               </div>
-              <div className="truncate text-xs text-muted-foreground">
-                {doc
-                  ? `${doc.fileName} · ${formatFileSize(doc.sizeBytes)} · ${formatDate(doc.uploadedAt)}`
-                  : "Not uploaded"}
-              </div>
-            </div>
-            {doc ? (
               <Button
                 variant="ghost"
                 size="sm"
                 className="h-8 rounded-lg bg-primary/[0.07] text-primary hover:bg-primary/[0.12] hover:text-primary"
-                onClick={() => setViewing(items.findIndex((i) => i.id === doc.id))}
+                onClick={() => setViewing(i)}
               >
                 <Eye aria-hidden /> View
               </Button>
-            ) : (
-              <span className="text-xs font-medium text-warning">Missing</span>
-            )}
-          </li>
-        ))}
-      </ul>
+            </li>
+          ))}
+        </ul>
+      )}
       <DocumentViewer items={items} index={viewing} onIndexChange={setViewing} />
     </Section>
   )

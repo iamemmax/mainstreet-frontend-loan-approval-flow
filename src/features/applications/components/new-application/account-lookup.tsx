@@ -4,6 +4,7 @@ import { Building2, CircleAlert, TriangleAlert, UserRound } from "lucide-react"
 import type { ReactNode } from "react"
 import { useFormContext } from "react-hook-form"
 import { ErrorState } from "@/components/shared/empty-state"
+import { ToneBadge } from "@/components/shared/status-badge"
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Skeleton } from "@/components/ui/skeleton"
@@ -40,6 +41,9 @@ export function applicantValues(holder: Applicant): Partial<FormValues> {
     rcNumber: holder.rcNumber,
     tin: holder.tin,
     sector: holder.sector,
+    activity: holder.activity,
+    // Where it trades is usually where it's registered; the officer can change it.
+    businessAddress: holder.address,
     yearsInOperation: String(holder.yearsInOperation),
     promoterName: holder.promoter.name,
     promoterBvn: holder.promoter.bvn,
@@ -49,15 +53,15 @@ export function applicantValues(holder: Applicant): Partial<FormValues> {
 }
 
 /**
- * The account and the applicant details on the form belong together: it's the right kind of
- * account for the loan, and the details were filled in from its holder.
+ * The account can take the loan and the applicant details on the form belong to it: it's active,
+ * the right kind of account for the loan, and the details were filled in from its holder.
  */
 export function accountReady(
   account: CustomerAccount | undefined,
   segment: FormValues["segment"],
   values: Pick<FormValues, "bvn" | "promoterBvn">,
 ): boolean {
-  if (!account || !accountFitsSegment(account, segment)) return false
+  if (!account || account.status !== "active" || !accountFitsSegment(account, segment)) return false
   const formBvn = segment === "retail" ? values.bvn : values.promoterBvn
   return applicantBvn(account.holder) === formBvn
 }
@@ -133,7 +137,7 @@ function LookupError({ error, onRetry }: { error: unknown; onRetry: () => void }
   return <ErrorState error={error} onRetry={onRetry} title="Couldn't look up the account" size="sm" />
 }
 
-/** The account found, and a warning if it's the wrong kind for the loan. */
+/** The account found, whether it's active, and a warning if it can't be used for this loan. */
 function AccountCard({ account, segment }: { account: CustomerAccount; segment: FormValues["segment"] }) {
   const personal = account.holder.kind === "individual"
   const Icon = personal ? UserRound : Building2
@@ -160,6 +164,9 @@ function AccountCard({ account, segment }: { account: CustomerAccount; segment: 
             <div className="truncate font-semibold">{account.accountName}</div>
             <div className="font-mono text-xs text-muted-foreground">{account.accountNumber}</div>
           </div>
+          <ToneBadge tone={account.status === "active" ? "success" : "danger"} dot className="ml-auto">
+            {account.status === "active" ? "Active" : "Dormant"}
+          </ToneBadge>
         </div>
         <dl className="grid gap-x-6 gap-y-2 px-4 py-3 text-sm sm:grid-cols-2">
           {rows.map(([label, value]) => (
@@ -170,7 +177,13 @@ function AccountCard({ account, segment }: { account: CustomerAccount; segment: 
           ))}
         </dl>
       </div>
-      {!accountFitsSegment(account, segment) && (
+      {account.status !== "active" && (
+        <p className="flex items-start gap-2 text-sm text-destructive">
+          <TriangleAlert className="mt-0.5 size-4 shrink-0" aria-hidden />
+          This account is dormant and can&apos;t take a loan. The customer needs to reactivate it at the branch first.
+        </p>
+      )}
+      {account.status === "active" && !accountFitsSegment(account, segment) && (
         <p className="flex items-start gap-2 text-sm text-warning">
           <TriangleAlert className="mt-0.5 size-4 shrink-0" aria-hidden />
           {personal

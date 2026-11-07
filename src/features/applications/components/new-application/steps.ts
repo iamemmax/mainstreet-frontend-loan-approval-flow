@@ -2,16 +2,29 @@ import type { Field } from "./schema"
 
 export const STEPS = [
   { id: "loan", label: "Loan", hint: "Product, amount and tenor" },
-  { id: "applicant", label: "Applicant", hint: "Current account, identity and contact" },
-  { id: "income", label: "Income", hint: "Employment or business financials" },
-  { id: "parties", label: "Guarantors", hint: "Guarantors, next of kin, collateral" },
-  { id: "documents", label: "Documents", hint: "Required uploads" },
+  { id: "applicant", label: "Applicant", hint: "Current account, identity and business" },
+  { id: "income", label: "Income", hint: "Employment and salary" },
+  { id: "parties", label: "Guarantors", hint: "Guarantors and next of kin" },
+  { id: "collateral", label: "Collateral", hint: "Assets pledged against the loan" },
+  { id: "documents", label: "Documents", hint: "Uploads, described and owned" },
   { id: "review", label: "Review", hint: "Check everything, then submit" },
 ] as const
 
+/** The steps as this segment sees them: an SME's third step is its statements of account. */
+export function stepsFor(segment: "retail" | "sme") {
+  if (segment === "retail") return STEPS
+  return STEPS.map((step) =>
+    step.id === "income" ? { ...step, label: "Statements", hint: "Statements of account, up to 6 banks" } : step,
+  )
+}
+
+const LOAN_FIELDS: Field[] = ["segment", "productId", "amount", "tenor", "purpose", "branchId"]
+const CONTACT_FIELDS: Field[] = ["phone", "email", "address", "state"]
+
+/** The form fields checked before leaving each step. Guarantors, collateral and documents check themselves. */
 export const STEP_FIELDS: Record<"retail" | "sme", Field[][]> = {
   retail: [
-    ["segment", "productId", "amount", "tenor", "purpose", "branchId"],
+    LOAN_FIELDS,
     [
       "accountNumber",
       "firstName",
@@ -20,34 +33,36 @@ export const STEP_FIELDS: Record<"retail" | "sme", Field[][]> = {
       "gender",
       "bvn",
       "nin",
-      "phone",
-      "email",
-      "address",
-      "state",
+      ...CONTACT_FIELDS,
+      "businessDescription",
+      "businessAddress",
     ],
     ["employerName", "empSector", "jobTitle", "monthlyNetIncome", "employmentStartDate", "salaryBank"],
     [],
     [],
     [],
+    [],
   ],
   sme: [
-    ["segment", "productId", "amount", "tenor", "purpose", "branchId"],
+    LOAN_FIELDS,
     [
       "accountNumber",
       "businessName",
       "rcNumber",
       "tin",
       "sector",
+      "activity",
       "yearsInOperation",
       "promoterName",
       "promoterBvn",
       "promoterNin",
-      "phone",
-      "email",
-      "address",
-      "state",
+      ...CONTACT_FIELDS,
+      "businessDescription",
+      "businessAddress",
     ],
-    ["monthlyRevenue", "monthlyExpenses", "annualTurnover", "primaryBank"],
+    // The statements step checks itself; analysis fills in the financials.
+    [],
+    [],
     [],
     [],
     [],
@@ -60,4 +75,6 @@ export const INCOME_STEP = 2
 
 export const PARTIES_STEP = 3
 
-export const DOCUMENTS_STEP = 4
+export const COLLATERAL_STEP = 4
+
+export const DOCUMENTS_STEP = 5

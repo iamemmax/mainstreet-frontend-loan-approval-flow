@@ -1,5 +1,5 @@
 import { ASSESSABLE_STATUSES } from "@/features/applications/schemas/status"
-import { DOCUMENT_TYPE_LABELS, REQUIRED_DOCUMENTS } from "@/features/applications/schemas/application"
+import { GUARANTOR_LIMITS, MAX_STATEMENTS } from "@/features/applications/schemas/business"
 import type {
   AdjustOfferInput,
   Application,
@@ -254,11 +254,20 @@ export function createApplication(store: MockStore, session: Session, input: New
 /** What still needs capturing before a draft can be submitted. */
 export function intakeGaps(app: Application): string[] {
   const gaps: string[] = []
-  const have = new Set(app.documents.map((d) => d.type))
-  const docs = REQUIRED_DOCUMENTS[app.segment].filter((t) => !have.has(t))
-  if (docs.length) gaps.push(`documents (${docs.map((d) => DOCUMENT_TYPE_LABELS[d]).join(", ")})`)
-  if (!app.guarantors.length) gaps.push("a guarantor")
+  if (!app.documents.length) gaps.push("at least one document")
+  if (app.documents.some((d) => !d.description?.trim() || !d.owner))
+    gaps.push("a description and owner for every document")
+  if (app.guarantors.length < GUARANTOR_LIMITS.min) gaps.push(`${GUARANTOR_LIMITS.min} guarantors`)
   if (!app.nextOfKin) gaps.push("next of kin")
+  if (app.collateral.some((item) => !item.files.length || !item.owner)) {
+    gaps.push("a photo or document and an owner for every collateral item")
+  }
+  if (app.segment === "sme" && !app.documents.some((d) => d.type === "bank_statement")) {
+    gaps.push("statements of account")
+  }
+  if (app.segment === "sme" && (!app.businessDescription?.trim() || !app.businessAddress?.trim())) {
+    gaps.push("the business description and address")
+  }
   return gaps
 }
 
@@ -363,6 +372,13 @@ export function saveAssessment(store: MockStore, session: Session, id: string, i
 
 /** The amount and tenor must fit an active product. */
 export function assertWithinProduct(store: MockStore, input: NewApplicationInput) {
+  const statements = input.documents.filter((d) => d.type === "bank_statement").length
+  if (input.segment === "sme" && statements > MAX_STATEMENTS) {
+    throw new ApiError(422, "too_many_statements", `Upload at most ${MAX_STATEMENTS} statements, one per bank`)
+  }
+  if (input.guarantors.length > GUARANTOR_LIMITS.max) {
+    throw new ApiError(422, "too_many_guarantors", `An application can have at most ${GUARANTOR_LIMITS.max} guarantors`)
+  }
   const product = store.reference.products.find((p) => p.id === input.productId && p.active)
   if (!product) throw new ApiError(422, "invalid_product", "Choose an active product")
   if (input.amountRequested < product.minAmount || input.amountRequested > product.maxAmount) {

@@ -1,14 +1,25 @@
 "use client"
 
-import { ImageOff } from "lucide-react"
+import { Images, ImageOff } from "lucide-react"
+import { useState } from "react"
 import { MoneyText } from "@/components/shared/money-text"
 import { ToneBadge } from "@/components/shared/status-badge"
 import { formatPercent } from "@/lib/format/money"
 import { cn } from "@/lib/utils"
 import type { Application } from "../../../../types"
+import { DocumentThumb } from "../../../preview/document-thumb"
+import { DocumentViewer } from "../../../preview/document-viewer"
+import { collateralViewerItems } from "../../../preview/viewer-items"
 import { Section } from "../../ui"
 
 type CollateralItem = Application["collateral"][number]
+
+/** The borrower's name, drawn on a collateral document that can't be shown. */
+function borrowerName(app: Application): string {
+  return app.applicant.kind === "business"
+    ? app.applicant.businessName
+    : `${app.applicant.firstName} ${app.applicant.lastName}`
+}
 
 /** What an item would fetch in a forced sale; the estimate stands in when no forced-sale value was given. */
 function saleValue(item: CollateralItem): number {
@@ -43,7 +54,7 @@ export function Collateral({ app }: { app: Application }) {
       <div className="space-y-4">
         <ul className="grid gap-4 @2xl:grid-cols-2">
           {items.map((item, i) => (
-            <CollateralCard key={i} item={item} number={i + 1} />
+            <CollateralCard key={i} item={item} number={i + 1} name={borrowerName(app)} />
           ))}
         </ul>
         <div className="space-y-2 rounded-xl border border-border/80 p-4">
@@ -71,24 +82,38 @@ export function Collateral({ app }: { app: Application }) {
   )
 }
 
-function CollateralCard({ item, number }: { item: CollateralItem; number: number }) {
+/** "Prime Pharma Ltd · Borrower" or "Ada Obi · Third party"; a dash when no owner was recorded. */
+function ownerLine(owner: CollateralItem["owner"]): string {
+  if (!owner) return "—"
+  return `${owner.name} · ${owner.role === "borrower" ? "Borrower" : "Third party"}`
+}
+
+function CollateralCard({ item, number, name }: { item: CollateralItem; number: number; name: string }) {
+  const [viewing, setViewing] = useState<number | null>(null)
+  const items = collateralViewerItems(item, name)
   const figures: [string, number | null][] = [
     ["Estimated value", item.estimatedValue],
     ["Forced-sale value", item.forcedSaleValue],
   ]
   return (
     <li className="overflow-hidden rounded-xl border border-border/80">
-      {item.photoUrl ? (
-        // eslint-disable-next-line @next/next/no-img-element -- local samples and data URLs; next/image can't optimise them
-        <img
-          src={item.photoUrl}
-          alt={`${item.type}: ${item.description}`}
-          className="aspect-[16/10] w-full object-cover"
-        />
+      {items.length > 0 ? (
+        <button
+          type="button"
+          onClick={() => setViewing(0)}
+          aria-label={`Open the photos and documents for ${item.type}`}
+          className="relative block w-full"
+        >
+          <DocumentThumb item={items[0]} showBadge={false} className="aspect-[16/10] w-full" />
+          <span className="absolute right-2 bottom-2 inline-flex items-center gap-1 rounded-full bg-card/90 px-2 py-0.5 text-xs font-medium shadow">
+            <Images className="size-3.5" aria-hidden />
+            {items.length === 1 ? "1 file" : `${items.length} files`}
+          </span>
+        </button>
       ) : (
         <div className="flex aspect-[16/10] w-full flex-col items-center justify-center gap-1.5 bg-muted text-muted-foreground">
           <ImageOff className="size-5" aria-hidden />
-          <span className="text-xs">No photo</span>
+          <span className="text-xs">No photos or documents</span>
         </div>
       )}
       <div className="space-y-3 p-4">
@@ -96,6 +121,9 @@ function CollateralCard({ item, number }: { item: CollateralItem; number: number
           <div className="text-xs text-muted-foreground">Item {number}</div>
           <div className="font-semibold">{item.type}</div>
           <p className="text-sm text-muted-foreground">{item.description}</p>
+          <p className="mt-1 text-sm">
+            <span className="text-muted-foreground">Owner:</span> {ownerLine(item.owner)}
+          </p>
         </div>
         <dl className="grid grid-cols-2 gap-3 border-t pt-3">
           {figures.map(([label, value]) => (
@@ -108,6 +136,7 @@ function CollateralCard({ item, number }: { item: CollateralItem; number: number
           ))}
         </dl>
       </div>
+      <DocumentViewer items={items} index={viewing} onIndexChange={setViewing} />
     </li>
   )
 }

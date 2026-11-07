@@ -6,9 +6,11 @@ const IMAGE = new Set(["jpg", "jpeg", "png", "webp", "gif", "svg", "heic"])
 
 const extOf = (path: string) => path.split(/[?#]/)[0].split(".").pop()?.toLowerCase() ?? ""
 
-/** How the viewer can show a file: read from its link if there is one, else its name. */
+/** How the viewer can show a file: from an uploaded file's data, else its link, else its name. */
 export function fileKind(doc: Pick<ApplicationDocument, "fileName" | "url">): FileKind {
-  const ext = extOf(doc.url ?? doc.fileName)
+  if (doc.url?.startsWith("data:image/")) return "image"
+  if (doc.url?.startsWith("data:application/pdf")) return "pdf"
+  const ext = extOf(doc.url?.startsWith("data:") ? doc.fileName : (doc.url ?? doc.fileName))
   if (ext === "pdf") return "pdf"
   return IMAGE.has(ext) ? "image" : "other"
 }

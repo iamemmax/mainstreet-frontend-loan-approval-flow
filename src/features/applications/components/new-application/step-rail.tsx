@@ -1,24 +1,23 @@
 "use client"
 
 import { Check } from "lucide-react"
-import type { ReactNode } from "react"
 import { cn } from "@/lib/utils"
 import { FORM_HEADER } from "./fields"
-import { STEPS } from "./steps"
+import { stepsFor } from "./steps"
 
 interface StepRailProps {
+  segment: "retail" | "sme"
   step: number
   /** The furthest step reached; anything up to it can be revisited. */
   furthest: number
   onStep: (index: number) => void
-  /** What's been captured so far, shown under the steps. */
-  summary: { label: string; value: ReactNode }[]
   className?: string
 }
 
-/** The left-hand guide: progress, every step with its state, and a running summary. */
-export function StepRail({ step, furthest, onStep, summary, className }: StepRailProps) {
-  const pct = Math.round((step / (STEPS.length - 1)) * 100)
+/** The left-hand guide: progress and every step with its state, as tall as the form beside it. */
+export function StepRail({ segment, step, furthest, onStep, className }: StepRailProps) {
+  const steps = stepsFor(segment)
+  const pct = Math.round((step / (steps.length - 1)) * 100)
   return (
     <aside
       aria-label="Application steps"
@@ -30,7 +29,7 @@ export function StepRail({ step, furthest, onStep, summary, className }: StepRai
       <div className={cn(FORM_HEADER, "shrink-0 bg-gradient-to-b from-primary/[0.05] to-transparent px-5")}>
         <div className="flex items-baseline justify-between">
           <span className="text-sm font-semibold">
-            Step {step + 1} <span className="font-normal text-muted-foreground">of {STEPS.length}</span>
+            Step {step + 1} <span className="font-normal text-muted-foreground">of {steps.length}</span>
           </span>
           <span className="tabular text-xs font-medium text-muted-foreground">{pct}%</span>
         </div>
@@ -42,16 +41,16 @@ export function StepRail({ step, furthest, onStep, summary, className }: StepRai
         </div>
       </div>
 
-      {/* Steps share the height between header and summary; each connector runs to the next circle. */}
+      {/* Steps share the height below the header; each connector runs to the next circle. */}
       <ol className="flex min-h-0 flex-1 flex-col overflow-y-auto p-2.5 [scrollbar-width:thin]">
-        {STEPS.map((s, i) => {
+        {steps.map((s, i) => {
           const done = i < step
           const current = i === step
           const reachable = i <= furthest
           return (
             <li key={s.id} className="relative flex-1">
               {/* Connector to the next step; fills in as steps are completed. */}
-              {i < STEPS.length - 1 && (
+              {i < steps.length - 1 && (
                 <span
                   aria-hidden
                   className="absolute top-[2.5rem] bottom-[-0.625rem] left-[calc(0.75rem+0.9375rem-1px)] w-0.5 overflow-hidden bg-border"
@@ -99,34 +98,24 @@ export function StepRail({ step, furthest, onStep, summary, className }: StepRai
           )
         })}
       </ol>
-
-      {summary.length > 0 && (
-        <dl className="shrink-0 space-y-2 border-t bg-muted/30 px-5 py-4 text-[13px]">
-          {summary.map((r) => (
-            <div key={r.label} className="flex justify-between gap-3 duration-300 animate-in fade-in">
-              <dt className="text-muted-foreground">{r.label}</dt>
-              <dd className="truncate text-right font-medium">{r.value}</dd>
-            </div>
-          ))}
-        </dl>
-      )}
     </aside>
   )
 }
 
 /** Small screens: a compact progress bar instead of the full rail. */
-export function StepProgress({ step }: { step: number }) {
-  const s = STEPS[step]
+export function StepProgress({ segment, step }: { segment: "retail" | "sme"; step: number }) {
+  const steps = stepsFor(segment)
+  const s = steps[step]
   return (
     <div className="rounded-2xl border border-border/80 bg-card px-4 py-3">
       <div className="flex items-baseline justify-between text-sm">
         <span className="font-semibold">{s.label}</span>
         <span className="text-xs text-muted-foreground">
-          Step {step + 1} of {STEPS.length}
+          Step {step + 1} of {steps.length}
         </span>
       </div>
       <div className="mt-2 flex gap-1" aria-hidden>
-        {STEPS.map((x, i) => (
+        {steps.map((x, i) => (
           <span
             key={x.id}
             className={cn(

@@ -46,7 +46,7 @@ function keptDocuments(
 ): Application["documents"] {
   return documents.map((doc, i) => {
     const existing = app.documents.find((d) => d.type === doc.type && d.fileName === doc.fileName)
-    if (existing) return existing
+    if (existing) return { ...existing, description: doc.description, owner: doc.owner }
     return {
       ...doc,
       id: `${app.id}-doc-${now.getTime()}-${i + 1}`,

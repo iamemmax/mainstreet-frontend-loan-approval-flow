@@ -12,6 +12,7 @@ import {
   applicationKeys,
   decideApplication,
   fetchAccount,
+  fetchBvnRecord,
   fetchApplication,
   fetchApplications,
   fetchMyWork,
@@ -23,6 +24,7 @@ import {
   sendMessage,
   submitAssessment,
   submitNewApplication,
+  submitStatementsForAnalysis,
 } from "../api/applications"
 import type {
   AdjustOfferInput,
@@ -59,6 +61,22 @@ export function useFetchAccount() {
       queryKey: applicationKeys.account(accountNumber),
       queryFn: () => fetchAccount(accountNumber),
       staleTime: 5 * 60_000,
+    })
+}
+
+/** Sends an SME's statements for analysis. Nothing is saved, so nothing needs refetching. The step shows its own errors. */
+export function useAnalyseStatements() {
+  return useMutation({ mutationFn: submitStatementsForAnalysis, meta: { inlineErrors: true } })
+}
+
+/** Looks a BVN up straight away, e.g. as the last digit is typed. Register entries rarely change. */
+export function useFetchBvnRecord() {
+  const queryClient = useQueryClient()
+  return (bvn: string) =>
+    queryClient.fetchQuery({
+      queryKey: applicationKeys.bvn(bvn),
+      queryFn: () => fetchBvnRecord(bvn),
+      staleTime: 10 * 60_000,
     })
 }
 

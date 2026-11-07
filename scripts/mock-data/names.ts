@@ -179,19 +179,6 @@ export const JOB_TITLES = [
   "Operations Supervisor",
 ] as const
 
-export const SME_SECTORS = [
-  "Wholesale and retail trade",
-  "Agro-processing",
-  "Logistics",
-  "Food and hospitality",
-  "Pharmaceutical distribution",
-  "Fashion and textiles",
-  "Building materials",
-  "ICT services",
-  "Education",
-  "Healthcare services",
-] as const
-
 export const SME_NAME_PARTS = {
   prefix: [
     "Royal",

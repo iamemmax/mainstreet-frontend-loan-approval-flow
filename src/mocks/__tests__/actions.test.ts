@@ -1,4 +1,3 @@
-import { REQUIRED_DOCUMENTS } from "@/features/applications/schemas/application"
 import type { NewApplicationInput } from "@/features/applications/types"
 import type { Session } from "@/features/auth/types"
 import {
@@ -15,7 +14,8 @@ import {
 import { dashboardSummary } from "../handlers/dashboard"
 import { reportsSummary } from "../handlers/reports"
 import { saveWorkflow } from "../handlers/workflows"
-import { findAccount } from "../handlers/accounts"
+import { findAccount, lookUpBvn } from "../handlers/accounts"
+import { analyseStatements } from "../handlers/statements"
 import { updateDraft } from "../handlers/drafts"
 import { postMessage, reviewApplication } from "../handlers/messages"
 import { DEMO_PIN } from "../handlers/pin"
@@ -38,24 +38,41 @@ beforeAll(async () => {
   store = await getStore()
 })
 
+const guarantor = (name: string, bvn: string) => ({
+  name,
+  relationship: "Brother",
+  phone: "+2348030001111",
+  address: "4 Allen Avenue, Ikeja",
+  occupation: "Trader",
+  monthlyIncome: 30_000_000,
+  bvn,
+  dateOfBirth: "1985-03-04",
+  gender: "male" as const,
+})
+
 const intake = {
-  guarantors: [
+  businessDescription: null,
+  businessAddress: null,
+  guarantors: [guarantor("Bola Ade", "22200000001"), guarantor("Tayo Ade", "22200000002")],
+  nextOfKin: {
+    name: "Kemi Ade",
+    relationship: "Spouse",
+    phone: "+2348030002222",
+    address: "4 Allen Avenue, Ikeja",
+    bvn: "22200000003",
+    dateOfBirth: "1988-07-21",
+    gender: "female" as const,
+  },
+  documents: [
     {
-      name: "Bola Ade",
-      relationship: "Brother",
-      phone: "+2348030001111",
-      address: "4 Allen Avenue, Ikeja",
-      occupation: "Trader",
-      monthlyIncome: 30_000_000,
-      bvn: null,
+      type: "other" as const,
+      fileName: "payslips.pdf",
+      sizeBytes: 100_000,
+      description: "Payslips for the last 3 months",
+      owner: { role: "borrower" as const, name: "Test Customer" },
+      bank: null,
     },
   ],
-  nextOfKin: { name: "Kemi Ade", relationship: "Spouse", phone: "+2348030002222", address: "4 Allen Avenue, Ikeja" },
-  documents: (["id_card", "bank_statement", "payslip", "guarantor_form"] as const).map((type) => ({
-    type,
-    fileName: `${type}.pdf`,
-    sizeBytes: 100_000,
-  })),
   collateral: [],
   asDraft: false,
 }
@@ -68,7 +85,13 @@ const sessionOf = (userId: string): Session => {
 /** Opens a current account held by this applicant, as core banking would, and adds its number to the input. */
 const withAccount = (input: Omit<NewApplicationInput, "accountNumber">): NewApplicationInput => {
   const accountNumber = `19${String(store.accounts.length).padStart(8, "0")}`
-  store.accounts.push({ accountNumber, accountName: "Account holder", openedOn: "2020-01-01", holder: input.applicant })
+  store.accounts.push({
+    accountNumber,
+    accountName: "Account holder",
+    openedOn: "2020-01-01",
+    status: "active",
+    holder: input.applicant,
+  })
   return { ...input, accountNumber }
 }
 
@@ -350,6 +373,8 @@ describe("intake", () => {
       },
       employment: null,
       business: null,
+      businessDescription: null,
+      businessAddress: null,
       guarantors: [],
       nextOfKin: null,
       documents: [],
@@ -380,8 +405,10 @@ describe("intake", () => {
       applicant: draft.applicant,
       employment: draft.employment,
       business: draft.business,
+      businessDescription: "Sells foodstuff wholesale to market traders.",
+      businessAddress: "12 Market Road, Ikeja",
       collateral: draft.collateral,
-      documents: REQUIRED_DOCUMENTS[draft.segment].map((type) => ({ type, fileName: `${type}.pdf`, sizeBytes: 1 })),
+      documents: intake.documents,
       guarantors: intake.guarantors,
       nextOfKin: intake.nextOfKin,
       asDraft: false,
@@ -389,11 +416,114 @@ describe("intake", () => {
     const notMine = { user: otherRo, permissions: store.rolePermissions.relationship_officer }
     expect(() => updateDraft(store, notMine, id, input)).toThrow()
     expect(() => updateDraft(store, owner, id, { ...input, guarantors: [] })).toThrow(/guarantor/)
+    const undescribed = [{ ...intake.documents[0], description: null }]
+    expect(() => updateDraft(store, owner, id, { ...input, documents: undescribed })).toThrow(/description/)
     expect(updateDraft(store, owner, id, { ...input, asDraft: true }).status).toBe("draft")
     const submitted = updateDraft(store, owner, id, input)
     expect(submitted.status).toBe("submitted")
     expect(submitted.submittedAt).not.toBeNull()
     expect(() => updateDraft(store, owner, id, input)).toThrow(/already been submitted/)
+  })
+})
+
+describe("intake rules", () => {
+  const retailInput = (overrides: Partial<NewApplicationInput> = {}) => {
+    const product = store.reference.products.find((p) => p.segment === "retail" && p.active)!
+    return {
+      segment: "retail" as const,
+      productId: product.id,
+      amountRequested: product.minAmount,
+      tenorMonths: product.minTenorMonths,
+      purpose: "Rent",
+      branchId: "b-lis",
+      agentId: null,
+      applicant: {
+        kind: "individual" as const,
+        firstName: "Rule",
+        middleName: null,
+        lastName: "Tester",
+        dateOfBirth: "1990-01-01",
+        gender: "female" as const,
+        bvn: "33344455566",
+        nin: "66655544433",
+        phone: "+2348030004444",
+        email: "rule@example.com",
+        address: "3 Rule Road",
+        state: "Lagos",
+      },
+      employment: null,
+      business: null,
+      ...intake,
+      ...overrides,
+    }
+  }
+
+  it("refuses a dormant account", () => {
+    const ro = sessionFor("relationship_officer")
+    const input = withAccount(retailInput())
+    store.accounts.find((a) => a.accountNumber === input.accountNumber)!.status = "dormant"
+    expect(() => createApplication(store, ro, input)).toThrow(/dormant/)
+  })
+
+  it("takes at most four guarantors", () => {
+    const ro = sessionFor("relationship_officer")
+    const five = ["01", "02", "03", "04", "05"].map((n) => guarantor(`Guarantor ${n}`, `222000000${n}`))
+    expect(() => createApplication(store, ro, withAccount(retailInput({ guarantors: five })))).toThrow(/at most 4/)
+  })
+
+  it("needs a photo and an owner for every collateral item", () => {
+    const ro = sessionFor("relationship_officer")
+    const item = {
+      type: "Vehicle",
+      description: "Toyota Corolla 2018",
+      estimatedValue: 500_000_000,
+      forcedSaleValue: null,
+    }
+    const noPhoto = [{ ...item, files: [], owner: { role: "borrower" as const, name: "Rule Tester" } }]
+    const noOwner = [
+      { ...item, files: [{ url: "/samples/collateral/vehicle.svg", fileName: "vehicle.svg" }], owner: null },
+    ]
+    expect(() => createApplication(store, ro, withAccount(retailInput({ collateral: noPhoto })))).toThrow(/photo/)
+    expect(() => createApplication(store, ro, withAccount(retailInput({ collateral: noOwner })))).toThrow(/owner/)
+    const someoneElse = [{ ...noOwner[0], owner: { role: "other" as const, name: "Chidi Okeke" } }]
+    expect(createApplication(store, ro, withAccount(retailInput({ collateral: someoneElse }))).status).toBe("submitted")
+  })
+
+  it("finds a guarantor's details, date of birth included, by BVN", () => {
+    const ro = sessionFor("relationship_officer")
+    const holder = store.accounts.find((a) => a.holder.kind === "individual")!.holder
+    if (holder.kind !== "individual") throw new Error("expected a personal account")
+    expect(lookUpBvn(store, ro, holder.bvn)).toMatchObject({ dateOfBirth: holder.dateOfBirth, gender: holder.gender })
+    expect(() => lookUpBvn(store, ro, "00000000000")).toThrow(/No BVN record/)
+  })
+})
+
+describe("statement analysis", () => {
+  const statement = (fileName: string) => ({ fileName, sizeBytes: 200_000 })
+  const loan = { amountRequested: 1_000_000_000, tenorMonths: 12 }
+
+  it("reads each statement's bank, adds up the flows and names the bank with the most money in", () => {
+    const ro = sessionFor("relationship_officer")
+    const result = analyseStatements(store, ro, {
+      ...loan,
+      statements: [statement("GTBank-2025.pdf"), statement("uba statement.pdf"), statement("scan-0042.pdf")],
+    })
+    expect(result.banks.map((bank) => bank.bank).slice(0, 2)).toEqual(["GTBank", "UBA"])
+    // A file name with no bank in it still gets a bank, and never one already used.
+    expect(["GTBank", "UBA"]).not.toContain(result.banks[2].bank)
+    const totalIn = result.banks.reduce((total, bank) => total + bank.monthlyInflow, 0)
+    expect(result.monthlyRevenue).toBe(totalIn)
+    expect(result.annualTurnover).toBe(totalIn * 12)
+    const busiest = [...result.banks].sort((a, b) => b.monthlyInflow - a.monthlyInflow)[0]
+    expect(result.primaryBank).toBe(busiest.bank)
+  })
+
+  it("takes one statement per bank, six at most", () => {
+    const ro = sessionFor("relationship_officer")
+    const twoFromGtb = [statement("gtbank-jan.pdf"), statement("gtbank-feb.pdf")]
+    expect(() => analyseStatements(store, ro, { ...loan, statements: twoFromGtb })).toThrow(/from GTBank/)
+    const seven = ["a", "b", "c", "d", "e", "f", "g"].map((name) => statement(`${name}.pdf`))
+    expect(() => analyseStatements(store, ro, { ...loan, statements: seven })).toThrow(/at most 6/)
   })
 })
 

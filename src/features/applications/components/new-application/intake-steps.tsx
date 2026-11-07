@@ -4,11 +4,15 @@ import { Building2, UserRound } from "lucide-react"
 import { useFormContext } from "react-hook-form"
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Textarea } from "@/components/ui/textarea"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import { useReferenceData } from "@/features/admin/hooks/use-reference-data"
+import { useSession } from "@/features/auth/hooks/use-session"
 import { formatNaira } from "@/lib/format/money"
 import { cn } from "@/lib/utils"
 import { useCustomerAccount } from "../../hooks/use-applications"
 import { AccountLookup, accountReady } from "./account-lookup"
+import { BusinessProfileFields, SectorFields } from "./business-fields"
 import { ContactFields, Section, SelectField, TextField } from "./fields"
 import type { FormValues } from "./schema"
 
@@ -16,6 +20,7 @@ import type { FormValues } from "./schema"
 export function LoanStep() {
   const form = useFormContext<FormValues>()
   const { data: ref } = useReferenceData()
+  const { user } = useSession()
   const segment = form.watch("segment")
   const product = ref?.products.find((p) => p.id === form.watch("productId"))
   return (
@@ -79,14 +84,11 @@ export function LoanStep() {
         label="Branch"
         options={ref?.branches.map((b) => ({ value: b.id, label: b.name })) ?? []}
       />
-      <SelectField
-        name="agentId"
-        label="Referring agent"
-        options={[
-          { value: "none", label: "None — direct" },
-          ...(ref?.agents.map((a) => ({ value: a.id, label: a.name })) ?? []),
-        ]}
-      />
+      {/* Whoever captures the application is the officer who brought it in. */}
+      <div className="space-y-2">
+        <Label htmlFor="relationship-officer">Relationship officer</Label>
+        <Input id="relationship-officer" value={user.name} readOnly className="bg-muted/50 text-muted-foreground" />
+      </div>
       <FormField
         control={form.control}
         name="purpose"
@@ -128,7 +130,8 @@ export function ApplicantStep({ segment }: { segment: FormValues["segment"] }) {
         )}
       >
         {segment === "retail" ? <PersonFields /> : <BusinessFields />}
-        <ContactFields />
+        <ContactFields segment={segment} />
+        <BusinessProfileFields segment={segment} />
       </fieldset>
     </Section>
   )
@@ -157,14 +160,14 @@ function PersonFields() {
   )
 }
 
-/** A business account holder: registration and promoter from the record; sector and age can be updated. */
+/** A business account holder: registration and promoter from the record; sector, activity and age can be updated. */
 function BusinessFields() {
   return (
     <>
       <TextField name="businessName" label="Business name" span readOnly />
       <TextField name="rcNumber" label="RC number" readOnly />
       <TextField name="tin" label="TIN" readOnly />
-      <TextField name="sector" label="Sector" />
+      <SectorFields />
       <TextField name="yearsInOperation" label="Years in operation" grouped />
       <TextField name="promoterName" label="Principal promoter" readOnly />
       <TextField name="promoterBvn" label="Promoter BVN" numeric readOnly />
@@ -173,11 +176,11 @@ function BusinessFields() {
   )
 }
 
-/** Step 3: what the affordability check runs on. */
-export function IncomeStep({ segment }: { segment: FormValues["segment"] }) {
+/** Step 3 for Retail: the employment the affordability check runs on. SME uploads statements instead. */
+export function IncomeStep() {
   const { data: ref } = useReferenceData()
   const banks = ref?.banks.map((bank) => ({ value: bank, label: bank })) ?? []
-  return segment === "retail" ? (
+  return (
     <Section title="Employment" description="Used for the affordability check.">
       <TextField name="employerName" label="Employer" />
       <TextField name="empSector" label="Sector" />
@@ -185,13 +188,6 @@ export function IncomeStep({ segment }: { segment: FormValues["segment"] }) {
       <TextField name="monthlyNetIncome" label="Monthly net income (₦)" grouped />
       <TextField name="employmentStartDate" label="Employed since" type="date" />
       <SelectField name="salaryBank" label="Salary bank" options={banks} />
-    </Section>
-  ) : (
-    <Section title="Business financials" description="From the last 12 months of statements.">
-      <TextField name="monthlyRevenue" label="Average monthly revenue (₦)" grouped />
-      <TextField name="monthlyExpenses" label="Average monthly expenses (₦)" grouped />
-      <TextField name="annualTurnover" label="Annual turnover (₦)" grouped />
-      <SelectField name="primaryBank" label="Primary bank" options={banks} />
     </Section>
   )
 }

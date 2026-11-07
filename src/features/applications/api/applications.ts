@@ -13,8 +13,9 @@ import {
   transitionApplication,
   type AssessmentInput,
 } from "@/mocks/handlers/actions"
-import { findAccount } from "@/mocks/handlers/accounts"
+import { findAccount, lookUpBvn } from "@/mocks/handlers/accounts"
 import { updateDraft } from "@/mocks/handlers/drafts"
+import { analyseStatements } from "@/mocks/handlers/statements"
 import { postMessage, reviewApplication } from "@/mocks/handlers/messages"
 import { decisionInputSchema } from "@/features/workflow/schemas/workflow"
 import type { DecisionInput } from "@/features/workflow/types"
@@ -24,10 +25,13 @@ import {
   applicationListSchema,
   adjustOfferInputSchema,
   applicationSchema,
+  bvnRecordSchema,
   customerAccountSchema,
   messageInputSchema,
   newApplicationInputSchema,
   offerViewSchema,
+  statementAnalysisInputSchema,
+  statementAnalysisSchema,
 } from "../schemas/application"
 import type {
   AdjustOfferInput,
@@ -35,6 +39,7 @@ import type {
   ApplicationTransition,
   MessageInput,
   NewApplicationInput,
+  StatementAnalysisInput,
 } from "../types"
 
 export const applicationKeys = {
@@ -46,9 +51,27 @@ export const applicationKeys = {
   myWork: () => [...applicationKeys.all, "my-work"] as const,
   offer: (token: string) => ["offer", token] as const,
   account: (accountNumber: string) => ["accounts", accountNumber] as const,
+  bvn: (bvn: string) => ["bvn", bvn] as const,
 }
 
 // Real backend: apiFetch(`/accounts/${accountNumber}`, { schema: customerAccountSchema })
+/** Reads an SME's bank statements for the monthly figures the affordability check needs. */
+// Real backend: apiFetch("/statements/analysis", { method: "POST", body: input, schema: statementAnalysisSchema })
+export function submitStatementsForAnalysis(input: StatementAnalysisInput) {
+  const body = statementAnalysisInputSchema.parse(input)
+  return mockRequest(statementAnalysisSchema, ({ store, session }) => analyseStatements(store, session, body), {
+    permission: "application:create",
+  })
+}
+
+/** A person on the BVN register, to fill in a guarantor or next of kin. */
+// Real backend: apiFetch(`/bvn/${bvn}`, { schema: bvnRecordSchema })
+export function fetchBvnRecord(bvn: string) {
+  return mockRequest(bvnRecordSchema, ({ store, session }) => lookUpBvn(store, session, bvn), {
+    permission: "application:create",
+  })
+}
+
 export function fetchAccount(accountNumber: string) {
   return mockRequest(customerAccountSchema, ({ store, session }) => findAccount(store, session, accountNumber), {
     permission: "application:create",

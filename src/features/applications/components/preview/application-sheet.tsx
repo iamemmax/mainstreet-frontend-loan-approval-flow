@@ -13,7 +13,6 @@ import { computeSla, getStage } from "@/features/workflow/engine"
 import { useWorkflowDefinitions } from "@/features/workflow/hooks/use-workflows"
 import { setIntent } from "@/lib/navigation/intent"
 import { useApplication } from "../../hooks/use-applications"
-import { REQUIRED_DOCUMENTS } from "../../schemas/application"
 import type { Application } from "../../types"
 import { computeOffer } from "../../utils/offer"
 import { applicantDisplayName } from "../detail/application-detail"
@@ -81,8 +80,6 @@ function SheetBody({
       : null
 
   const items = documentViewerItems(app, name)
-  const required = REQUIRED_DOCUMENTS[app.segment]
-  const received = required.filter((t) => app.documents.some((d) => d.type === t)).length
 
   return (
     <>
@@ -113,7 +110,7 @@ function SheetBody({
           <IdentityPhotos app={app} name={name} />
         </SheetSection>
 
-        <DocumentsSection items={items} received={received} required={required.length} onView={setViewing} />
+        <DocumentsSection items={items} onView={setViewing} />
 
         <LoanSection
           app={app}

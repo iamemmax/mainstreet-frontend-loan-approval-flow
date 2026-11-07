@@ -2,6 +2,11 @@ import type { z } from "zod"
 import type {
   applicantSchema,
   customerAccountSchema,
+  bvnRecordSchema,
+  ownerSchema,
+  statementAnalysisInputSchema,
+  statementAnalysisSchema,
+  statementUploadSchema,
   assessmentSchema,
   collateralSchema,
   documentSchema,
@@ -59,3 +64,8 @@ export type AdjustOfferInput = z.infer<typeof adjustOfferInputSchema>
 export type CreditFacility = z.infer<typeof creditFacilitySchema>
 export type CreditHistory = z.infer<typeof creditHistorySchema>
 export type CustomerAccount = z.infer<typeof customerAccountSchema>
+export type BvnRecord = z.infer<typeof bvnRecordSchema>
+export type Owner = z.infer<typeof ownerSchema>
+export type StatementUpload = z.infer<typeof statementUploadSchema>
+export type StatementAnalysisInput = z.infer<typeof statementAnalysisInputSchema>
+export type StatementAnalysis = z.infer<typeof statementAnalysisSchema>

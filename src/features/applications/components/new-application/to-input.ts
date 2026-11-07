@@ -1,6 +1,6 @@
 import { nairaToKobo } from "@/lib/format/money"
 import type { Collateral, Guarantor, NewApplicationInput, NextOfKin } from "../../types"
-import type { DocumentDraft } from "./parties-step"
+import type { DocumentDraft } from "./documents-step"
 import type { FormValues } from "./schema"
 
 export interface IntakeExtras {
@@ -21,8 +21,11 @@ export function toInput(v: FormValues, extras: IntakeExtras): NewApplicationInpu
     tenorMonths: Number(v.tenor),
     purpose: v.purpose,
     branchId: v.branchId,
-    agentId: v.agentId && v.agentId !== "none" ? v.agentId : null,
+    // The relationship officer capturing the application is the one who brought it in.
+    agentId: null,
     accountNumber: v.accountNumber,
+    businessDescription: v.businessDescription?.trim() || null,
+    businessAddress: v.businessAddress?.trim() || null,
     applicant:
       v.segment === "retail"
         ? {
@@ -42,6 +45,7 @@ export function toInput(v: FormValues, extras: IntakeExtras): NewApplicationInpu
             rcNumber: v.rcNumber!,
             tin: v.tin!,
             sector: v.sector!,
+            activity: v.activity!,
             yearsInOperation: Number(v.yearsInOperation),
             promoter: { name: v.promoterName!, bvn: v.promoterBvn!, nin: v.promoterNin! },
             ...common,
@@ -67,6 +71,6 @@ export function toInput(v: FormValues, extras: IntakeExtras): NewApplicationInpu
           }
         : null,
     ...extras,
-    collateral: v.segment === "sme" ? extras.collateral : [],
+    documents: extras.documents.map((doc) => ({ ...doc, description: doc.description?.trim() || null })),
   }
 }

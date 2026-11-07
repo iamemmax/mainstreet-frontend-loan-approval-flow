@@ -26,6 +26,8 @@ export const businessApplicantSchema = z.object({
   rcNumber: z.string(),
   tin: z.string(),
   sector: z.string(),
+  /** What the business trades, makes or does, from the sector's own list (see BUSINESS_SECTORS). */
+  activity: z.string(),
   yearsInOperation: z.number().int().nonnegative(),
   address: z.string(),
   state: z.string(),
@@ -50,6 +52,8 @@ export const customerAccountSchema = z.object({
   accountName: z.string(),
   /** ISO date (no time) the account was opened. */
   openedOn: z.string(),
+  /** Only an active account can take a loan; a dormant one has to be reactivated first. */
+  status: z.enum(["active", "dormant"]),
   /** The holder's KYC record: a person on a personal account, a business on a corporate one. */
   holder: applicantSchema,
 })
@@ -81,6 +85,9 @@ export const guarantorSchema = z.object({
     .string()
     .regex(/^\d{11}$/)
     .nullable(),
+  /** ISO date, from the BVN record. */
+  dateOfBirth: z.string().nullable(),
+  gender: genderSchema.nullable(),
 })
 
 export const nextOfKinSchema = z.object({
@@ -88,6 +95,26 @@ export const nextOfKinSchema = z.object({
   relationship: z.string().trim().min(2),
   phone: z.string(),
   address: z.string().trim().min(5),
+  bvn: z
+    .string()
+    .regex(/^\d{11}$/)
+    .nullable(),
+  /** ISO date, from the BVN record. */
+  dateOfBirth: z.string().nullable(),
+  gender: genderSchema.nullable(),
+})
+
+/** A person's details as the BVN register holds them, used to fill in guarantors and next of kin. */
+export const bvnRecordSchema = z.object({
+  bvn: z.string().regex(/^\d{11}$/),
+  firstName: z.string(),
+  middleName: z.string().nullable(),
+  lastName: z.string(),
+  /** ISO date. */
+  dateOfBirth: z.string(),
+  gender: genderSchema,
+  phone: z.string(),
+  address: z.string(),
 })
 
 export const DOCUMENT_TYPES = [
@@ -115,11 +142,11 @@ export const DOCUMENT_TYPE_LABELS: Record<z.infer<typeof documentTypeSchema>, st
   other: "Other",
 }
 
-/** Documents each segment must have before verification can complete. */
-export const REQUIRED_DOCUMENTS: Record<"retail" | "sme", z.infer<typeof documentTypeSchema>[]> = {
-  retail: ["id_card", "bank_statement", "payslip", "guarantor_form"],
-  sme: ["cac_certificate", "id_card", "bank_statement", "management_accounts", "guarantor_form"],
-}
+/** Who a document or a piece of collateral belongs to: the borrower, or someone else the officer names. */
+export const ownerSchema = z.object({
+  role: z.enum(["borrower", "other"]),
+  name: z.string().trim().min(1),
+})
 
 export const documentSchema = z.object({
   id: z.string(),
@@ -130,6 +157,48 @@ export const documentSchema = z.object({
   uploadedById: z.string(),
   /** Where the file can be opened. A real backend returns a short-lived signed link; null if not available. */
   url: z.string().nullable().default(null),
+  /** What the document is, in the officer's words, e.g. "Payslips for July to September". */
+  description: z.string().nullable(),
+  owner: ownerSchema.nullable(),
+  /** The bank that issued a statement of account; null for every other document. */
+  bank: z.string().nullable(),
+})
+
+/** One uploaded statement of account. Analysis reads which bank issued it. */
+export const statementUploadSchema = z.object({
+  fileName: z.string(),
+  sizeBytes: z.number().int().nonnegative(),
+})
+
+/** Body for POST /statements/analysis: an SME's statements, one per bank, and the loan they're for. */
+export const statementAnalysisInputSchema = z.object({
+  amountRequested: koboSchema,
+  tenorMonths: z.number().int().positive(),
+  statements: z.array(statementUploadSchema).min(1),
+})
+
+/** What statement analysis reads from the statements: each bank's flows and the business's monthly averages. */
+export const statementAnalysisSchema = z.object({
+  /** One entry per statement, in the order they were sent. */
+  banks: z.array(
+    z.object({
+      fileName: z.string(),
+      /** The bank that issued the statement, read from the statement itself. */
+      bank: z.string(),
+      /** Kobo, average a month. */
+      monthlyInflow: koboSchema,
+      /** Kobo, average a month. */
+      monthlyOutflow: koboSchema,
+    }),
+  ),
+  /** Kobo: inflows across every bank, average a month. */
+  monthlyRevenue: koboSchema,
+  /** Kobo: outflows across every bank, average a month. */
+  monthlyExpenses: koboSchema,
+  /** Kobo: twelve months of revenue. */
+  annualTurnover: koboSchema,
+  /** The bank with the most money coming in. */
+  primaryBank: z.string(),
 })
 
 export const collateralSchema = z.object({
@@ -137,8 +206,13 @@ export const collateralSchema = z.object({
   description: z.string().trim().min(3),
   estimatedValue: koboSchema,
   forcedSaleValue: koboSchema.nullable(),
-  /** Photo of the asset. A data URL from intake until the real API stores uploads. */
-  photoUrl: z.string().nullable().default(null),
+  /**
+   * Photos of the asset and documents about it (images or PDFs), at least one to submit.
+   * Data URLs from intake until the real API stores uploads.
+   */
+  files: z.array(z.object({ url: z.string(), fileName: z.string() })),
+  /** Who owns the asset. */
+  owner: ownerSchema.nullable(),
 })
 
 export const VERIFICATION_CHECKS = [
@@ -282,6 +356,10 @@ export const applicationSchema = z.object({
   applicant: applicantSchema,
   /** The customer's current account at the bank, where the loan is paid. */
   accountNumber: accountNumberSchema,
+  /** What the customer's business does, in the officer's words. Optional for Retail. */
+  businessDescription: z.string().nullable(),
+  /** Where the business operates; for SME, where it trades rather than its registered address. */
+  businessAddress: z.string().nullable(),
   employment: employmentSchema.nullable(),
   business: businessFinancialsSchema.nullable(),
   branchId: z.string(),
@@ -396,6 +474,8 @@ export const newApplicationInputSchema = z.object({
   /** The current account the applicant's details were taken from. */
   accountNumber: accountNumberSchema,
   applicant: applicantSchema,
+  businessDescription: z.string().trim().nullable(),
+  businessAddress: z.string().trim().nullable(),
   employment: employmentSchema.nullable(),
   business: businessFinancialsSchema.nullable(),
   guarantors: z.array(guarantorSchema),

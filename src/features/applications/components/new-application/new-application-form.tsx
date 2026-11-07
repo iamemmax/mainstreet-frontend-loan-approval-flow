@@ -12,24 +12,20 @@ import { useReferenceData } from "@/features/admin/hooks/use-reference-data"
 import { formatNaira, nairaToKobo } from "@/lib/format/money"
 import { cn } from "@/lib/utils"
 import { useCreateApplication, useCustomerAccount, useSaveDraft } from "../../hooks/use-applications"
-import { DOCUMENT_TYPE_LABELS, REQUIRED_DOCUMENTS } from "../../schemas/application"
-import type { Application, Collateral, Guarantor, NextOfKin } from "../../types"
-import {
-  type DocumentDraft,
-  DocumentsChecklist,
-  emptyGuarantor,
-  emptyNextOfKin,
-  partiesErrors,
-  PartiesStep,
-} from "./parties-step"
+import { GUARANTOR_LIMITS } from "../../schemas/business"
+import type { Application, Collateral, Guarantor, NextOfKin, Owner, StatementAnalysis } from "../../types"
 import { accountReady } from "./account-lookup"
+import { collateralErrors, CollateralStep } from "./collateral-step"
+import { type DocumentDraft, documentsErrors, DocumentsStep } from "./documents-step"
+import { emptyGuarantor, emptyNextOfKin, partiesErrors, PartiesStep } from "./parties-step"
 import { AffordabilityPreview } from "./affordability-preview"
 import { ApplicantStep, IncomeStep, LoanStep } from "./intake-steps"
 import { formValuesFrom } from "./from-application"
 import { ReviewStep } from "./review-step"
+import { statementsErrors, StatementsStep, type UploadedStatement } from "./statements-step"
 import { StepProgress, StepRail } from "./step-rail"
 import { formSchema, type FormValues } from "./schema"
-import { APPLICANT_STEP, DOCUMENTS_STEP, INCOME_STEP, PARTIES_STEP, STEP_FIELDS, STEPS } from "./steps"
+import { APPLICANT_STEP, COLLATERAL_STEP, DOCUMENTS_STEP, INCOME_STEP, PARTIES_STEP, STEP_FIELDS, STEPS } from "./steps"
 import { type IntakeExtras, toInput } from "./to-input"
 
 interface NewApplicationFormProps {
@@ -47,7 +43,6 @@ function blankValues(branchId: string): FormValues {
     tenor: "",
     purpose: "",
     branchId,
-    agentId: "none",
     accountNumber: "",
     phone: "",
     email: "",
@@ -59,10 +54,50 @@ function blankValues(branchId: string): FormValues {
 /** Where a draft picks up: the first step that still has something missing. */
 function startingStep(draft: Application | undefined): number {
   if (!draft) return 0
-  if (!draft.guarantors.length || !draft.nextOfKin) return PARTIES_STEP
-  const missingDocs = REQUIRED_DOCUMENTS[draft.segment].some((t) => !draft.documents.some((d) => d.type === t))
-  if (missingDocs) return DOCUMENTS_STEP
+  if (draft.guarantors.length < GUARANTOR_LIMITS.min || !draft.nextOfKin) return PARTIES_STEP
+  if (!draft.documents.length || draft.documents.some((d) => !d.description || !d.owner)) return DOCUMENTS_STEP
   return STEPS.length - 1
+}
+
+/** A draft's guarantors, topped up with blank ones to the minimum. */
+function startingGuarantors(draft: Application | undefined): Guarantor[] {
+  const guarantors = [...(draft?.guarantors ?? [])]
+  while (guarantors.length < GUARANTOR_LIMITS.min) guarantors.push(emptyGuarantor())
+  return guarantors
+}
+
+/** An SME draft's statements of account; they're kept apart from the other documents on the form. */
+function isStatement(draft: Application | undefined, doc: Application["documents"][number]): boolean {
+  return draft?.segment === "sme" && doc.type === "bank_statement" && !!doc.bank
+}
+
+/** Statements as documents on the application, each owned by the borrower and named after its bank. */
+function statementDocuments(statements: UploadedStatement[], borrower: Owner): DocumentDraft[] {
+  return statements.map((statement) => ({
+    type: "bank_statement",
+    fileName: statement.fileName,
+    sizeBytes: statement.sizeBytes,
+    description: `${statement.bank} statement of account`,
+    owner: borrower,
+    bank: statement.bank,
+  }))
+}
+
+/** The borrower's name as captured on the Applicant step: the business, or the person. */
+function borrowerName(values: FormValues): string {
+  const name = values.segment === "sme" ? values.businessName : [values.firstName, values.lastName].join(" ")
+  return name?.trim() || "Borrower"
+}
+
+/** The parts still incomplete, in plain words for the review step. */
+function missingParts(...stepErrors: Record<string, string>[]): string[] {
+  const [statements, parties, collateral, documents] = stepErrors.map((errors) => Object.keys(errors).length > 0)
+  const missing: string[] = []
+  if (statements) missing.push("analysed statements of account")
+  if (parties) missing.push("guarantor or next-of-kin details")
+  if (collateral) missing.push("collateral details")
+  if (documents) missing.push("documents and their descriptions")
+  return missing
 }
 
 /** The intake wizard, for a new application or to finish a saved draft. */
@@ -79,15 +114,31 @@ export function NewApplicationForm({ defaultBranchId = "", draft }: NewApplicati
   // Which way the step content slides in.
   const [direction, setDirection] = useState<"forward" | "back">("forward")
   const scroller = useRef<HTMLDivElement>(null)
-  const [guarantors, setGuarantors] = useState<Guarantor[]>(() =>
-    draft?.guarantors.length ? draft.guarantors : [emptyGuarantor()],
-  )
+  const [guarantors, setGuarantors] = useState<Guarantor[]>(() => startingGuarantors(draft))
   const [nextOfKin, setNextOfKin] = useState<NextOfKin>(() => draft?.nextOfKin ?? emptyNextOfKin())
   const [collateral, setCollateral] = useState<Collateral[]>(draft?.collateral ?? [])
   const [documents, setDocuments] = useState<DocumentDraft[]>(
-    () => draft?.documents.map(({ type, fileName, sizeBytes }) => ({ type, fileName, sizeBytes })) ?? [],
+    () =>
+      draft?.documents
+        .filter((doc) => !isStatement(draft, doc))
+        .map(({ type, fileName, sizeBytes, description, owner, bank }) => ({
+          type,
+          fileName,
+          sizeBytes,
+          description,
+          owner,
+          bank,
+        })) ?? [],
   )
-  const [showPartyErrors, setShowPartyErrors] = useState(false)
+  const [statements, setStatements] = useState<UploadedStatement[]>(
+    () =>
+      draft?.documents
+        .filter((doc) => isStatement(draft, doc))
+        .map(({ bank, fileName, sizeBytes }) => ({ bank, fileName, sizeBytes })) ?? [],
+  )
+  const [analysis, setAnalysis] = useState<StatementAnalysis | null>(null)
+  // Steps the officer has tried to leave; their problems show from then on.
+  const [checkedSteps, setCheckedSteps] = useState<number[]>([])
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     mode: "onChange",
@@ -104,8 +155,18 @@ export function NewApplicationForm({ defaultBranchId = "", draft }: NewApplicati
   })
   const reachable = accountIsReady ? furthest : Math.min(furthest, APPLICANT_STEP)
 
-  const partyErrors = partiesErrors(guarantors, nextOfKin, collateral, segment)
-  const missingDocs = REQUIRED_DOCUMENTS[segment].filter((t) => !documents.some((d) => d.type === t))
+  const statementErrors = segment === "sme" ? statementsErrors(statements, !!form.watch("monthlyRevenue")) : {}
+  const partyErrors = partiesErrors(guarantors, nextOfKin)
+  const pledgeErrors = collateralErrors(collateral)
+  const documentErrors = documentsErrors(documents)
+  const stepErrors: Record<number, Record<string, string>> = {
+    [INCOME_STEP]: statementErrors,
+    [PARTIES_STEP]: partyErrors,
+    [COLLATERAL_STEP]: pledgeErrors,
+    [DOCUMENTS_STEP]: documentErrors,
+  }
+  const showErrors = checkedSteps.includes(step)
+  const missing = missingParts(statementErrors, partyErrors, pledgeErrors, documentErrors)
 
   const next = async () => {
     // The account card already says why it can't be used (not found, or the wrong kind).
@@ -115,8 +176,8 @@ export function NewApplicationForm({ defaultBranchId = "", draft }: NewApplicati
     }
     const ok = await form.trigger(STEP_FIELDS[segment][step], { shouldFocus: true })
     if (!ok) return
-    if (step === PARTIES_STEP && Object.keys(partyErrors).length) {
-      setShowPartyErrors(true)
+    if (Object.keys(stepErrors[step] ?? {}).length) {
+      setCheckedSteps((steps) => [...steps, step])
       return
     }
     if (step === 0 && product) {
@@ -156,9 +217,18 @@ export function NewApplicationForm({ defaultBranchId = "", draft }: NewApplicati
       ? guarantors.filter((_, i) => !Object.keys(partyErrors).some((k) => k.startsWith(`guarantors.${i}.`)))
       : guarantors,
     nextOfKin: asDraft && Object.keys(partyErrors).some((k) => k.startsWith("nextOfKin.")) ? null : nextOfKin,
-    documents,
+    documents: [
+      // Statements belong to SME loans only, in case the segment was changed after uploading.
+      ...(segment === "sme"
+        ? statementDocuments(
+            statements.filter((statement) => statement.bank),
+            { role: "borrower", name: borrowerName(form.getValues()) },
+          )
+        : []),
+      ...documents,
+    ],
     collateral: asDraft
-      ? collateral.filter((_, i) => !Object.keys(partyErrors).some((k) => k.startsWith(`collateral.${i}.`)))
+      ? collateral.filter((_, i) => !Object.keys(pledgeErrors).some((k) => k.startsWith(`collateral.${i}.`)))
       : collateral,
     asDraft,
   })
@@ -180,7 +250,7 @@ export function NewApplicationForm({ defaultBranchId = "", draft }: NewApplicati
   }
 
   const submit = form.handleSubmit(async (values) => {
-    if (missingDocs.length || Object.keys(partyErrors).length) {
+    if (missing.length) {
       toast.error("Some details are missing — save as a draft, or complete them to submit")
       return
     }
@@ -192,16 +262,6 @@ export function NewApplicationForm({ defaultBranchId = "", draft }: NewApplicati
       // The error modal explains what went wrong.
     }
   })
-
-  const amount = Number(form.watch("amount"))
-  const tenor = Number(form.watch("tenor"))
-  const summary = [
-    { label: "Segment", value: segment === "sme" ? "SME" : "Retail" },
-    ...(product ? [{ label: "Product", value: product.name }] : []),
-    ...(amount > 0 ? [{ label: "Amount", value: formatNaira(nairaToKobo(amount)) }] : []),
-    ...(tenor > 0 ? [{ label: "Tenor", value: `${tenor} months` }] : []),
-    ...(accountIsReady && account.data ? [{ label: "Account", value: account.data.accountName }] : []),
-  ]
 
   return (
     <div className="flex flex-col gap-6 lg:h-[calc(100svh-8.5rem)]">
@@ -216,10 +276,10 @@ export function NewApplicationForm({ defaultBranchId = "", draft }: NewApplicati
       <div className="grid gap-6 lg:min-h-0 lg:flex-1 lg:grid-cols-[19rem_minmax(0,1fr)] lg:grid-rows-[minmax(0,1fr)]">
         <div className="lg:min-h-0">
           <div className="hidden h-full lg:block">
-            <StepRail step={step} furthest={reachable} onStep={goTo} summary={summary} className="h-full" />
+            <StepRail segment={segment} step={step} furthest={reachable} onStep={goTo} className="h-full" />
           </div>
           <div className="lg:hidden">
-            <StepProgress step={step} />
+            <StepProgress segment={segment} step={step} />
           </div>
         </div>
         <FormProvider {...form}>
@@ -242,25 +302,49 @@ export function NewApplicationForm({ defaultBranchId = "", draft }: NewApplicati
               >
                 {step === 0 && <LoanStep />}
                 {step === APPLICANT_STEP && <ApplicantStep segment={segment} />}
-                {step === INCOME_STEP && <IncomeStep segment={segment} />}
+                {step === INCOME_STEP && segment === "retail" && <IncomeStep />}
+                {step === INCOME_STEP && segment === "sme" && (
+                  <StatementsStep
+                    statements={statements}
+                    onStatements={setStatements}
+                    analysis={analysis}
+                    onAnalysis={setAnalysis}
+                    errors={statementErrors}
+                    showErrors={showErrors}
+                  />
+                )}
                 {step === INCOME_STEP && <AffordabilityPreview product={product} />}
 
                 {step === PARTIES_STEP && (
                   <PartiesStep
-                    segment={segment}
                     guarantors={guarantors}
                     onGuarantors={setGuarantors}
                     nextOfKin={nextOfKin}
                     onNextOfKin={setNextOfKin}
+                    errors={partyErrors}
+                    showErrors={showErrors}
+                  />
+                )}
+
+                {step === COLLATERAL_STEP && (
+                  <CollateralStep
+                    segment={segment}
                     collateral={collateral}
                     onCollateral={setCollateral}
-                    errors={partyErrors}
-                    showErrors={showPartyErrors}
+                    borrowerName={borrowerName(form.getValues())}
+                    errors={pledgeErrors}
+                    showErrors={showErrors}
                   />
                 )}
 
                 {step === DOCUMENTS_STEP && (
-                  <DocumentsChecklist segment={segment} documents={documents} onChange={setDocuments} />
+                  <DocumentsStep
+                    documents={documents}
+                    onChange={setDocuments}
+                    borrowerName={borrowerName(form.getValues())}
+                    errors={documentErrors}
+                    showErrors={showErrors}
+                  />
                 )}
 
                 {step === STEPS.length - 1 && (
@@ -270,10 +354,7 @@ export function NewApplicationForm({ defaultBranchId = "", draft }: NewApplicati
                     product={product}
                     guarantors={guarantors.length}
                     documents={documents.length}
-                    missing={[
-                      ...missingDocs.map((d) => DOCUMENT_TYPE_LABELS[d]),
-                      ...(Object.keys(partyErrors).length ? ["guarantor or next-of-kin details"] : []),
-                    ]}
+                    missing={missing}
                   />
                 )}
               </div>

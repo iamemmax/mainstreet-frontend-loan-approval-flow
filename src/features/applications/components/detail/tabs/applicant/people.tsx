@@ -2,6 +2,7 @@
 
 import { Phone } from "lucide-react"
 import { MaskedValue } from "@/components/shared/masked-value"
+import { formatDate } from "@/lib/format/date"
 import { formatNaira } from "@/lib/format/money"
 import type { Application } from "../../../../types"
 import { Avatar, Section } from "../../ui"
@@ -21,7 +22,7 @@ export function Guarantors({ guarantors }: { guarantors: Application["guarantors
               key={i}
               name={guarantor.name}
               role={guarantor.relationship}
-              lines={[guarantorWork(guarantor), guarantor.address]}
+              lines={[bornOn(guarantor.dateOfBirth), guarantorWork(guarantor), guarantor.address]}
               phone={guarantor.phone}
             />
           ))}
@@ -40,13 +41,18 @@ export function NextOfKin({ nextOfKin }: { nextOfKin: Application["nextOfKin"] }
           <Person
             name={nextOfKin.name}
             role={nextOfKin.relationship}
-            lines={[nextOfKin.address]}
+            lines={[bornOn(nextOfKin.dateOfBirth), nextOfKin.address]}
             phone={nextOfKin.phone}
           />
         </ul>
       )}
     </Section>
   )
+}
+
+/** "Born 4 Mar 1985", from the BVN record; blank when the record had no date. */
+function bornOn(dateOfBirth: string | null): string {
+  return dateOfBirth ? `Born ${formatDate(dateOfBirth, "d MMM yyyy")}` : ""
 }
 
 /** "Trader · ₦250,000/month", leaving out whatever wasn't captured. */

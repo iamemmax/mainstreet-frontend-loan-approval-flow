@@ -26,6 +26,18 @@ Optional settings are listed in `.env.example`. Copy it to `.env.local` to chang
 
 Sign in at `/login`: choose a staff account, then enter its password (**Mainstreet@2026** for every demo account until changed in Settings). Every action that changes an application — approval decisions, running checks, saving the assessment, submitting, sending or re-sending an offer, handing over to finance — is confirmed with the user's PIN: **1234** for all demo users (three wrong tries lock the PIN for 15 minutes). Everyone lands on the **Dashboard**; navigation and actions change with the role.
 
+**Current account numbers** for the Applicant step of a new application (the details fill in from the account):
+
+| Retail (personal) | Account name       | SME (business) | Account name                             |
+| ----------------- | ------------------ | -------------- | ---------------------------------------- |
+| `1168744179`      | CHUKWU NNEKA       | `1188930967`   | GOLDEN PHARMA LTD                        |
+| `1113562223`      | LAWAL ABDULLAHI    | `1108438256`   | CREST FARMS LIMITED                      |
+| `1180199613`      | SHEHU ALIYU HARUNA | `1141578929`   | KINGSWAY INTEGRATED SERVICES ENTERPRISES |
+
+Dormant accounts are refused until reactivated: `1199193441` (personal) and `1103498333` (business). Every existing applicant also has an account: `12` followed by the application number padded to 8 digits (application 1167 → `1200001167`).
+
+**BVNs** for guarantors and next of kin (name, date of birth and gender fill in): `22180964618`, `22209000859`, `22931161582`, or the BVN of any personal account holder above.
+
 **Documents** open in a full-screen viewer from the Applications sheet or the Applicant tab: PDFs in the browser's own PDF reader (with Open and Download, and a fallback where a browser can't show PDFs inline), images as images. Each document carries a `url`; a real backend returns a short-lived signed link. The demo's files live in `public/samples` and are regenerated with `python3 scripts/mock-data/sample-files.py`.
 
 **Settings** (sidebar → Account, or the account menu) has each user's profile and access, a password change (every demo account starts with **Mainstreet@2026**), a PIN change (the new PIN signs every action from then on), Out of office delegation to a colleague in the same role (PIN-confirmed, up to 30 days), personal notification channels, and the theme.

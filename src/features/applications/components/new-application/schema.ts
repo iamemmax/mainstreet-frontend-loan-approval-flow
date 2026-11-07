@@ -16,7 +16,6 @@ export const formSchema = z
     tenor: z.string().regex(/^\d+$/, "Enter the tenor in months"),
     purpose: z.string().trim().min(3, "Describe what the loan is for"),
     branchId: z.string().min(1, "Choose a branch"),
-    agentId: z.string(),
     accountNumber: digits(10, "Account number"),
     phone: z.string().regex(/^(\+234|0)[789]\d{9}$/, "Enter a Nigerian mobile number"),
     email: z.email("Enter a valid email"),
@@ -33,7 +32,10 @@ export const formSchema = z
     rcNumber: opt,
     tin: opt,
     sector: opt,
+    activity: opt,
     yearsInOperation: opt,
+    businessDescription: opt,
+    businessAddress: opt,
     promoterName: opt,
     promoterBvn: opt,
     promoterNin: opt,
@@ -69,15 +71,19 @@ export const formSchema = z
       need("businessName", "Enter the business name")
       need("rcNumber", "Enter the RC number")
       need("tin", "Enter the TIN")
-      need("sector", "Enter the sector")
+      need("sector", "Choose the sector")
+      need("activity", "Choose what the business does")
+      need("businessDescription", "Describe the business", z.string().trim().min(10))
+      need("businessAddress", "Enter the business address", z.string().trim().min(5))
       need("yearsInOperation", "Enter years in operation", z.string().regex(/^\d+$/))
       need("promoterName", "Enter the promoter's name")
       need("promoterBvn", "BVN must be 11 digits", digits(11, "BVN"))
       need("promoterNin", "NIN must be 11 digits", digits(11, "NIN"))
-      need("monthlyRevenue", "Enter monthly revenue", money)
-      need("monthlyExpenses", "Enter monthly expenses", money)
-      need("annualTurnover", "Enter annual turnover", money)
-      need("primaryBank", "Choose the primary bank")
+      // Filled in by statement analysis, not typed.
+      need("monthlyRevenue", "Analyse the statements", money)
+      need("monthlyExpenses", "Analyse the statements", money)
+      need("annualTurnover", "Analyse the statements", money)
+      need("primaryBank", "Analyse the statements")
     }
   })
 

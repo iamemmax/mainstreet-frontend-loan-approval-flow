@@ -14,26 +14,12 @@ import { DocumentThumb } from "./document-thumb"
 import { InfoGrid, SheetSection } from "./sheet-ui"
 import type { ViewerItem } from "./viewer-items"
 
-export function DocumentsSection({
-  items,
-  received,
-  required,
-  onView,
-}: {
-  items: ViewerItem[]
-  received: number
-  required: number
-  onView: (index: number) => void
-}) {
+export function DocumentsSection({ items, onView }: { items: ViewerItem[]; onView: (index: number) => void }) {
   return (
     <SheetSection
       icon={FileText}
       title="Documents"
-      aside={
-        <span className="text-xs text-muted-foreground">
-          {received} of {required} required
-        </span>
-      }
+      aside={items.length > 0 && <span className="text-xs text-muted-foreground">{items.length} uploaded</span>}
     >
       {items.length === 0 ? (
         <p className="text-sm text-muted-foreground">No documents uploaded yet.</p>

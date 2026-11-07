@@ -3,11 +3,14 @@
  * They come from their own random stream so the rest of the seed stays byte-identical.
  */
 import type { Applicant, Application, CustomerAccount } from "@/features/applications/types"
-import { NAME_POOLS, PHONE_PREFIXES, SME_NAME_PARTS, SME_SECTORS, STREETS, type Ethnicity } from "./names"
+import { NAME_POOLS, PHONE_PREFIXES, SME_NAME_PARTS, STREETS, type Ethnicity } from "./names"
 import { createRandom, type Random } from "./random"
+import { sectorAndActivity } from "./sectors"
 
 const PERSONAL_ACCOUNTS = 30
 const CORPORATE_ACCOUNTS = 12
+/** Every sixth seeded account is dormant, so staff can see one refused. */
+const DORMANT_EVERY = 6
 const ETHNICITIES = Object.keys(NAME_POOLS) as Ethnicity[]
 
 /** The state for each town in STREETS, so an address and its state agree. */
@@ -33,7 +36,9 @@ export function seedAccounts(): CustomerAccount[] {
   const accounts: CustomerAccount[] = []
   for (let i = 0; i < PERSONAL_ACCOUNTS; i++) accounts.push(personalAccount(rnd, uniqueNumber(rnd, used)))
   for (let i = 0; i < CORPORATE_ACCOUNTS; i++) accounts.push(corporateAccount(rnd, uniqueNumber(rnd, used)))
-  return accounts
+  return accounts.map((account, i) =>
+    (i + 1) % DORMANT_EVERY === 0 ? { ...account, status: "dormant" as const } : account,
+  )
 }
 
 /** Every seeded applicant banks here. Their account number comes from the application id. */
@@ -49,6 +54,7 @@ export function applicantAccount(app: Application): CustomerAccount {
     accountNumber: accountNumberFor(app),
     accountName: accountNameOf(app.applicant),
     openedOn: `${created.getUTCFullYear() - yearsBefore}-${twoDigits(created.getUTCMonth() + 1)}-01`,
+    status: "active",
     holder: app.applicant,
   }
 }
@@ -86,7 +92,7 @@ function personalAccount(rnd: Random, accountNumber: string): CustomerAccount {
     email: `${firstName}.${lastName}${rnd.int(1, 99)}@gmail.com`.toLowerCase(),
     ...address(rnd),
   }
-  return { accountNumber, accountName: accountNameOf(holder), openedOn: openedOn(rnd), holder }
+  return { accountNumber, accountName: accountNameOf(holder), openedOn: openedOn(rnd), status: "active", holder }
 }
 
 function corporateAccount(rnd: Random, accountNumber: string): CustomerAccount {
@@ -97,12 +103,13 @@ function corporateAccount(rnd: Random, accountNumber: string): CustomerAccount {
     accountNumber,
     accountName: businessName.toUpperCase(),
     openedOn: openedOn(rnd),
+    status: "active",
     holder: {
       kind: "business",
       businessName,
       rcNumber: `RC${rnd.int(150_000, 1_950_000)}`,
       tin: `${rnd.digits(8)}-0001`,
-      sector: rnd.pick(SME_SECTORS),
+      ...sectorAndActivity(rnd),
       yearsInOperation: rnd.int(1, 22),
       ...address(rnd),
       phone: phone(rnd),

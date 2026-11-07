@@ -12,13 +12,15 @@ export function formValuesFrom(app: Application): FormValues {
     tenor: String(app.tenorMonths),
     purpose: app.purpose,
     branchId: app.branchId,
-    agentId: app.agentId ?? "none",
     accountNumber: app.accountNumber,
     phone: "",
     email: "",
     address: "",
     state: "",
     ...applicantValues(app.applicant),
+    // What the officer wrote, not the account's registered address.
+    businessDescription: app.businessDescription ?? "",
+    businessAddress: app.businessAddress ?? "",
     ...incomeValues(app),
   }
 }
