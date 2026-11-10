@@ -2,7 +2,7 @@
 
 import { FileText, Landmark, Loader2, Trash2 } from "lucide-react"
 import { useState } from "react"
-import { useFormContext } from "react-hook-form"
+import { useFieldArray, useFormContext } from "react-hook-form"
 import { ErrorState } from "@/components/shared/empty-state"
 import { FileDropZone } from "@/components/shared/file-drop-zone"
 import { MoneyText } from "@/components/shared/money-text"
@@ -10,26 +10,16 @@ import { Button } from "@/components/ui/button"
 import { koboToNaira, nairaToKobo } from "@/lib/format/money"
 import { useAnalyseStatements } from "../../hooks/use-applications"
 import { MAX_STATEMENTS } from "../../schemas/business"
-import type { StatementAnalysis, StatementUpload } from "../../types"
+import type { StatementAnalysis } from "../../types"
 import { formatFileSize } from "../../utils/documents"
 import { FormCard } from "./fields"
+import type { UploadedStatement } from "./list-schemas"
 import type { FormValues } from "./schema"
 
 const MAX_BYTES = 10 * 1_048_576
 
 /** The business financials that statement analysis fills in. */
 const FINANCIAL_FIELDS = ["monthlyRevenue", "monthlyExpenses", "annualTurnover", "primaryBank"] as const
-
-/** A statement on the form, with the bank analysis read from it (null until it has). */
-export type UploadedStatement = StatementUpload & { bank: string | null }
-
-/** Problems with the statements step, keyed like the other steps' errors. */
-export function statementsErrors(statements: UploadedStatement[], analysed: boolean) {
-  const errors: Record<string, string> = {}
-  if (!statements.length) errors["statements"] = "Upload at least one statement of account"
-  else if (!analysed) errors["analysis"] = "Wait for the statements to be read, or fix the problem shown"
-  return errors
-}
 
 /** Why a file can't be taken as a statement, or null if it's fine. */
 function fileProblem(file: File): string | null {
@@ -38,47 +28,36 @@ function fileProblem(file: File): string | null {
   return null
 }
 
-interface StatementsStepProps {
-  statements: UploadedStatement[]
-  onStatements: (statements: UploadedStatement[]) => void
-  /** The last analysis, with each bank's flows. Null until it's run, and after any change to the statements. */
-  analysis: StatementAnalysis | null
-  onAnalysis: (analysis: StatementAnalysis | null) => void
-  errors: Record<string, string>
-  showErrors: boolean
-}
-
 /**
  * Step 3 for SME: up to six statements of account, one per bank. Each upload is read straight away for its
  * bank and flows, which fill in the business's monthly figures for the affordability preview.
  */
-export function StatementsStep({
-  statements,
-  onStatements,
-  analysis,
-  onAnalysis,
-  errors,
-  showErrors,
-}: StatementsStepProps) {
+export function StatementsStep() {
   const form = useFormContext<FormValues>()
+  const { fields, append, remove, replace } = useFieldArray({ control: form.control, name: "statements" })
   const analyse = useAnalyseStatements()
   const [problems, setProblems] = useState<string[]>([])
-  const slotsLeft = MAX_STATEMENTS - statements.length
+  // Each bank's flows from the last reading. Only the totals are kept on the form.
+  const [analysis, setAnalysis] = useState<StatementAnalysis | null>(null)
+  const slotsLeft = MAX_STATEMENTS - fields.length
   const analysed = !!form.watch("monthlyRevenue")
+  const { errors } = form.formState
+  const listError = errors.statements?.message ?? errors.statements?.root?.message
 
-  /** Reads the statements and fills in the bank of each one and the business's monthly figures. */
-  const read = (next: UploadedStatement[]) => {
-    if (!next.length) return
+  /** Reads the statements on the form and fills in each one's bank and the business's monthly figures. */
+  const read = () => {
+    const statements = form.getValues("statements")
+    if (!statements.length) return
     analyse.mutate(
       {
         amountRequested: nairaToKobo(Number(form.getValues("amount") || 0)),
         tenorMonths: Number(form.getValues("tenor") || 1),
-        statements: next.map(({ fileName, sizeBytes }) => ({ fileName, sizeBytes })),
+        statements: statements.map(({ fileName, sizeBytes }) => ({ fileName, sizeBytes })),
       },
       {
         onSuccess: (result) => {
-          onStatements(next.map((statement, i) => ({ ...statement, bank: result.banks[i]?.bank ?? null })))
-          onAnalysis(result)
+          replace(statements.map((statement, i) => ({ ...statement, bank: result.banks[i]?.bank ?? null })))
+          setAnalysis(result)
           form.setValue("monthlyRevenue", String(koboToNaira(result.monthlyRevenue)), { shouldValidate: true })
           form.setValue("monthlyExpenses", String(koboToNaira(result.monthlyExpenses)), { shouldValidate: true })
           form.setValue("annualTurnover", String(koboToNaira(result.annualTurnover)), { shouldValidate: true })
@@ -89,12 +68,11 @@ export function StatementsStep({
   }
 
   /** Any change makes the last reading out of date, so the statements are read again. */
-  const change = (next: UploadedStatement[]) => {
-    onStatements(next)
-    onAnalysis(null)
+  const readAgain = () => {
+    setAnalysis(null)
     for (const field of FINANCIAL_FIELDS) form.setValue(field, "")
     analyse.reset()
-    read(next)
+    read()
   }
 
   const addFiles = (files: File[]) => {
@@ -107,7 +85,9 @@ export function StatementsStep({
       else rejected.push(`${file.name}: at most ${MAX_STATEMENTS} statements, one per bank`)
     }
     setProblems(rejected)
-    if (accepted.length) change([...statements, ...accepted])
+    if (!accepted.length) return
+    append(accepted)
+    readAgain()
   }
 
   return (
@@ -130,27 +110,30 @@ export function StatementsStep({
           {problem}
         </p>
       ))}
-      {showErrors && errors["statements"] && <p className="text-sm text-destructive">{errors["statements"]}</p>}
+      {listError && <p className="text-sm text-destructive">{listError}</p>}
 
-      {statements.length > 0 && (
+      {fields.length > 0 && (
         <ul className="divide-y rounded-lg border">
-          {statements.map((statement, i) => (
-            <li key={`${statement.fileName}-${i}`} className="flex items-center gap-3 px-4 py-3">
+          {fields.map((field, i) => (
+            <li key={field.id} className="flex items-center gap-3 px-4 py-3">
               <span className="flex size-8 shrink-0 items-center justify-center rounded-md bg-primary/10 text-primary">
                 <FileText className="size-4" aria-hidden />
               </span>
               <div className="min-w-0 flex-1">
-                <div className="truncate text-sm font-medium">{statement.fileName}</div>
-                <div className="text-xs text-muted-foreground">{formatFileSize(statement.sizeBytes)}</div>
+                <div className="truncate text-sm font-medium">{field.fileName}</div>
+                <div className="text-xs text-muted-foreground">{formatFileSize(field.sizeBytes)}</div>
               </div>
-              <IssuingBank bank={statement.bank} reading={analyse.isPending} />
+              <IssuingBank bank={field.bank} reading={analyse.isPending} />
               <Button
                 type="button"
                 variant="ghost"
                 size="icon-sm"
-                aria-label={`Remove ${statement.fileName}`}
+                aria-label={`Remove ${field.fileName}`}
                 disabled={analyse.isPending}
-                onClick={() => change(statements.filter((_, j) => j !== i))}
+                onClick={() => {
+                  remove(i)
+                  readAgain()
+                }}
               >
                 <Trash2 aria-hidden />
               </Button>
@@ -159,13 +142,11 @@ export function StatementsStep({
         </ul>
       )}
 
+      {fields.length > 0 && !analysed && !analyse.isPending && !analyse.error && errors.monthlyRevenue && (
+        <p className="text-sm text-destructive">{errors.monthlyRevenue.message}</p>
+      )}
       {analyse.error && (
-        <ErrorState
-          error={analyse.error}
-          onRetry={() => read(statements)}
-          title="Couldn't read the statements"
-          size="sm"
-        />
+        <ErrorState error={analyse.error} onRetry={read} title="Couldn't read the statements" size="sm" />
       )}
       {analysed && <AnalysisResult analysis={analysis} values={form.getValues()} />}
     </FormCard>

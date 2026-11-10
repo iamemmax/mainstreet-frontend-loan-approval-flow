@@ -6,13 +6,6 @@ import { PlainField, PlainSelect } from "./plain-field"
 const BORROWER = "The borrower"
 const SOMEONE_ELSE = "Someone else"
 
-/** Problem with an owner, or null if it's fine: it must be chosen, and someone else needs a full name. */
-export function ownerProblem(owner: Owner | null): string | null {
-  if (!owner) return "Choose who it belongs to"
-  if (owner.name.trim().length < 3) return "Enter the owner's full name"
-  return null
-}
-
 interface OwnerFieldsProps {
   label: string
   owner: Owner | null

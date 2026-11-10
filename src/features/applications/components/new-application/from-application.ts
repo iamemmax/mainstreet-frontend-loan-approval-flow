@@ -1,7 +1,39 @@
 import { koboToNaira } from "@/lib/format/money"
+import { GUARANTOR_LIMITS } from "../../schemas/business"
 import type { Application } from "../../types"
 import { applicantValues } from "./account-lookup"
+import { emptyGuarantor, emptyNextOfKin } from "./list-schemas"
 import type { FormValues } from "./schema"
+
+/** An SME's statements of account sit in their own list on the form, apart from the other documents. */
+function isStatement(app: Application, doc: Application["documents"][number]): boolean {
+  return app.segment === "sme" && doc.type === "bank_statement" && !!doc.bank
+}
+
+/** The lists on the form for a saved draft, with blank guarantors to make up the minimum. */
+function listValues(
+  app: Application,
+): Pick<FormValues, "guarantors" | "nextOfKin" | "collateral" | "documents" | "statements"> {
+  const guarantors = [...app.guarantors]
+  while (guarantors.length < GUARANTOR_LIMITS.min) guarantors.push(emptyGuarantor())
+  const keep = ({ type, fileName, sizeBytes, description, owner, bank }: Application["documents"][number]) => ({
+    type,
+    fileName,
+    sizeBytes,
+    description,
+    owner,
+    bank,
+  })
+  return {
+    guarantors,
+    nextOfKin: app.nextOfKin ?? emptyNextOfKin(),
+    collateral: app.collateral,
+    documents: app.documents.filter((doc) => !isStatement(app, doc)).map(keep),
+    statements: app.documents
+      .filter((doc) => isStatement(app, doc))
+      .map(({ fileName, sizeBytes, bank }) => ({ fileName, sizeBytes, bank })),
+  }
+}
 
 /** The form's values for a saved draft: the reverse of `toInput`. */
 export function formValuesFrom(app: Application): FormValues {
@@ -22,6 +54,7 @@ export function formValuesFrom(app: Application): FormValues {
     businessDescription: app.businessDescription ?? "",
     businessAddress: app.businessAddress ?? "",
     ...incomeValues(app),
+    ...listValues(app),
   }
 }
 

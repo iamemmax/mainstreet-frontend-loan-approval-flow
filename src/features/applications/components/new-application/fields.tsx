@@ -5,6 +5,7 @@ import { useFormContext } from "react-hook-form"
 import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { koboToNaira, nairaToKobo } from "@/lib/format/money"
 import { cn } from "@/lib/utils"
 import { FormCard } from "@/components/shared/form-card"
 import { NumberInput } from "@/components/shared/number-input"
@@ -71,7 +72,8 @@ export function TextField({ name, label, numeric, grouped, span, ...input }: Tex
               <Input
                 {...input}
                 {...field}
-                value={field.value ?? ""}
+                // Text fields only ever hold text; nested list fields share the form's wider value type.
+                value={(field.value as string | null | undefined) ?? ""}
                 className={cn(numeric && "tabular", input.readOnly && "bg-muted/50 text-muted-foreground")}
                 onChange={(e) => field.onChange(numeric ? e.target.value.replace(/\D/g, "") : e.target.value)}
               />
@@ -111,7 +113,7 @@ export function SelectField({
         <FormItem className={cn(span && "sm:col-span-2")}>
           <FormLabel>{label}</FormLabel>
           <Select
-            value={field.value ?? ""}
+            value={(field.value as string | null | undefined) ?? ""}
             onValueChange={(value) => {
               field.onChange(value)
               onChange?.(value)
@@ -135,6 +137,35 @@ export function SelectField({
           <FormMessage />
         </FormItem>
       )}
+    />
+  )
+}
+
+/** An amount kept in kobo on the form (e.g. a guarantor's income) but typed in naira. Empty is null when optional. */
+export function MoneyField({ name, label, optional }: { name: Field; label: string; optional?: boolean }) {
+  const { control } = useFormContext<FormValues>()
+  return (
+    <FormField
+      control={control}
+      name={name}
+      render={({ field }) => {
+        const kobo = field.value as number | null
+        return (
+          <FormItem>
+            <FormLabel>{label}</FormLabel>
+            <FormControl>
+              <NumberInput
+                name={field.name}
+                ref={field.ref}
+                onBlur={field.onBlur}
+                value={kobo ? String(koboToNaira(kobo)) : ""}
+                onValueChange={(typed) => field.onChange(typed ? nairaToKobo(Number(typed)) : optional ? null : 0)}
+              />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )
+      }}
     />
   )
 }

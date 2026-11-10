@@ -13,20 +13,21 @@ import { formatNaira, nairaToKobo } from "@/lib/format/money"
 import { cn } from "@/lib/utils"
 import { useCreateApplication, useCustomerAccount, useSaveDraft } from "../../hooks/use-applications"
 import { GUARANTOR_LIMITS } from "../../schemas/business"
-import type { Application, Collateral, Guarantor, NextOfKin, Owner, StatementAnalysis } from "../../types"
+import type { Application } from "../../types"
 import { accountReady } from "./account-lookup"
-import { collateralErrors, CollateralStep } from "./collateral-step"
-import { type DocumentDraft, documentsErrors, DocumentsStep } from "./documents-step"
-import { emptyGuarantor, emptyNextOfKin, partiesErrors, PartiesStep } from "./parties-step"
 import { AffordabilityPreview } from "./affordability-preview"
-import { ApplicantStep, IncomeStep, LoanStep } from "./intake-steps"
+import { CollateralStep } from "./collateral-step"
+import { DocumentsStep } from "./documents-step"
 import { formValuesFrom } from "./from-application"
+import { ApplicantStep, IncomeStep, LoanStep } from "./intake-steps"
+import { emptyGuarantor, emptyNextOfKin } from "./list-schemas"
+import { PartiesStep } from "./parties-step"
 import { ReviewStep } from "./review-step"
-import { statementsErrors, StatementsStep, type UploadedStatement } from "./statements-step"
-import { StepProgress, StepRail } from "./step-rail"
 import { formSchema, type FormValues } from "./schema"
+import { StatementsStep } from "./statements-step"
+import { StepProgress, StepRail } from "./step-rail"
 import { APPLICANT_STEP, COLLATERAL_STEP, DOCUMENTS_STEP, INCOME_STEP, PARTIES_STEP, STEP_FIELDS, STEPS } from "./steps"
-import { type IntakeExtras, toInput } from "./to-input"
+import { toInput } from "./to-input"
 
 interface NewApplicationFormProps {
   defaultBranchId?: string
@@ -48,6 +49,11 @@ function blankValues(branchId: string): FormValues {
     email: "",
     address: "",
     state: "",
+    guarantors: Array.from({ length: GUARANTOR_LIMITS.min }, emptyGuarantor),
+    nextOfKin: emptyNextOfKin(),
+    collateral: [],
+    documents: [],
+    statements: [],
   }
 }
 
@@ -59,44 +65,16 @@ function startingStep(draft: Application | undefined): number {
   return STEPS.length - 1
 }
 
-/** A draft's guarantors, topped up with blank ones to the minimum. */
-function startingGuarantors(draft: Application | undefined): Guarantor[] {
-  const guarantors = [...(draft?.guarantors ?? [])]
-  while (guarantors.length < GUARANTOR_LIMITS.min) guarantors.push(emptyGuarantor())
-  return guarantors
-}
-
-/** An SME draft's statements of account; they're kept apart from the other documents on the form. */
-function isStatement(draft: Application | undefined, doc: Application["documents"][number]): boolean {
-  return draft?.segment === "sme" && doc.type === "bank_statement" && !!doc.bank
-}
-
-/** Statements as documents on the application, each owned by the borrower and named after its bank. */
-function statementDocuments(statements: UploadedStatement[], borrower: Owner): DocumentDraft[] {
-  return statements.map((statement) => ({
-    type: "bank_statement",
-    fileName: statement.fileName,
-    sizeBytes: statement.sizeBytes,
-    description: `${statement.bank} statement of account`,
-    owner: borrower,
-    bank: statement.bank,
-  }))
-}
-
-/** The borrower's name as captured on the Applicant step: the business, or the person. */
-function borrowerName(values: FormValues): string {
-  const name = values.segment === "sme" ? values.businessName : [values.firstName, values.lastName].join(" ")
-  return name?.trim() || "Borrower"
-}
-
-/** The parts still incomplete, in plain words for the review step. */
-function missingParts(...stepErrors: Record<string, string>[]): string[] {
-  const [statements, parties, collateral, documents] = stepErrors.map((errors) => Object.keys(errors).length > 0)
+/** The parts still incomplete, in plain words for the review step. Read from the form's own validation. */
+function missingParts(values: FormValues): string[] {
+  const result = formSchema.safeParse(values)
+  if (result.success) return []
+  const lists = new Set(result.error.issues.map((issue) => issue.path[0]))
   const missing: string[] = []
-  if (statements) missing.push("analysed statements of account")
-  if (parties) missing.push("guarantor or next-of-kin details")
-  if (collateral) missing.push("collateral details")
-  if (documents) missing.push("documents and their descriptions")
+  if (lists.has("statements") || lists.has("monthlyRevenue")) missing.push("statements of account, read")
+  if (lists.has("guarantors") || lists.has("nextOfKin")) missing.push("guarantor or next-of-kin details")
+  if (lists.has("collateral")) missing.push("collateral details")
+  if (lists.has("documents")) missing.push("documents and their descriptions")
   return missing
 }
 
@@ -114,31 +92,6 @@ export function NewApplicationForm({ defaultBranchId = "", draft }: NewApplicati
   // Which way the step content slides in.
   const [direction, setDirection] = useState<"forward" | "back">("forward")
   const scroller = useRef<HTMLDivElement>(null)
-  const [guarantors, setGuarantors] = useState<Guarantor[]>(() => startingGuarantors(draft))
-  const [nextOfKin, setNextOfKin] = useState<NextOfKin>(() => draft?.nextOfKin ?? emptyNextOfKin())
-  const [collateral, setCollateral] = useState<Collateral[]>(draft?.collateral ?? [])
-  const [documents, setDocuments] = useState<DocumentDraft[]>(
-    () =>
-      draft?.documents
-        .filter((doc) => !isStatement(draft, doc))
-        .map(({ type, fileName, sizeBytes, description, owner, bank }) => ({
-          type,
-          fileName,
-          sizeBytes,
-          description,
-          owner,
-          bank,
-        })) ?? [],
-  )
-  const [statements, setStatements] = useState<UploadedStatement[]>(
-    () =>
-      draft?.documents
-        .filter((doc) => isStatement(draft, doc))
-        .map(({ bank, fileName, sizeBytes }) => ({ bank, fileName, sizeBytes })) ?? [],
-  )
-  const [analysis, setAnalysis] = useState<StatementAnalysis | null>(null)
-  // Steps the officer has tried to leave; their problems show from then on.
-  const [checkedSteps, setCheckedSteps] = useState<number[]>([])
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     mode: "onChange",
@@ -155,19 +108,6 @@ export function NewApplicationForm({ defaultBranchId = "", draft }: NewApplicati
   })
   const reachable = accountIsReady ? furthest : Math.min(furthest, APPLICANT_STEP)
 
-  const statementErrors = segment === "sme" ? statementsErrors(statements, !!form.watch("monthlyRevenue")) : {}
-  const partyErrors = partiesErrors(guarantors, nextOfKin)
-  const pledgeErrors = collateralErrors(collateral)
-  const documentErrors = documentsErrors(documents)
-  const stepErrors: Record<number, Record<string, string>> = {
-    [INCOME_STEP]: statementErrors,
-    [PARTIES_STEP]: partyErrors,
-    [COLLATERAL_STEP]: pledgeErrors,
-    [DOCUMENTS_STEP]: documentErrors,
-  }
-  const showErrors = checkedSteps.includes(step)
-  const missing = missingParts(statementErrors, partyErrors, pledgeErrors, documentErrors)
-
   const next = async () => {
     // The account card already says why it can't be used (not found, or the wrong kind).
     if (step === APPLICANT_STEP && !accountIsReady) {
@@ -176,10 +116,6 @@ export function NewApplicationForm({ defaultBranchId = "", draft }: NewApplicati
     }
     const ok = await form.trigger(STEP_FIELDS[segment][step], { shouldFocus: true })
     if (!ok) return
-    if (Object.keys(stepErrors[step] ?? {}).length) {
-      setCheckedSteps((steps) => [...steps, step])
-      return
-    }
     if (step === 0 && product) {
       const amount = nairaToKobo(Number(form.getValues("amount")))
       const tenor = Number(form.getValues("tenor"))
@@ -211,28 +147,6 @@ export function NewApplicationForm({ defaultBranchId = "", draft }: NewApplicati
     window.scrollTo({ top: 0, behavior: "smooth" })
   }
 
-  const extras = (asDraft: boolean): IntakeExtras => ({
-    // A draft keeps only the parties that are complete enough to store.
-    guarantors: asDraft
-      ? guarantors.filter((_, i) => !Object.keys(partyErrors).some((k) => k.startsWith(`guarantors.${i}.`)))
-      : guarantors,
-    nextOfKin: asDraft && Object.keys(partyErrors).some((k) => k.startsWith("nextOfKin.")) ? null : nextOfKin,
-    documents: [
-      // Statements belong to SME loans only, in case the segment was changed after uploading.
-      ...(segment === "sme"
-        ? statementDocuments(
-            statements.filter((statement) => statement.bank),
-            { role: "borrower", name: borrowerName(form.getValues()) },
-          )
-        : []),
-      ...documents,
-    ],
-    collateral: asDraft
-      ? collateral.filter((_, i) => !Object.keys(pledgeErrors).some((k) => k.startsWith(`collateral.${i}.`)))
-      : collateral,
-    asDraft,
-  })
-
   const saveDraft = async () => {
     // A draft needs the loan, account, applicant and income details; parties and documents can follow.
     const ok = await form.trigger(STEP_FIELDS[segment].slice(0, PARTIES_STEP).flat(), { shouldFocus: true })
@@ -241,7 +155,7 @@ export function NewApplicationForm({ defaultBranchId = "", draft }: NewApplicati
       return
     }
     try {
-      const app = await save.mutateAsync(toInput(form.getValues(), extras(true)))
+      const app = await save.mutateAsync(toInput(form.getValues(), true))
       toast.success(`Draft ${app.reference} saved`)
       router.push(`/applications/${app.id}`)
     } catch {
@@ -249,19 +163,19 @@ export function NewApplicationForm({ defaultBranchId = "", draft }: NewApplicati
     }
   }
 
-  const submit = form.handleSubmit(async (values) => {
-    if (missing.length) {
-      toast.error("Some details are missing — save as a draft, or complete them to submit")
-      return
-    }
-    try {
-      const app = await save.mutateAsync(toInput(values, extras(false)))
-      toast.success(`Application ${app.reference} sent to verification`)
-      router.push(`/applications/${app.id}`)
-    } catch {
-      // The error modal explains what went wrong.
-    }
-  })
+  const submit = form.handleSubmit(
+    async (values) => {
+      try {
+        const app = await save.mutateAsync(toInput(values, false))
+        toast.success(`Application ${app.reference} sent to verification`)
+        router.push(`/applications/${app.id}`)
+      } catch {
+        // The error modal explains what went wrong.
+      }
+    },
+    // The problems are on earlier steps; the review step lists which.
+    () => toast.error("Some details are missing — save as a draft, or complete them to submit"),
+  )
 
   return (
     <div className="flex flex-col gap-6 lg:h-[calc(100svh-8.5rem)]">
@@ -303,58 +217,21 @@ export function NewApplicationForm({ defaultBranchId = "", draft }: NewApplicati
                 {step === 0 && <LoanStep />}
                 {step === APPLICANT_STEP && <ApplicantStep segment={segment} />}
                 {step === INCOME_STEP && segment === "retail" && <IncomeStep />}
-                {step === INCOME_STEP && segment === "sme" && (
-                  <StatementsStep
-                    statements={statements}
-                    onStatements={setStatements}
-                    analysis={analysis}
-                    onAnalysis={setAnalysis}
-                    errors={statementErrors}
-                    showErrors={showErrors}
-                  />
-                )}
+                {step === INCOME_STEP && segment === "sme" && <StatementsStep />}
                 {step === INCOME_STEP && <AffordabilityPreview product={product} />}
 
-                {step === PARTIES_STEP && (
-                  <PartiesStep
-                    guarantors={guarantors}
-                    onGuarantors={setGuarantors}
-                    nextOfKin={nextOfKin}
-                    onNextOfKin={setNextOfKin}
-                    errors={partyErrors}
-                    showErrors={showErrors}
-                  />
-                )}
-
-                {step === COLLATERAL_STEP && (
-                  <CollateralStep
-                    segment={segment}
-                    collateral={collateral}
-                    onCollateral={setCollateral}
-                    borrowerName={borrowerName(form.getValues())}
-                    errors={pledgeErrors}
-                    showErrors={showErrors}
-                  />
-                )}
-
-                {step === DOCUMENTS_STEP && (
-                  <DocumentsStep
-                    documents={documents}
-                    onChange={setDocuments}
-                    borrowerName={borrowerName(form.getValues())}
-                    errors={documentErrors}
-                    showErrors={showErrors}
-                  />
-                )}
+                {step === PARTIES_STEP && <PartiesStep />}
+                {step === COLLATERAL_STEP && <CollateralStep />}
+                {step === DOCUMENTS_STEP && <DocumentsStep />}
 
                 {step === STEPS.length - 1 && (
                   <ReviewStep
                     values={form.getValues()}
                     productName={product?.name}
                     product={product}
-                    guarantors={guarantors.length}
-                    documents={documents.length}
-                    missing={missing}
+                    guarantors={form.getValues("guarantors").length}
+                    documents={form.getValues("documents").length}
+                    missing={missingParts(form.getValues())}
                   />
                 )}
               </div>

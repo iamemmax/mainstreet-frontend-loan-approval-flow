@@ -527,6 +527,21 @@ describe("statement analysis", () => {
   })
 })
 
+describe("dashboard charts", () => {
+  it("gives an officer six months of their own applications and where each one is now", () => {
+    const ro = sessionFor("relationship_officer")
+    const { charts } = dashboardSummary(store, ro)
+    expect(charts?.activity.months).toHaveLength(6)
+    const mine = store.applications.filter((a) => a.officerId === ro.user.id && a.status !== "rejected")
+    const counted = charts!.breakdown.rows.reduce((total, row) => total + row.count, 0)
+    expect(counted).toBe(mine.length)
+  })
+
+  it("leaves managers with their own volume and stage charts", () => {
+    expect(dashboardSummary(store, sessionFor("credit_manager")).charts).toBeNull()
+  })
+})
+
 describe("approval PIN", () => {
   it("rejects a wrong PIN, counts attempts and locks after three", () => {
     const ro = sessionFor("relationship_officer")

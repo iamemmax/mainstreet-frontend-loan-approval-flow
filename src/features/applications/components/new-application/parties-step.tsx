@@ -1,41 +1,21 @@
 "use client"
 
 import { Plus, Trash2 } from "lucide-react"
+import { useFieldArray, useFormContext } from "react-hook-form"
 import { Button } from "@/components/ui/button"
 import { formatDate } from "@/lib/format/date"
-import { koboToNaira, nairaToKobo } from "@/lib/format/money"
 import { GUARANTOR_LIMITS, RELATIONSHIPS } from "../../schemas/business"
-import type { BvnRecord, Guarantor, NextOfKin } from "../../types"
+import type { BvnRecord } from "../../types"
 import { BvnLookupField } from "./bvn-lookup-field"
-import { FormCard } from "./fields"
-import { PlainField, PlainSelect } from "./plain-field"
+import { FormCard, MoneyField, SelectField, TextField } from "./fields"
+import { emptyGuarantor, type GuarantorValues } from "./list-schemas"
+import { PlainField } from "./plain-field"
+import type { FormValues } from "./schema"
 
-export const emptyGuarantor = (): Guarantor => ({
-  name: "",
-  relationship: "",
-  phone: "",
-  address: "",
-  occupation: "",
-  monthlyIncome: null,
-  bvn: null,
-  dateOfBirth: null,
-  gender: null,
-})
-
-export const emptyNextOfKin = (): NextOfKin => ({
-  name: "",
-  relationship: "",
-  phone: "",
-  address: "",
-  bvn: null,
-  dateOfBirth: null,
-  gender: null,
-})
-
-const PHONE = /^(\+234|0)[789]\d{9}$/
+const RELATIONSHIP_OPTIONS = RELATIONSHIPS.map((relationship) => ({ value: relationship, label: relationship }))
 
 /** The register's details for a guarantor or next of kin. Phone and address can still be changed. */
-function fromRecord(record: BvnRecord) {
+function fromRecord(record: BvnRecord): Partial<GuarantorValues> {
   return {
     bvn: record.bvn,
     name: [record.firstName, record.middleName, record.lastName].filter(Boolean).join(" "),
@@ -46,51 +26,12 @@ function fromRecord(record: BvnRecord) {
   }
 }
 
-/** Problems shared by guarantors and next of kin, keyed like "guarantors.0.phone". */
-function personErrors(person: Guarantor | NextOfKin, key: string, errors: Record<string, string>) {
-  if (!person.bvn || !person.dateOfBirth) errors[`${key}.bvn`] = "Enter a BVN to look the person up"
-  if (!person.relationship) errors[`${key}.relationship`] = "Choose the relationship"
-  if (!PHONE.test(person.phone)) errors[`${key}.phone`] = "Enter a Nigerian mobile number"
-  if (person.address.trim().length < 5) errors[`${key}.address`] = "Enter the address"
-}
-
-/** Field-level problems with the guarantors step, keyed like "guarantors.0.phone". */
-export function partiesErrors(guarantors: Guarantor[], nextOfKin: NextOfKin) {
-  const errors: Record<string, string> = {}
-  if (guarantors.length < GUARANTOR_LIMITS.min) errors["guarantors"] = `Add at least ${GUARANTOR_LIMITS.min} guarantors`
-  guarantors.forEach((guarantor, i) => {
-    personErrors(guarantor, `guarantors.${i}`, errors)
-    if (guarantor.occupation.trim().length < 2) errors[`guarantors.${i}.occupation`] = "Enter the occupation"
-    const usedBefore = guarantors.slice(0, i).some((other) => other.bvn && other.bvn === guarantor.bvn)
-    if (usedBefore) errors[`guarantors.${i}.bvn`] = "This person is already a guarantor"
-  })
-  personErrors(nextOfKin, "nextOfKin", errors)
-  return errors
-}
-
-interface PartiesStepProps {
-  guarantors: Guarantor[]
-  onGuarantors: (g: Guarantor[]) => void
-  nextOfKin: NextOfKin
-  onNextOfKin: (n: NextOfKin) => void
-  errors: Record<string, string>
-  showErrors: boolean
-}
-
 /** Step 4: two to four guarantors and one next of kin, each found by BVN. */
-export function PartiesStep({
-  guarantors,
-  onGuarantors,
-  nextOfKin,
-  onNextOfKin,
-  errors,
-  showErrors,
-}: PartiesStepProps) {
-  const err = (key: string) => (showErrors ? errors[key] : undefined)
-  const setGuarantor = (i: number, patch: Partial<Guarantor>) =>
-    onGuarantors(guarantors.map((g, j) => (j === i ? { ...g, ...patch } : g)))
-  const canAdd = guarantors.length < GUARANTOR_LIMITS.max
-  const canRemove = guarantors.length > GUARANTOR_LIMITS.min
+export function PartiesStep() {
+  const form = useFormContext<FormValues>()
+  const { fields, append, remove } = useFieldArray({ control: form.control, name: "guarantors" })
+  const errors = form.formState.errors.guarantors
+  const listError = errors?.message ?? errors?.root?.message
 
   return (
     <div className="space-y-6">
@@ -99,75 +40,43 @@ export function PartiesStep({
         description={`Between ${GUARANTOR_LIMITS.min} and ${GUARANTOR_LIMITS.max} guarantors. Enter each one's BVN and their details fill in.`}
         bodyClassName="space-y-4"
       >
-        {guarantors.map((guarantor, i) => (
-          <fieldset key={i} className="space-y-4 rounded-lg border p-4">
+        {fields.map((field, i) => (
+          <fieldset key={field.id} className="space-y-4 rounded-lg border p-4">
             <div className="flex items-center justify-between">
               <legend className="text-sm font-medium">Guarantor {i + 1}</legend>
-              {canRemove && (
+              {fields.length > GUARANTOR_LIMITS.min && (
                 <Button
                   type="button"
                   variant="ghost"
                   size="icon-sm"
                   aria-label={`Remove guarantor ${i + 1}`}
-                  onClick={() => onGuarantors(guarantors.filter((_, j) => j !== i))}
+                  onClick={() => remove(i)}
                 >
                   <Trash2 aria-hidden />
                 </Button>
               )}
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
-              <BvnLookupField
-                bvn={guarantor.bvn}
-                found={!!guarantor.dateOfBirth}
-                // A new BVN clears the last person's details until the lookup answers.
-                onBvnChange={(bvn) => setGuarantor(i, { bvn, name: "", dateOfBirth: null, gender: null })}
-                onFound={(record) => setGuarantor(i, fromRecord(record))}
-                error={err(`guarantors.${i}.bvn`)}
-              />
-              <RegisteredDetails person={guarantor} />
-              <PlainSelect
+              <PersonLookup path={`guarantors.${i}`} />
+              <SelectField
+                name={`guarantors.${i}.relationship`}
                 label="Relationship to applicant"
-                options={RELATIONSHIPS}
-                value={guarantor.relationship}
-                onChange={(v) => setGuarantor(i, { relationship: v })}
-                error={err(`guarantors.${i}.relationship`)}
+                options={RELATIONSHIP_OPTIONS}
               />
-              <PlainField
-                label="Phone"
-                type="tel"
-                value={guarantor.phone}
-                onChange={(v) => setGuarantor(i, { phone: v })}
-                error={err(`guarantors.${i}.phone`)}
-              />
-              <PlainField
-                label="Occupation"
-                value={guarantor.occupation}
-                onChange={(v) => setGuarantor(i, { occupation: v })}
-                error={err(`guarantors.${i}.occupation`)}
-              />
-              <PlainField
-                label="Monthly income (₦, optional)"
-                grouped
-                value={guarantor.monthlyIncome === null ? "" : String(koboToNaira(guarantor.monthlyIncome))}
-                onChange={(v) => setGuarantor(i, { monthlyIncome: v ? nairaToKobo(Number(v)) : null })}
-              />
-              <PlainField
-                label="Address"
-                className="sm:col-span-2"
-                value={guarantor.address}
-                onChange={(v) => setGuarantor(i, { address: v })}
-                error={err(`guarantors.${i}.address`)}
-              />
+              <TextField name={`guarantors.${i}.phone`} label="Phone" type="tel" />
+              <TextField name={`guarantors.${i}.occupation`} label="Occupation" />
+              <MoneyField name={`guarantors.${i}.monthlyIncome`} label="Monthly income (₦, optional)" optional />
+              <TextField name={`guarantors.${i}.address`} label="Address" span />
             </div>
           </fieldset>
         ))}
-        {err("guarantors") && <p className="text-sm text-destructive">{err("guarantors")}</p>}
-        {canAdd && (
+        {listError && <p className="text-sm text-destructive">{listError}</p>}
+        {fields.length < GUARANTOR_LIMITS.max && (
           <Button
             type="button"
             variant="outline"
             className="w-full border-dashed"
-            onClick={() => onGuarantors([...guarantors, emptyGuarantor()])}
+            onClick={() => append(emptyGuarantor())}
           >
             <Plus aria-hidden /> Add guarantor
           </Button>
@@ -179,42 +88,48 @@ export function PartiesStep({
         description="One person to contact about the applicant. Enter their BVN and their details fill in."
         bodyClassName="grid gap-5 sm:grid-cols-2"
       >
-        <BvnLookupField
-          bvn={nextOfKin.bvn}
-          found={!!nextOfKin.dateOfBirth}
-          onBvnChange={(bvn) => onNextOfKin({ ...nextOfKin, bvn, name: "", dateOfBirth: null, gender: null })}
-          onFound={(record) => onNextOfKin({ ...nextOfKin, ...fromRecord(record) })}
-          error={err("nextOfKin.bvn")}
-        />
-        <RegisteredDetails person={nextOfKin} />
-        <PlainSelect
-          label="Relationship"
-          options={RELATIONSHIPS}
-          value={nextOfKin.relationship}
-          onChange={(v) => onNextOfKin({ ...nextOfKin, relationship: v })}
-          error={err("nextOfKin.relationship")}
-        />
-        <PlainField
-          label="Phone"
-          type="tel"
-          value={nextOfKin.phone}
-          onChange={(v) => onNextOfKin({ ...nextOfKin, phone: v })}
-          error={err("nextOfKin.phone")}
-        />
-        <PlainField
-          label="Address"
-          className="sm:col-span-2"
-          value={nextOfKin.address}
-          onChange={(v) => onNextOfKin({ ...nextOfKin, address: v })}
-          error={err("nextOfKin.address")}
-        />
+        <PersonLookup path="nextOfKin" />
+        <SelectField name="nextOfKin.relationship" label="Relationship" options={RELATIONSHIP_OPTIONS} />
+        <TextField name="nextOfKin.phone" label="Phone" type="tel" />
+        <TextField name="nextOfKin.address" label="Address" span />
       </FormCard>
     </div>
   )
 }
 
+/**
+ * A guarantor's or the next of kin's BVN, then the name, date of birth and gender the register holds for it.
+ * `path` is where the person sits on the form, e.g. "guarantors.0".
+ */
+function PersonLookup({ path }: { path: `guarantors.${number}` | "nextOfKin" }) {
+  const form = useFormContext<FormValues>()
+  const person = form.watch(path)
+  const error = form.getFieldState(`${path}.bvn`, form.formState).error?.message
+
+  /** Sets several of this person's fields at once; `validate` re-checks them, e.g. once the lookup answers. */
+  const set = (values: Partial<GuarantorValues>, validate: boolean) => {
+    for (const [key, value] of Object.entries(values)) {
+      form.setValue(`${path}.${key as "name"}`, value as string, { shouldValidate: validate })
+    }
+  }
+
+  return (
+    <>
+      <BvnLookupField
+        bvn={person.bvn}
+        found={!!person.dateOfBirth}
+        // A new BVN clears the last person's details until the lookup answers.
+        onBvnChange={(bvn) => set({ bvn, name: "", dateOfBirth: null, gender: null }, false)}
+        onFound={(record) => set(fromRecord(record), true)}
+        error={error}
+      />
+      <RegisteredDetails person={person} />
+    </>
+  )
+}
+
 /** Name, date of birth and gender as the BVN register holds them; read-only. */
-function RegisteredDetails({ person }: { person: Guarantor | NextOfKin }) {
+function RegisteredDetails({ person }: { person: Pick<GuarantorValues, "name" | "dateOfBirth" | "gender"> }) {
   const details = [
     { label: "Full name", value: person.name },
     { label: "Date of birth", value: person.dateOfBirth ? formatDate(person.dateOfBirth, "d MMM yyyy") : "" },
@@ -229,7 +144,7 @@ function RegisteredDetails({ person }: { person: Guarantor | NextOfKin }) {
   )
 }
 
-function genderLabel(gender: Guarantor["gender"]): string {
+function genderLabel(gender: GuarantorValues["gender"]): string {
   if (gender === "female") return "Female"
   if (gender === "male") return "Male"
   return ""

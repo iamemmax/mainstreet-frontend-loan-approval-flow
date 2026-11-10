@@ -35,7 +35,7 @@ export function OverviewTab({ app, product, branch, officer, agent, terms, onOpe
       <Section title="Loan request">
         <div className="space-y-6">
           <div className="rounded-xl bg-muted/50 px-4 py-3">
-            <div className="text-[13px] text-muted-foreground">Purpose</div>
+            <div className="text-[13px] text-muted-foreground">Loan Purpose</div>
             <p className="mt-0.5 text-[15px] font-medium">{app.purpose}</p>
           </div>
           <div className="grid gap-8 @4xl:grid-cols-2 @4xl:divide-x @4xl:[&>div+div]:pl-8">

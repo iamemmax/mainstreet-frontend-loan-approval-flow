@@ -1,5 +1,6 @@
 import type { FieldPath } from "react-hook-form"
 import { z } from "zod"
+import { listFields } from "./list-schemas"
 
 export const digits = (n: number, label: string) =>
   z.string().regex(new RegExp(`^\\d{${n}}$`), `${label} must be ${n} digits`)
@@ -49,6 +50,7 @@ export const formSchema = z
     monthlyExpenses: opt,
     annualTurnover: opt,
     primaryBank: opt,
+    ...listFields,
   })
   .superRefine((v, ctx) => {
     const need = (key: keyof typeof v, message: string, schema: z.ZodType = z.string().trim().min(1)) => {
@@ -79,12 +81,21 @@ export const formSchema = z
       need("promoterName", "Enter the promoter's name")
       need("promoterBvn", "BVN must be 11 digits", digits(11, "BVN"))
       need("promoterNin", "NIN must be 11 digits", digits(11, "NIN"))
+      if (!v.statements.length) {
+        ctx.addIssue({ code: "custom", path: ["statements"], message: "Upload at least one statement of account" })
+      }
       // Filled in by statement analysis, not typed.
-      need("monthlyRevenue", "Analyse the statements", money)
+      need("monthlyRevenue", "Wait for the statements to be read, or fix the problem shown", money)
       need("monthlyExpenses", "Analyse the statements", money)
       need("annualTurnover", "Analyse the statements", money)
       need("primaryBank", "Analyse the statements")
     }
+    // The same person can't stand as guarantor twice.
+    v.guarantors.forEach((guarantor, i) => {
+      if (guarantor.bvn && v.guarantors.slice(0, i).some((other) => other.bvn === guarantor.bvn)) {
+        ctx.addIssue({ code: "custom", path: ["guarantors", i, "bvn"], message: "This person is already a guarantor" })
+      }
+    })
   })
 
 export type FormValues = z.infer<typeof formSchema>

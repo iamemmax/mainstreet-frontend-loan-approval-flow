@@ -1,17 +1,51 @@
 import { nairaToKobo } from "@/lib/format/money"
-import type { Collateral, Guarantor, NewApplicationInput, NextOfKin } from "../../types"
-import type { DocumentDraft } from "./documents-step"
+import type { NewApplicationInput, Owner } from "../../types"
+import {
+  collateralFormSchema,
+  type DocumentDraft,
+  guarantorFormSchema,
+  nextOfKinFormSchema,
+  type UploadedStatement,
+} from "./list-schemas"
 import type { FormValues } from "./schema"
 
-export interface IntakeExtras {
-  guarantors: Guarantor[]
-  nextOfKin: NextOfKin | null
-  documents: DocumentDraft[]
-  collateral: Collateral[]
-  asDraft: boolean
+/** The borrower's name as captured on the Applicant step: the business, or the person. */
+export function borrowerName(values: FormValues): string {
+  const name = values.segment === "sme" ? values.businessName : [values.firstName, values.lastName].join(" ")
+  return name?.trim() || "Borrower"
 }
 
-export function toInput(v: FormValues, extras: IntakeExtras): NewApplicationInput {
+/** Statements as documents on the application, each owned by the borrower and named after its bank. */
+function statementDocuments(statements: UploadedStatement[], borrower: Owner): DocumentDraft[] {
+  return statements
+    .filter((statement) => statement.bank)
+    .map((statement) => ({
+      type: "bank_statement",
+      fileName: statement.fileName,
+      sizeBytes: statement.sizeBytes,
+      description: `${statement.bank} statement of account`,
+      owner: borrower,
+      bank: statement.bank,
+    }))
+}
+
+/** The guarantors, next of kin, collateral and documents to send. A draft keeps only the complete parties. */
+function lists(v: FormValues, asDraft: boolean) {
+  const complete = <T>(schema: { safeParse: (value: unknown) => { success: boolean } }, items: T[]) =>
+    asDraft ? items.filter((item) => schema.safeParse(item).success) : items
+  const borrower: Owner = { role: "borrower", name: borrowerName(v) }
+  // Statements belong to SME loans only, in case the segment was changed after uploading.
+  const statements = v.segment === "sme" ? statementDocuments(v.statements, borrower) : []
+  return {
+    guarantors: complete(guarantorFormSchema, v.guarantors),
+    nextOfKin: complete(nextOfKinFormSchema, [v.nextOfKin])[0] ?? null,
+    collateral: complete(collateralFormSchema, v.collateral).map((item) => ({ ...item, owner: item.owner! })),
+    documents: [...statements, ...v.documents].map((doc) => ({ ...doc, description: doc.description?.trim() || null })),
+    asDraft,
+  }
+}
+
+export function toInput(v: FormValues, asDraft: boolean): NewApplicationInput {
   const k = (s?: string) => nairaToKobo(Number(s ?? 0))
   const common = { phone: v.phone, email: v.email, address: v.address, state: v.state }
   return {
@@ -70,7 +104,6 @@ export function toInput(v: FormValues, extras: IntakeExtras): NewApplicationInpu
             primaryBank: v.primaryBank!,
           }
         : null,
-    ...extras,
-    documents: extras.documents.map((doc) => ({ ...doc, description: doc.description?.trim() || null })),
+    ...lists(v, asDraft),
   }
 }

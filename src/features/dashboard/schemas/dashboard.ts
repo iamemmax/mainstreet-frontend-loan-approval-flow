@@ -123,6 +123,31 @@ export const dashboardSummarySchema = z.object({
       monthly: z.array(countValueSchema.extend({ month: z.string(), label: z.string() })),
     })
     .nullable(),
+  /** The team's two charts: what it got done each month, and where its work stands now. Roles without insights. */
+  charts: z
+    .object({
+      activity: z.object({
+        title: z.string(),
+        description: z.string(),
+        /** What one unit is called in the tooltip, e.g. "files". */
+        unit: z.string(),
+        months: z.array(countValueSchema.extend({ month: z.string(), label: z.string() })),
+      }),
+      breakdown: z.object({
+        title: z.string(),
+        description: z.string(),
+        rows: z.array(
+          z.object({
+            key: z.string(),
+            label: z.string(),
+            count: z.number().int().nonnegative(),
+            /** Late work is coloured as a warning; everything else stays neutral. */
+            tone: z.enum(["neutral", "warning", "danger"]),
+          }),
+        ),
+      }),
+    })
+    .nullable(),
 })
 
 export type DashboardSummary = z.infer<typeof dashboardSummarySchema>

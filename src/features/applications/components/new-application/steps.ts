@@ -21,7 +21,7 @@ export function stepsFor(segment: "retail" | "sme") {
 const LOAN_FIELDS: Field[] = ["segment", "productId", "amount", "tenor", "purpose", "branchId"]
 const CONTACT_FIELDS: Field[] = ["phone", "email", "address", "state"]
 
-/** The form fields checked before leaving each step. Guarantors, collateral and documents check themselves. */
+/** The form fields checked before leaving each step. A list's name checks every item in it. */
 export const STEP_FIELDS: Record<"retail" | "sme", Field[][]> = {
   retail: [
     LOAN_FIELDS,
@@ -38,9 +38,9 @@ export const STEP_FIELDS: Record<"retail" | "sme", Field[][]> = {
       "businessAddress",
     ],
     ["employerName", "empSector", "jobTitle", "monthlyNetIncome", "employmentStartDate", "salaryBank"],
-    [],
-    [],
-    [],
+    ["guarantors", "nextOfKin"],
+    ["collateral"],
+    ["documents"],
     [],
   ],
   sme: [
@@ -60,11 +60,11 @@ export const STEP_FIELDS: Record<"retail" | "sme", Field[][]> = {
       "businessDescription",
       "businessAddress",
     ],
-    // The statements step checks itself; analysis fills in the financials.
-    [],
-    [],
-    [],
-    [],
+    // Reading the statements fills in the financials.
+    ["statements", "monthlyRevenue"],
+    ["guarantors", "nextOfKin"],
+    ["collateral"],
+    ["documents"],
     [],
   ],
 }

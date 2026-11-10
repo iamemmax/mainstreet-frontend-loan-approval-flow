@@ -19,6 +19,7 @@ import { FigureRow } from "./figure-row"
 import { PerformanceFigures } from "./performance-figures"
 import { QueueCard } from "./queue-card"
 import { StageAgingCard } from "./stage-aging-card"
+import { TeamCharts } from "./team-charts"
 import { VolumeCard } from "./volume-card"
 
 function greeting(now: Date) {
@@ -118,6 +119,8 @@ export function DashboardView() {
             )}
             <AttentionCard alerts={data?.alerts} ctx={ctx} loading={isPending} />
           </div>
+          {/* Managers have the volume and stage charts below instead. */}
+          {!ROLE_PROFILE[user.role].insights && <TeamCharts charts={data?.charts} loading={isPending} />}
           {hasInsights && (
             <div className="grid gap-4 lg:grid-cols-3">
               <VolumeCard

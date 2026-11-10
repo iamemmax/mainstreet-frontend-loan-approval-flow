@@ -3,29 +3,12 @@
 import { ArrowRight, BadgeCheck } from "lucide-react"
 import Link from "next/link"
 import { EmptyState } from "@/components/shared/empty-state"
-import { MoneyText } from "@/components/shared/money-text"
-import { SLABadge, ToneBadge } from "@/components/shared/status-badge"
-import { Button } from "@/components/ui/button"
-import { Card, CardAction, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
 import { formatCount } from "@/lib/format/money"
-import { setIntent } from "@/lib/navigation/intent"
 import { cn } from "@/lib/utils"
-import type { DashboardFocus, DashboardSummary, QueueAction } from "../schemas/dashboard"
-import { formatDays } from "./figures"
-
-const ACTION: Record<QueueAction, { label: string; tab: string }> = {
-  finish_draft: { label: "Finish draft", tab: "overview" },
-  fix_return: { label: "Fix and resubmit", tab: "activity" },
-  start_verification: { label: "Start verification", tab: "verification" },
-  run_checks: { label: "Run checks", tab: "verification" },
-  complete_verification: { label: "Complete verification", tab: "verification" },
-  assess: { label: "Assess", tab: "assessment" },
-  decide: { label: "Decide", tab: "workflow" },
-  send_offer: { label: "Send offer", tab: "offer" },
-  chase_offer: { label: "Follow up", tab: "offer" },
-  hand_over: { label: "Hand over", tab: "offer" },
-}
+import type { DashboardFocus, DashboardSummary, QueueAction, QueueItem } from "../schemas/dashboard"
+import { isOverdue, QUEUE_ACTION, QueueRow } from "./queue-row"
 
 const EMPTY: Record<DashboardFocus, string> = {
   origination: "No drafts, returns or offers need you right now.",
@@ -36,9 +19,62 @@ const EMPTY: Record<DashboardFocus, string> = {
   oversight: "No decisions are waiting on you.",
 }
 
-/** Days after which a step without an SLA is shown as slow. */
-const SLOW_DAYS = 2
+/** Where "View all" goes: the page that lists every task of this kind. */
+const VIEW_ALL: Record<DashboardFocus, string> = {
+  origination: "/applications",
+  verification: "/applications",
+  assessment: "/applications",
+  approval: "/my-work",
+  finance: "/handover",
+  oversight: "/my-work",
+}
 
+/** The tasks grouped by what needs doing, each group in the order its most urgent task appears. */
+function groupByAction(items: QueueItem[]): { action: QueueAction; items: QueueItem[] }[] {
+  const groups: { action: QueueAction; items: QueueItem[] }[] = []
+  for (const item of items) {
+    const group = groups.find((g) => g.action === item.action)
+    if (group) group.items.push(item)
+    else groups.push({ action: item.action, items: [item] })
+  }
+  return groups
+}
+
+/** One kind of task: what to do and why, how many and how many are overdue, then each one. */
+function QueueGroup({ action, items, now }: { action: QueueAction; items: QueueItem[]; now: number }) {
+  const { label, hint, icon: Icon } = QUEUE_ACTION[action]
+  const overdue = items.filter((item) => isOverdue(item, now)).length
+  return (
+    <section aria-label={label} className="py-3">
+      <div className="mb-1.5 flex items-center gap-3 rounded-xl bg-muted/50 px-3 py-2.5">
+        <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-card text-primary shadow-xs ring-1 ring-border/70">
+          <Icon className="size-4" aria-hidden />
+        </span>
+        <div className="min-w-0 flex-1">
+          <h3 className="text-sm font-semibold">{label}</h3>
+          <p className="truncate text-xs text-muted-foreground">{hint}</p>
+        </div>
+        <div className="flex shrink-0 items-center gap-1.5">
+          {overdue > 0 && (
+            <span className="tabular rounded-full bg-destructive/10 px-2 py-0.5 text-xs font-medium text-destructive">
+              {overdue} overdue
+            </span>
+          )}
+          <span className="tabular rounded-full bg-card px-2 py-0.5 text-xs font-semibold ring-1 ring-border/70">
+            {items.length}
+          </span>
+        </div>
+      </div>
+      <ul>
+        {items.map((item) => (
+          <QueueRow key={`${item.id}-${item.action}`} item={item} now={now} />
+        ))}
+      </ul>
+    </section>
+  )
+}
+
+/** The tasks waiting on the signed-in user, most urgent first, grouped by what needs doing. */
 export function QueueCard({
   queue,
   focus,
@@ -52,13 +88,14 @@ export function QueueCard({
 }) {
   const now = Date.now()
   return (
-    <Card className={cn("gap-0 pb-2", className)}>
+    <Card className={cn("gap-0 pb-0", className)}>
       <CardHeader className="border-b">
         <CardTitle>Waiting on you</CardTitle>
+        <CardDescription>Most urgent first. Open one to pick it up.</CardDescription>
         <CardAction>
           {queue && queue.total > 0 && (
-            <span className="tabular inline-flex h-7 items-center rounded-full bg-muted px-3 text-[13px] font-medium text-muted-foreground">
-              {formatCount(queue.total)} {queue.total === 1 ? "item" : "items"}
+            <span className="tabular inline-flex h-7 items-center rounded-full bg-primary/[0.08] px-3 text-[13px] font-semibold text-primary">
+              {formatCount(queue.total)} {queue.total === 1 ? "task" : "tasks"}
             </span>
           )}
         </CardAction>
@@ -78,74 +115,28 @@ export function QueueCard({
             description={EMPTY[focus]}
           />
         ) : (
-          <>
-            {/* One shared grid so badges and buttons line up across rows, whatever their text. */}
-            <ul className="divide-y sm:grid sm:grid-cols-[minmax(0,1fr)_auto_auto] sm:gap-x-4">
-              {queue.items.map((i) => {
-                const action = ACTION[i.action]
-                const days = (now - Date.parse(i.since)) / 86_400_000
-                return (
-                  <li
-                    key={`${i.id}-${i.action}`}
-                    className="flex flex-col gap-3 py-3.5 sm:col-span-3 sm:grid sm:grid-cols-subgrid sm:items-center"
-                  >
-                    <div className="min-w-0 flex-1">
-                      <div className="flex flex-wrap items-baseline gap-x-2">
-                        <Link href={`/applications/${i.id}`} className="truncate font-semibold hover:underline">
-                          {i.applicantName}
-                        </Link>
-                        <MoneyText
-                          value={i.amountRequested}
-                          format="compact"
-                          className="text-sm text-muted-foreground"
-                        />
-                      </div>
-                      <div className="mt-0.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-muted-foreground">
-                        <span className="font-mono">{i.reference}</span>
-                        <span aria-hidden className="size-1 rounded-full bg-muted-foreground/50" />
-                        <span>{i.action === "decide" && i.currentStageName ? i.currentStageName : i.productName}</span>
-                        {i.onBehalfOfName && (
-                          <>
-                            <span aria-hidden className="size-1 rounded-full bg-muted-foreground/50" />
-                            <span>For {i.onBehalfOfName}</span>
-                          </>
-                        )}
-                      </div>
-                    </div>
-                    <div className="flex items-center justify-between gap-3 sm:contents">
-                      {i.sla ? (
-                        <SLABadge state={i.sla.state} dueAt={i.sla.dueAt} className="sm:justify-self-start" />
-                      ) : (
-                        <ToneBadge
-                          tone={days >= SLOW_DAYS ? "warning" : "neutral"}
-                          className="tabular sm:justify-self-start"
-                        >
-                          Waiting {formatDays(days)}
-                        </ToneBadge>
-                      )}
-                      <Button
-                        size="sm"
-                        variant={i.sla?.state === "breached" ? "default" : "outline"}
-                        className="sm:w-full sm:justify-between"
-                        asChild
-                      >
-                        <Link href={`/applications/${i.id}`} onClick={() => setIntent("applicationTab", action.tab)}>
-                          {action.label} <ArrowRight aria-hidden />
-                        </Link>
-                      </Button>
-                    </div>
-                  </li>
-                )
-              })}
-            </ul>
-            {queue.total > queue.items.length && (
-              <p className="border-t py-3 text-sm text-muted-foreground">
-                Showing the {queue.items.length} most urgent of {formatCount(queue.total)}.
-              </p>
-            )}
-          </>
+          <div>
+            {groupByAction(queue.items).map((group) => (
+              <QueueGroup key={group.action} action={group.action} items={group.items} now={now} />
+            ))}
+          </div>
         )}
       </CardContent>
+      {queue && focus && queue.items.length > 0 && (
+        <div className="mt-2 flex items-center justify-between gap-3 border-t px-6 py-3 text-sm">
+          <span className="text-muted-foreground">
+            {queue.total > queue.items.length
+              ? `Showing the ${queue.items.length} most urgent of ${formatCount(queue.total)}`
+              : "That's everything waiting on you"}
+          </span>
+          <Link
+            href={VIEW_ALL[focus]}
+            className="inline-flex items-center gap-1 font-medium text-primary hover:underline"
+          >
+            View all <ArrowRight className="size-3.5" aria-hidden />
+          </Link>
+        </div>
+      )}
     </Card>
   )
 }

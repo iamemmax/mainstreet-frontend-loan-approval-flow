@@ -1,3 +1,4 @@
+import { pluralize } from "@/lib/format/money"
 import type { ListIntent } from "@/lib/navigation/intent"
 import type { DashboardFigure } from "../schemas/dashboard"
 import type { DashboardContext } from "./alerts"
@@ -119,9 +120,10 @@ export const FIGURE: Record<
   approval_rate: { label: "Approval rate", format: "percent", link: () => ({ href: "/reports" }) },
 }
 
-/** "4h", "2.5 days", "12 days". */
+/** A length of time in whole units people use: "16h", "4 days", "3 weeks", "5 months". Never "4.2 days". */
 export function formatDays(days: number): string {
-  if (days < 1) return `${Math.max(1, Math.round(days * 24))}h`
-  const rounded = days < 10 ? Math.round(days * 10) / 10 : Math.round(days)
-  return `${rounded} ${rounded === 1 ? "day" : "days"}`
+  if (days < 2) return `${Math.max(1, Math.round(days * 24))}h`
+  if (days < 14) return pluralize(Math.round(days), "day")
+  if (days < 60) return pluralize(Math.round(days / 7), "week")
+  return pluralize(Math.round(days / 30), "month")
 }
